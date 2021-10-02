@@ -48,7 +48,7 @@ table {
 }
 
 * {
-/* 	border: 1px solid orange; */
+	/* border: 1px solid orange; */
 	font-family: monospace;
 	
 }
@@ -60,6 +60,7 @@ h1 {
 	align-items: center;
 	font-family: monospace;
 	font-weight: bold;
+	margin: 1%;
 }
 
 h2 {
@@ -70,6 +71,7 @@ h2 {
 	align-items: center;
 	line-height: 1.5;
 	font-family: monospace;
+	margin: 0% 1%;
 }
 
 #internal {
@@ -104,6 +106,7 @@ ul {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	
 }
 
 li {
