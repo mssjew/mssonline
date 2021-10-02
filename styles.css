@@ -47,14 +47,22 @@ table {
 	border-spacing: 0;
 }
 
+html {
+    font-size: 62.5%;
+}
+
 * {
 	/* border: 1px solid orange; */
 	font-family: monospace;
+	box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    max-width:100%;
 	
 }
 
 h1 {
-	font-size: 4.5rem;
+	font-size: 5rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -75,19 +83,19 @@ h2 {
 }
 
 #internal {
-	font-size: 2.1rem;
+	font-size: 2.5rem;
 	color: darkorange;
 	font-weight: bold;
 }
 
 #net {
-	font-size: 2.1rem;
+	font-size: 2.5rem;
 	color: darkorange;
 	font-weight: bold;
 }
 
 h3 {
-	font-size: 2rem;
+	font-size: 2.5rem;
 	font-weight: 500;
 	line-height: 1;
 	font-family: monospace;
@@ -119,6 +127,16 @@ p {
 	display: flex;
 	justify-content: center;
 	line-height: 2;
-	font-size: 2.1rem;
+	font-size: 2.3rem;
 	font-family: monospace;
+}
+
+#avgBuy {
+	color: darkorange;
+	font-weight: bold;
+}
+
+#avgSell {
+	color: darkorange;
+	font-weight: bold;
 }
