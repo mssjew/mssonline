@@ -69,6 +69,7 @@ html {
     display: flex;
     justify-content: center;
     margin-top: 2%;
+	margin-bottom: 2%;
 	height: 10vh;
 }
 
@@ -119,16 +120,27 @@ hr {
 	margin: 3%;
 }
 
-.Stats {
+.soldStats {
 	display: flex;
 	justify-content: center;
+	color: chocolate;
 }
+
+.buyStats {
+	display: flex;
+	justify-content: center;
+	color: crimson;
+}
+
+
 
 ul {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	margin: 1%;
+	margin-bottom: 5%;
 	
 	
 	
@@ -136,8 +148,8 @@ ul {
 
 li {
 	font-family: monospace;
-	font-size: 2.8rem;
-	
+	font-size: 2.6rem;
+	margin: .5% 0%;
 
 }
 
@@ -151,22 +163,24 @@ p {
 }
 
 #avgBuy {
-	color: rgb(196, 108, 0);
+	color: crimson;
 	font-weight: bold;
+
 }
 
 #avgSell {
-	color: rgb(196, 108, 0);
+	color: chocolate;
 	font-weight: bold;
 }
 
 #sell {
-	color: rgb(196, 108, 0);
+	color: chocolate;
 	font-weight: bold;
+	
 }
 
 #buy {
-	color: rgb(196, 108, 0);
+	color: crimson;
 	font-weight: bold;
 }
 @media(max-width:520px) {
@@ -186,7 +200,7 @@ p {
 	}
 
 	h2 {
-		font-size: 2rem;
+		font-size: 2.4rem;
 		padding: 0% 1%;
 	}
 
@@ -205,6 +219,10 @@ p {
 
 	#totalSold {
 		font-weight: bold;
+	}
+
+	p {
+		font-size: 2.6rem;
 	}
 	
 
@@ -251,7 +269,57 @@ p {
 	}
 	
 	p {
+		font-size: 2rem;
+	}
+
+	
+    
+}
+
+@media(max-width:390px) {
+
+    * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+        max-width:100%;
+        
+    }
+
+	h1{
+		font-size: 3rem;
+		padding: 1%;
+		color: rgb(196, 108, 0);
+	}
+
+	h2 {
+		font-size: 2rem;
+		padding: 0% 1%;
+	}
+
+	#internal {
+		font-size: 2rem;
+	}
+	
+	#net {
+		font-size: 2rem;
+	}
+
+	h3 {
 		font-size: 1.8rem;
+		font-weight: bold;
+	}
+
+	#totalSold {
+		font-weight: bold;
+	}
+	
+	p {
+		font-size: 2rem;
+	}
+
+	li {
+		font-size: 2.3rem;
 	}
 
 	

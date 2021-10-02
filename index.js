@@ -4,8 +4,8 @@ const netSpan = document.getElementById("net");
 const sellList = document.getElementById("sell");
 const buyList = document.getElementById("buy");
 
-const sellPosCountElement = document.getElementById("sellPosCount");
-const buyPosCountElement = document.getElementById("buyPosCount");
+const sellPosCountElement = document.getElementById("numSoldPos");
+const buyPosCountElement = document.getElementById("numBoughtPos");
 
 const totalSoldElement = document.getElementById("totalSold");
 const totalBoughtElement = document.getElementById("totalBought");
@@ -57,9 +57,9 @@ axios.get(`https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5
 // -------------------- SELL SIDE START ---------------------
 
 // SELL POSITION COUNT
-axios.get(`https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${sellPosCount}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`)
+axios.get(`https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${sellRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`)
 .then(resp => {
-  sellPosCountElement.textContent = resp.data.values[0];
+  sellPosCountElement.textContent = resp.data.values.length;
 })
 .catch(err => {
   console.error(err);
@@ -103,9 +103,9 @@ axios.get(`https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5
 // -------------------- BUY SIDE START ---------------------
 
 // BUY POSITION COUNT
-axios.get(`https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${buyPosCount}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`)
+axios.get(`https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${buyRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`)
 .then(resp => {
-  buyPosCountElement.textContent = resp.data.values[0];
+  buyPosCountElement.textContent = resp.data.values.length;
 })
 .catch(err => {
   console.error(err);
