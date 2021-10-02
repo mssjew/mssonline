@@ -52,7 +52,7 @@ html {
 }
 
 * {
-/* 	border: 1px solid rgb(196, 108, 0); */
+	/* border: 1px solid rgb(196, 108, 0); */
 	font-family: monospace;
 	box-sizing: border-box;
     padding: 0;
@@ -136,7 +136,7 @@ ul {
 
 li {
 	font-family: monospace;
-	font-size: 2rem;
+	font-size: 2.8rem;
 	
 
 }
@@ -160,7 +160,16 @@ p {
 	font-weight: bold;
 }
 
-@media(max-width:500px) {
+#sell {
+	color: rgb(196, 108, 0);
+	font-weight: bold;
+}
+
+#buy {
+	color: rgb(196, 108, 0);
+	font-weight: bold;
+}
+@media(max-width:520px) {
 
     * {
         box-sizing: border-box;
@@ -198,6 +207,52 @@ p {
 		font-weight: bold;
 	}
 	
+
+	
+    
+}
+
+@media(max-width:425px) {
+
+    * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+        max-width:100%;
+        
+    }
+
+	h1{
+		font-size: 3rem;
+		padding: 1%;
+		color: rgb(196, 108, 0);
+	}
+
+	h2 {
+		font-size: 2rem;
+		padding: 0% 1%;
+	}
+
+	#internal {
+		font-size: 2rem;
+	}
+	
+	#net {
+		font-size: 2rem;
+	}
+
+	h3 {
+		font-size: 1.8rem;
+		font-weight: bold;
+	}
+
+	#totalSold {
+		font-weight: bold;
+	}
+	
+	p {
+		font-size: 1.8rem;
+	}
 
 	
     
