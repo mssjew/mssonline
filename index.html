@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MSS Online Report</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+  </head>
+  <body>
+
+    <div id="logo"></div>
+
+   
+      <h1>MSS Online Position</h1>
+
+      <h2>Internal: &nbsp; <span id="internal"></span></h2>
+
+      <h2>Net: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span id="net"></span></h2>
+      
+    <hr>
+      <!-- SELL DATA -->
+
+      <div class="soldStats">
+        <!-- <h3 id="sellPosCount"></h3> -->
+
+        <h3 id="totalSold"></h3>
+        <h3 >IN <span id="numSoldPos"></span> POSITIONS</h3>
+
+      </div>
+      <p style="color: chocolate;">Avg. Sell: &nbsp;<span id="avgSell"></span></p>
+      
+      <ul id="sell"></ul>
+    
+      
+
+      
+      <hr>
+
+      <!-- BUY DATA -->
+      <div class="buyStats">
+
+        <h3 id="totalBought"></h3>
+        <h3 >IN <span id="numBoughtPos"></span> POSITIONS</h3>
+      </div>
+      <p style="color: crimson;">Avg. Buy: &nbsp;<span id="avgBuy"></span></p>
+     
+
+      <ul id="buy"></ul>
+
+     
+
+	<script src="index.js"></script>
+  </body>
+</html>
