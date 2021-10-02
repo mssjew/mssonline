@@ -103,10 +103,14 @@ h3 {
 
 }
 
+hr {
+	border: 2px dashed black;
+	margin: 3%;
+}
+
 .Stats {
 	display: flex;
 	justify-content: center;
-	text-decoration: underline;
 }
 
 ul {
@@ -139,4 +143,45 @@ p {
 #avgSell {
 	color: darkorange;
 	font-weight: bold;
+}
+
+@media(max-width:500px) {
+
+    * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+        max-width:100%;
+        
+    }
+
+	h1{
+		font-size: 3.5rem;
+		padding: 1%;
+	}
+
+	h2 {
+		font-size: 2rem;
+		padding: 0% 1%;
+	}
+
+	#internal {
+		font-size: 2rem;
+	}
+	
+	#net {
+		font-size: 2rem;
+	}
+
+	h3 {
+		font-size: 1.8rem;
+	}
+
+	#totalSold {
+		font-weight: bold;
+	}
+	
+
+	
+    
 }
