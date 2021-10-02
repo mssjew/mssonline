@@ -84,6 +84,38 @@ h2 {
 	font-weight: bold;
 }
 
+h3 {
+	font-size: 2rem;
+	font-weight: 500;
+	line-height: 1;
+	font-family: monospace;
+	margin: 1%;
+
+}
+
+.Stats {
+	display: flex;
+	justify-content: center;
+	text-decoration: underline;
+}
+
+ul {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
 li {
+	font-family: monospace;
+	font-size: 2rem;
+
+}
+
+p {
+	display: flex;
+	justify-content: center;
+	line-height: 2;
+	font-size: 2.1rem;
 	font-family: monospace;
 }
