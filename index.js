@@ -206,34 +206,33 @@ fetch("https://www.goldapi.io/api/XAU/USD", requestOptions)
 
 // -------------------- Closing Today --------------------
 
-function cardMaker(e) {
-
-  function getNum(arr) {
+function getNum(arr) {
     
-    const profit = arr.split("");
+  const profit = arr.split("");
 
 
-    if (profit[0] === "-") {
-      profit.splice(1, 4);
-    } else {
-      profit.splice(0, 4);
-    }
-
-    
-    for (let i = 0; i < profit.length; i++){
-        if (profit[i] === ",") {
-          profit.splice(i,1);
-        }
-    }
-  
-    let num = profit.join('');
-  
-    let retval = parseFloat(num);
-
-    return retval
+  if (profit[0] === "-") {
+    profit.splice(1, 4);
+  } else {
+    profit.splice(0, 4);
   }
 
+  
+  for (let i = 0; i < profit.length; i++){
+      if (profit[i] === ",") {
+        profit.splice(i,1);
+      }
+  }
 
+  let num = profit.join('');
+
+  let retval = parseFloat(num);
+
+  return retval
+}
+
+
+function cardMaker(e) {
   const totalProfit = getNum(e[3]);
   const perTT = getNum(e[4]);
 
@@ -298,3 +297,34 @@ axios
   .catch((err) => {
     console.error(err);
   });
+
+
+
+  const totalDailyP = "Summary!E63";
+  const totalDailyHTML = document.getElementById("dailyProfit");
+
+// Total Daily Profit
+axios
+.get(
+  `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${totalDailyP}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+)
+.then((resp) => {
+
+  console.log();
+
+  const profitTot = getNum(resp.data.values[0][0]);
+
+  totalDailyHTML.textContent = "Profit Today: BD " + profitTot;
+
+  if (profitTot > 0) {
+    totalDailyHTML.classList.add("rowProfit");
+  } else {
+    totalDailyHTML.classList.add("rowLoss");
+  }
+
+  
+
+})
+.catch((err) => {
+  console.error(err);
+});
