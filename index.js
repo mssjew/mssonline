@@ -29,118 +29,177 @@ const avgSell = "Summary!B34";
 const avgBuy = "Summary!C34";
 
 // LIST MAKER FUNCTION
-function listMaker(list, content) {
+function listMakerSell(list, content) {
   const listItem = document.createElement("li");
   list.appendChild(listItem);
   listItem.textContent = content;
+  
+
 }
 
-// INTERNAL POSITION 
-axios.get(`https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${internalPos}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`)
-.then(resp => {
-  internalSpan.textContent = resp.data.values[0];
-})
-.catch(err => {
-  console.error(err);
-})
+function listMakerBuy(list, content) {
+  const listItem = document.createElement("li");
+  list.appendChild(listItem);
+  listItem.textContent = content;
+  
+}
 
-// NET POSITION 
-axios.get(`https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${netPos}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`)
-.then(resp => {
-  netSpan.textContent = resp.data.values[0];
-})
-.catch(err => {
-  console.error(err);
-})
+// INTERNAL POSITION
+axios
+  .get(
+    `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${internalPos}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+  )
+  .then((resp) => {
+    internalSpan.textContent = resp.data.values[0];
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
+// NET POSITION
+axios
+  .get(
+    `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${netPos}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+  )
+  .then((resp) => {
+    netSpan.textContent = resp.data.values[0];
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
 // -------------------- SELL SIDE START ---------------------
 
 // SELL POSITION COUNT
-axios.get(`https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${sellRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`)
-.then(resp => {
-  sellPosCountElement.textContent = resp.data.values.length;
-})
-.catch(err => {
-  console.error(err);
-})
+axios
+  .get(
+    `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${sellRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+  )
+  .then((resp) => {
+    sellPosCountElement.textContent = resp.data.values.length;
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
 // TOTAL SOLD TT
-axios.get(`https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${totalSold}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`)
-.then(resp => {
-  totalSoldElement.textContent = resp.data.values[0];
-})
-.catch(err => {
-  console.error(err);
-})
-
-// SELL LIST 
-axios.get(`https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${sellRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`)
-.then(resp => {
-  resp.data.values.forEach(element => {
-    listMaker(sellList, element);
+axios
+  .get(
+    `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${totalSold}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+  )
+  .then((resp) => {
+    totalSoldElement.textContent = resp.data.values[0];
+  })
+  .catch((err) => {
+    console.error(err);
   });
-})
-.catch(err => {
-  console.error(err);
-})
+
+// SELL LIST
+axios
+  .get(
+    `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${sellRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+  )
+  .then((resp) => {
+    resp.data.values.forEach((element) => {
+      listMakerSell(sellList, element);
+    });
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
 // AVG SOLD PRICE
-axios.get(`https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${avgSell}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`)
-.then(resp => {
-  avgSellElement.textContent = resp.data.values[0];
-})
-.catch(err => {
-  console.error(err);
-})
+axios
+  .get(
+    `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${avgSell}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+  )
+  .then((resp) => {
+    avgSellElement.textContent = resp.data.values[0];
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
 // -------------------- SELL SIDE END ---------------------
 
-
 // ------------------
-
 
 // -------------------- BUY SIDE START ---------------------
 
 // BUY POSITION COUNT
-axios.get(`https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${buyRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`)
-.then(resp => {
-  buyPosCountElement.textContent = resp.data.values.length;
-})
-.catch(err => {
-  console.error(err);
-})
+axios
+  .get(
+    `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${buyRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+  )
+  .then((resp) => {
+    buyPosCountElement.textContent = resp.data.values.length;
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
 // TOTAL BOUGHT TT
-axios.get(`https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${totalBought}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`)
-.then(resp => {
-  totalBoughtElement.textContent = resp.data.values[0];
-})
-.catch(err => {
-  console.error(err);
-})
-
-// BUY LIST 
-axios.get(`https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${buyRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`)
-.then(resp => {
-  resp.data.values.forEach(element => {
-    listMaker(buyList, element);
+axios
+  .get(
+    `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${totalBought}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+  )
+  .then((resp) => {
+    totalBoughtElement.textContent = resp.data.values[0];
+  })
+  .catch((err) => {
+    console.error(err);
   });
-})
-.catch(err => {
-  console.error(err);
-})
+
+// BUY LIST
+axios
+  .get(
+    `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${buyRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+  )
+  .then((resp) => {
+    resp.data.values.forEach((element) => {
+      listMakerBuy(buyList, element);
+    });
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
 // AVG BUY PRICE
-axios.get(`https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${avgBuy}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`)
-.then(resp => {
-  avgBuyElement.textContent = resp.data.values[0];
-})
-.catch(err => {
-  console.error(err);
-})
+axios
+  .get(
+    `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${avgBuy}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+  )
+  .then((resp) => {
+    avgBuyElement.textContent = resp.data.values[0];
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
 // -------------------- BUY SIDE END ---------------------
+
+
+const priceSpan = document.getElementById("price");
+
+
+
+// var myHeaders = new Headers();
+// myHeaders.append("x-access-token", "goldapi-f20pyjatkuagctl5-io");
+// myHeaders.append("Content-Type", "application/json");
+
+// var requestOptions = {
+//   method: 'GET',
+//   headers: myHeaders,
+//   redirect: 'follow'
+// };
+
+
+// fetch("https://www.goldapi.io/api/XAU/USD", requestOptions)
+//   .then(response => response.json())
+//   .then(result => priceSpan.textContent = result.price)
+//   .catch(error => console.log('error', error));
+
+
 
 
 

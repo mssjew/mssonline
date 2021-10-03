@@ -7,6 +7,8 @@
     <title>MSS Online Report</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+    
 
 
   </head>
@@ -17,9 +19,13 @@
    
       <h1>MSS Online Position</h1>
 
+      <h2 class="price">Live Price: $<span id="price"></span></h2>
+
       <h2>Internal: &nbsp; <span id="internal"></span></h2>
 
       <h2>Net: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span id="net"></span></h2>
+
+      
       
     <hr>
       <!-- SELL DATA -->
@@ -31,7 +37,7 @@
         <h3 >IN <span id="numSoldPos"></span> POSITIONS</h3>
 
       </div>
-      <p style="color: chocolate;">Avg. Sell: &nbsp;<span id="avgSell"></span></p>
+      <p style="color: black;">Avg. Sell: &nbsp;<span id="avgSell"></span></p>
       
       <ul id="sell"></ul>
     
@@ -46,12 +52,34 @@
         <h3 id="totalBought"></h3>
         <h3 >IN <span id="numBoughtPos"></span> POSITIONS</h3>
       </div>
-      <p style="color: crimson;">Avg. Buy: &nbsp;<span id="avgBuy"></span></p>
+      <p style="color: black;">Avg. Buy: &nbsp;<span id="avgBuy"></span></p>
      
 
       <ul id="buy"></ul>
 
       <hr>
+
+      <div class="todaySec">
+
+
+      <div class="card">
+          <div class="row1">
+            <p class="desc">
+                <span id="tt">50</span> TT Bought at <span id="buyP">$1750</span> and sold at <span id="sellP">$1850</span>
+            </p>
+          </div>
+          <div class="row2">
+            <p class="totalP">Profit: BD 1500</p>
+          </div>
+          <div class="row3">
+            <p class="perTT">Per TT: BD 45</p>
+          </div>
+      </div>
+
+    </div>
+
+
+
 
      
 

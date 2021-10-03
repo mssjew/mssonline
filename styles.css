@@ -52,7 +52,7 @@ html {
 }
 
 * {
-	/* border: 1px solid rgb(196, 108, 0); */
+	border: 1px solid rgb(196, 108, 0);
 	font-family: monospace;
 	box-sizing: border-box;
     padding: 0;
@@ -163,13 +163,13 @@ p {
 }
 
 #avgBuy {
-	color: crimson;
+	color: black;
 	font-weight: bold;
 
 }
 
 #avgSell {
-	color: chocolate;
+	color: black;
 	font-weight: bold;
 }
 
@@ -183,6 +183,54 @@ p {
 	color: crimson;
 	font-weight: bold;
 }
+
+#price {
+	color: red;
+	font-weight: bold;
+}
+
+.price {
+	color: red;
+	font-size: 2.5rem;
+	font-weight: bold;
+}
+
+
+.card {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	border: 1px solid black;
+	width: 75%;
+	margin: auto;
+	
+}
+
+.card p {
+	font-size: 2rem;
+}
+
+.row1 {
+	display: flex;
+	justify-content: space-around;
+	width: 30%;
+}
+.row2 {
+	display: flex;
+	justify-content: space-around;
+	width: 30%;
+}
+
+.row3 {
+	display: flex;
+	justify-content: space-around;
+	width: 30%;
+}
+
+
+
+
 @media(max-width:520px) {
 
     * {
@@ -223,7 +271,36 @@ p {
 	p {
 		font-size: 2.6rem;
 	}
+
+	.card {
+		border: 1px solid black;
+		width: 90%;
+		margin: auto;
 	
+	}
+	
+	.card p {
+		font-size: 1.4rem;
+	}
+	
+	.row1 {
+		display: flex;
+		justify-content: space-around;
+		width: 80%;
+	}
+	.row2 {
+		display: flex;
+		justify-content: space-around;
+		width: 90%;
+	}
+	
+	.row3 {
+		display: flex;
+		justify-content: space-around;
+		width: 80%;
+	}
+
+
 
 	
     
