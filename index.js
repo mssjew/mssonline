@@ -290,9 +290,17 @@ axios
     `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${amtToday}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
-    resp.data.values.forEach(function(e) {
-      todaySection.appendChild(cardMaker(e));
-    });
+    if (resp.data.values[0][0] === "#N/A") {
+      const noneP = document.createElement("p");
+      noneP.classList.add("card");
+      todaySection.appendChild(noneP);
+      noneP.textContent = "None";
+    } else {
+      resp.data.values.forEach(function(e) {
+        todaySection.appendChild(cardMaker(e));
+      });
+      
+    }
   })
   .catch((err) => {
     console.error(err);
@@ -309,14 +317,15 @@ axios
   `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${totalDailyP}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
 )
 .then((resp) => {
-
-  console.log();
-
+  
   const profitTot = getNum(resp.data.values[0][0]);
 
   totalDailyHTML.textContent = "Profit Today: BD " + profitTot;
 
-  if (profitTot > 0) {
+
+  if (isNaN(profitTot)) {
+    totalDailyHTML.classList.add("hide");
+  } else if (profitTot > 0) {
     totalDailyHTML.classList.add("rowProfit");
   } else {
     totalDailyHTML.classList.add("rowLoss");

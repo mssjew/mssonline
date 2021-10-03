@@ -228,6 +228,10 @@ h1.today {
 	text-decoration: underline;
 }
 
+.hide {
+	display: none;
+}
+
 
 
 
