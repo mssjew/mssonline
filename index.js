@@ -209,9 +209,17 @@ fetch("https://www.goldapi.io/api/XAU/USD", requestOptions)
 function cardMaker(e) {
 
   function getNum(arr) {
+    
     const profit = arr.split("");
-    profit.splice(0, 4);
-  
+
+
+    if (profit[0] === "-") {
+      profit.splice(1, 4);
+    } else {
+      profit.splice(0, 4);
+    }
+
+    
     for (let i = 0; i < profit.length; i++){
         if (profit[i] === ",") {
           profit.splice(i,1);
@@ -260,12 +268,12 @@ function cardMaker(e) {
   divr4.textContent = "Profit: BD " + totalProfit;
   divr5.textContent = "Per TT: BD " + perTT;
 
-  if (totalProfit && perTT > 0) {
+  if (totalProfit > 0 && perTT > 0) {
     divr4.classList.add("rowProfit");
     divr5.classList.add("rowProfit");
   } else {
-    divr4.classList.add("rowLoss")
-    divr5.classList.add("rowProfit");
+    divr4.classList.add("rowLoss");
+    divr5.classList.add("rowLoss");
   }
   
 
