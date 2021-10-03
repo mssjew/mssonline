@@ -52,7 +52,7 @@ html {
 }
 
 * {
-	border: 1px solid rgb(196, 108, 0);
+	/* border: 1px solid rgb(196, 108, 0); */
 	font-family: monospace;
 	box-sizing: border-box;
     padding: 0;
@@ -201,32 +201,35 @@ p {
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	border: 1px solid black;
 	width: 75%;
 	margin: auto;
-	
-}
-
-.card p {
 	font-size: 2rem;
 }
 
-.row1 {
+.row1 .row2 .row3 .row4 .row5 {
 	display: flex;
 	justify-content: space-around;
-	width: 30%;
-}
-.row2 {
-	display: flex;
-	justify-content: space-around;
-	width: 30%;
+	width: 80%;
 }
 
-.row3 {
-	display: flex;
-	justify-content: space-around;
-	width: 30%;
+.rowProfit {
+	color: green;
+	font-weight: bold;
 }
+
+.rowLoss {
+	color: red;
+	font-weight: bold;
+}
+
+
+h1.today {
+	font-size: 2.5rem;
+	text-decoration: underline;
+}
+
+
+
 
 
 
@@ -273,37 +276,22 @@ p {
 	}
 
 	.card {
-		border: 1px solid black;
-		width: 90%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		width: 75%;
 		margin: auto;
-	
+		line-height: 1.5;
+		font-family: monospace;
 	}
 	
-	.card p {
-		font-size: 1.4rem;
-	}
-	
-	.row1 {
+	.row1 .row2 .row3 .row4 .row5 .row6 {
 		display: flex;
 		justify-content: space-around;
-		width: 80%;
-	}
-	.row2 {
-		display: flex;
-		justify-content: space-around;
-		width: 90%;
-	}
-	
-	.row3 {
-		display: flex;
-		justify-content: space-around;
-		width: 80%;
+		width: 50%;
 	}
 
-
-
-	
-    
 }
 
 @media(max-width:425px) {
