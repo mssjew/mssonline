@@ -203,7 +203,7 @@ p {
 	flex-direction: column;
 	width: 75%;
 	margin: auto;
-	font-size: 2rem;
+	font-size: 2.4rem;
 }
 
 .row1 .row2 .row3 .row4 .row5 {
@@ -336,6 +336,8 @@ h1.today {
 	}
 
 	
+	
+	
     
 }
 
@@ -383,6 +385,17 @@ h1.today {
 	li {
 		font-size: 2.3rem;
 	}
+
+	.card {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		width: 75%;
+		margin: auto;
+		font-size: 2rem;
+	}
+
 
 	
     
