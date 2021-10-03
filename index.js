@@ -181,23 +181,23 @@ axios
 
 
 // -------------------- Live Price --------------------
-const priceSpan = document.getElementById("price");
+// const priceSpan = document.getElementById("price");
 
-var myHeaders = new Headers();
-myHeaders.append("x-access-token", "goldapi-f20pyjatkuagctl5-io");
-myHeaders.append("Content-Type", "application/json");
+// var myHeaders = new Headers();
+// myHeaders.append("x-access-token", "goldapi-f20pyjatkuagctl5-io");
+// myHeaders.append("Content-Type", "application/json");
 
-var requestOptions = {
-  method: 'GET',
-  headers: myHeaders,
-  redirect: 'follow'
-};
+// var requestOptions = {
+//   method: 'GET',
+//   headers: myHeaders,
+//   redirect: 'follow'
+// };
 
 
-fetch("https://www.goldapi.io/api/XAU/USD", requestOptions)
-  .then(response => response.json())
-  .then(result => priceSpan.textContent = result.price)
-  .catch(error => console.log('error', error));
+// fetch("https://www.goldapi.io/api/XAU/USD", requestOptions)
+//   .then(response => response.json())
+//   .then(result => priceSpan.textContent = result.price)
+//   .catch(error => console.log('error', error));
 
 
 
@@ -242,7 +242,7 @@ function cardMaker(e) {
   const divr3 = document.createElement("div");
   const divr4 = document.createElement("div");
   const divr5 = document.createElement("div");
-  const divSep = document.createElement("br");
+  // const divSep = document.createElement("br");
  
   
   cardDiv.appendChild(divr1);
@@ -250,7 +250,7 @@ function cardMaker(e) {
   cardDiv.appendChild(divr3);
   cardDiv.appendChild(divr4);
   cardDiv.appendChild(divr5);
-  cardDiv.appendChild(divSep);
+  // cardDiv.appendChild(divSep);
 
 
   cardDiv.classList.add("card");

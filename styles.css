@@ -203,7 +203,10 @@ p {
 	flex-direction: column;
 	width: 75%;
 	margin: auto;
+	padding: 3%;
 	font-size: 2.4rem;
+	border: 2px dashed black;
+
 }
 
 .row1 .row2 .row3 .row4 .row5 {
