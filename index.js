@@ -28,42 +28,19 @@ const buyRange = "Summary!C11:C32";
 const avgSell = "Summary!B34";
 const avgBuy = "Summary!C34";
 
-function pad(idx) {
-  idx = idx.toString();
-  if (idx.length < 2) idx = "0" + idx;
-  return idx;
-}
-
 // LIST MAKER FUNCTION
-function listMakerSell(list, content, idx) {
- 
-  
-
+function listMakerSell(list, content) {
   const listItem = document.createElement("li");
   list.appendChild(listItem);
   listItem.textContent = content;
-
-
-  const indexVal = document.createElement("span");
-  indexVal.classList.add("index");
-  listItem.prepend(indexVal);
-  indexVal.textContent = pad(idx+1) + ".  ";
-
-
   
 
 }
 
-function listMakerBuy(list, content, idx) {
+function listMakerBuy(list, content) {
   const listItem = document.createElement("li");
   list.appendChild(listItem);
   listItem.textContent = content;
-
-  const indexVal = document.createElement("span");
-  indexVal.classList.add("index");
-  listItem.prepend(indexVal);
-  indexVal.textContent = pad(idx+1) + ".  ";
-
   
 }
 
@@ -123,8 +100,8 @@ axios
     `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${sellRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
-    resp.data.values.forEach((element, idx) => {
-      listMakerSell(sellList, element, idx);
+    resp.data.values.forEach((element) => {
+      listMakerSell(sellList, element);
     });
   })
   .catch((err) => {
@@ -179,8 +156,8 @@ axios
     `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${buyRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
-    resp.data.values.forEach((element, idx) => {
-      listMakerBuy(buyList, element, idx);
+    resp.data.values.forEach((element) => {
+      listMakerBuy(buyList, element);
     });
   })
   .catch((err) => {
@@ -255,9 +232,12 @@ function getNum(arr) {
 }
 
 
-function cardMaker(e) {
+function cardMaker(e,idx) {
   const totalProfit = getNum(e[3]);
   const perTT = getNum(e[4]);
+
+  const divHolder = document.createElement("div");
+  const num = document.createElement("h3");
 
   const cardDiv = document.createElement("div");
   const divr1 = document.createElement("div");
@@ -266,8 +246,11 @@ function cardMaker(e) {
   const divr4 = document.createElement("div");
   const divr5 = document.createElement("div");
   // const divSep = document.createElement("br");
- 
   
+  divHolder.classList.add("divHolder");
+  num.classList.add("numIdx");
+  divHolder.appendChild(num);
+  divHolder.appendChild(cardDiv);
   cardDiv.appendChild(divr1);
   cardDiv.appendChild(divr2);
   cardDiv.appendChild(divr3);
@@ -283,7 +266,7 @@ function cardMaker(e) {
   divr4.classList.add("row4");
   divr5.classList.add("row5");
 
-
+  num.textContent = idx+1; 
   divr1.textContent = "Amount: " + e[0];
   divr2.textContent = "Buy Price: " + e[1];
   divr3.textContent = "Sell Price: " + e[2];
@@ -299,7 +282,7 @@ function cardMaker(e) {
   }
   
 
-  return cardDiv;
+  return divHolder;
 }
 
 
@@ -319,8 +302,8 @@ axios
       todaySection.appendChild(noneP);
       noneP.textContent = "None";
     } else {
-      resp.data.values.forEach(function(e) {
-        todaySection.appendChild(cardMaker(e));
+      resp.data.values.forEach(function(e,idx) {
+        todaySection.appendChild(cardMaker(e,idx));
       });
       
     }

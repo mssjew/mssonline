@@ -74,7 +74,7 @@ html {
 }
 
 h1 {
-	font-size: 5rem;
+	font-size: 4rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -148,7 +148,7 @@ ul {
 
 li {
 	font-family: monospace;
-	font-size: 2.4rem;
+	font-size: 2.6rem;
 	margin: .5% 0%;
 
 }
@@ -201,18 +201,19 @@ p {
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	width: 75%;
+	width: 100%;
 	margin: auto;
 	padding: 3%;
-	font-size: 2.4rem;
-	border: 2px dashed black;
+	font-size: 2.7rem;
+	font-family: monospace;
+	line-height: 1.5;
 
 }
 
 .row1 .row2 .row3 .row4 .row5 {
 	display: flex;
 	justify-content: space-around;
-	width: 80%;
+	font-family: monospace;
 }
 
 .rowProfit {
@@ -239,12 +240,29 @@ h1.today {
 	font-size: 2rem;
 }
 
-.index {
-	color: gray;
-	font-weight: 100;
-	
+h3.numIdx {
+	width: 30px;
+    line-height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 2.5rem;
+    border: 2px solid #666;
+	margin: 0;
+	padding: 0;
+	font-family: monospace;
 
 }
+
+.divHolder {
+	border: 2px dashed black;
+	width: 90%;
+	margin: auto;
+	padding: 3%;
+}
+
+
+
+
 
 
 
@@ -296,21 +314,21 @@ h1.today {
 		justify-content: center;
 		align-items: center;
 		flex-direction: column;
-		width: 75%;
+		width: 100%;
 		margin: auto;
 		line-height: 1.5;
 		font-family: monospace;
+		font-size: 2.6rem;
 	}
 	
 	.row1 .row2 .row3 .row4 .row5 .row6 {
 		display: flex;
 		justify-content: space-around;
-		width: 50%;
 	}
 
 }
 
-@media(max-width:431px) {
+@media(max-width:425px) {
 
     * {
         box-sizing: border-box;
@@ -351,13 +369,21 @@ h1.today {
 		font-size: 2rem;
 	}
 
+	#dailyProfit {
+		font-size: 2rem;
+	}
+
+	.card {
+		font-size: 2.3rem;
+	}
+
 	
 	
 	
     
 }
 
-@media(max-width:430px) {
+@media(max-width:390px) {
 
     * {
         box-sizing: border-box;
@@ -368,8 +394,12 @@ h1.today {
     }
 
 	h1{
-		font-size: 3rem;
+		font-size: 2.5rem;
 		padding: 1%;
+	}
+
+	h1.today {
+		font-size: 1.5rem;
 	}
 
 	h2 {
@@ -399,7 +429,7 @@ h1.today {
 	}
 
 	li {
-		font-size: 2.5em;
+		font-size: 2.3rem;
 	}
 
 	.card {
@@ -407,7 +437,7 @@ h1.today {
 		justify-content: center;
 		align-items: center;
 		flex-direction: column;
-		width: 75%;
+		width: 100%;
 		margin: auto;
 		font-size: 2rem;
 	}
