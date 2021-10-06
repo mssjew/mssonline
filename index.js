@@ -28,19 +28,42 @@ const buyRange = "Summary!C11:C32";
 const avgSell = "Summary!B34";
 const avgBuy = "Summary!C34";
 
+function pad(idx) {
+  idx = idx.toString();
+  if (idx.length < 2) idx = "0" + idx;
+  return idx;
+}
+
 // LIST MAKER FUNCTION
-function listMakerSell(list, content) {
+function listMakerSell(list, content, idx) {
+ 
+  
+
   const listItem = document.createElement("li");
   list.appendChild(listItem);
   listItem.textContent = content;
+
+
+  const indexVal = document.createElement("span");
+  indexVal.classList.add("index");
+  listItem.prepend(indexVal);
+  indexVal.textContent = pad(idx+1) + ".  ";
+
+
   
 
 }
 
-function listMakerBuy(list, content) {
+function listMakerBuy(list, content, idx) {
   const listItem = document.createElement("li");
   list.appendChild(listItem);
   listItem.textContent = content;
+
+  const indexVal = document.createElement("span");
+  indexVal.classList.add("index");
+  listItem.prepend(indexVal);
+  indexVal.textContent = pad(idx+1) + ".  ";
+
   
 }
 
@@ -100,8 +123,8 @@ axios
     `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${sellRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
-    resp.data.values.forEach((element) => {
-      listMakerSell(sellList, element);
+    resp.data.values.forEach((element, idx) => {
+      listMakerSell(sellList, element, idx);
     });
   })
   .catch((err) => {
@@ -156,8 +179,8 @@ axios
     `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${buyRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
-    resp.data.values.forEach((element) => {
-      listMakerBuy(buyList, element);
+    resp.data.values.forEach((element, idx) => {
+      listMakerBuy(buyList, element, idx);
     });
   })
   .catch((err) => {
