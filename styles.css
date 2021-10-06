@@ -148,7 +148,7 @@ ul {
 
 li {
 	font-family: monospace;
-	font-size: 2.6rem;
+	font-size: 2.4rem;
 	margin: .5% 0%;
 
 }
@@ -310,7 +310,7 @@ h1.today {
 
 }
 
-@media(max-width:425px) {
+@media(max-width:431px) {
 
     * {
         box-sizing: border-box;
@@ -357,7 +357,7 @@ h1.today {
     
 }
 
-@media(max-width:390px) {
+@media(max-width:430px) {
 
     * {
         box-sizing: border-box;
@@ -399,7 +399,7 @@ h1.today {
 	}
 
 	li {
-		font-size: 2.3rem;
+		font-size: 2.5em;
 	}
 
 	.card {
