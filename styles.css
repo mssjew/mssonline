@@ -260,6 +260,11 @@ h3.numIdx {
 	padding: 3%;
 }
 
+.index {
+	color: gray;
+	font-weight: 100;
+}
+
 
 
 
@@ -286,6 +291,10 @@ h3.numIdx {
 	h2 {
 		font-size: 2.4rem;
 		padding: 0% 1%;
+	}
+
+	li {
+		font-size: 2.4rem;
 	}
 
 	#internal {
@@ -346,6 +355,10 @@ h3.numIdx {
 	h2 {
 		font-size: 2rem;
 		padding: 0% 1%;
+	}
+
+	li {
+		font-size: 2.2rem;
 	}
 
 	#internal {
@@ -429,7 +442,7 @@ h3.numIdx {
 	}
 
 	li {
-		font-size: 2.3rem;
+		font-size: 1.8rem;
 	}
 
 	.card {
