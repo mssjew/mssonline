@@ -341,7 +341,7 @@ axios
   
   const profitTot = getNum(resp.data.values[0][0]);
 
-  totalDailyHTML.textContent = "Profit Today: BD " + profitTot;
+  totalDailyHTML.textContent = "Profit Today: BD " + profitTot.toLocaleString("en-US");
 
 
   if (isNaN(profitTot)) {
