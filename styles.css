@@ -3,459 +3,539 @@
    License: none (public domain)
 */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	/* border: 0; */
-	font-size: 62.5%;
-	font: inherit;
-	vertical-align: baseline;
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  /* border: 0; */
+  font-size: 62.5%;
+  font: inherit;
+  vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
 }
 body {
-	line-height: 1;
+  line-height: 1;
 }
-ol, ul {
-	list-style: none;
+ol,
+ul {
+  list-style: none;
 }
-blockquote, q {
-	quotes: none;
+blockquote,
+q {
+  quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
 }
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 html {
-    font-size: 62.5%;
+  font-size: 62.5%;
 }
 
 * {
-	/* border: 1px solid rgb(196, 108, 0); */
-	font-family: monospace;
-	box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-    max-width:100%;
-	
+  /* border: 1px solid rgb(196, 108, 0); */
+  font-family: monospace;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  max-width: 100%;
 }
 
 #logo {
-    background-image: url("https://msspricess.b-cdn.net/logo.png");
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: center;
-    margin-top: 2%;
-	margin-bottom: 2%;
-	height: 10vh;
+  background-image: url("https://msspricess.b-cdn.net/logo.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  height: 10vh;
 }
 
 h1 {
-	font-size: 4rem;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-family: monospace;
-	font-weight: bold;
-	margin: 1%;
+  font-size: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: monospace;
+  font-weight: bold;
+  margin: 1%;
 }
 
 h2 {
-	font-size: 2.5rem;
-	font-weight: 500;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	line-height: 1.5;
-	font-family: monospace;
-	margin: 0% 1%;
+  font-size: 2.5rem;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.5;
+  font-family: monospace;
+  margin: 0% 1%;
 }
 
 #internal {
-	font-size: 2.5rem;
-	color: rgb(196, 108, 0);
-	font-weight: bold;
+  font-size: 2.5rem;
+  color: rgb(196, 108, 0);
+  font-weight: bold;
 }
 
 #net {
-	font-size: 2.5rem;
-	color: rgb(196, 108, 0);
-	font-weight: bold;
+  font-size: 2.5rem;
+  color: rgb(196, 108, 0);
+  font-weight: bold;
 }
 
 h3 {
-	font-size: 2.5rem;
-	font-weight: 500;
-	line-height: 1;
-	font-family: monospace;
-	margin: 1%;
-
+  font-size: 2.5rem;
+  font-weight: 500;
+  line-height: 1;
+  font-family: monospace;
+  margin: 1%;
 }
 
 hr {
-	border: 2px dashed black;
-	margin: 3%;
+  border: 2px dashed black;
+  margin: 3%;
 }
 
 .soldStats {
-	display: flex;
-	justify-content: center;
-	color: chocolate;
+  display: flex;
+  justify-content: center;
+  color: chocolate;
 }
 
 .buyStats {
-	display: flex;
-	justify-content: center;
-	color: crimson;
+  display: flex;
+  justify-content: center;
+  color: crimson;
 }
 
-
-
 ul {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	margin: 1%;
-	margin-bottom: 5%;
-	
-	
-	
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1%;
+  margin-bottom: 5%;
 }
 
 li {
-	font-family: monospace;
-	font-size: 2.6rem;
-	margin: .5% 0%;
-
+  font-family: monospace;
+  font-size: 2.6rem;
+  margin: 0.5% 0%;
 }
 
 p {
-	display: flex;
-	justify-content: center;
-	line-height: 2;
-	font-size: 2.1rem;
-	font-family: monospace;
-	font-weight: bold;
+  display: flex;
+  justify-content: center;
+  line-height: 2;
+  font-size: 2.1rem;
+  font-family: monospace;
+  font-weight: bold;
 }
 
 #avgBuy {
-	color: black;
-	font-weight: bold;
-
+  color: black;
+  font-weight: bold;
 }
 
 #avgSell {
-	color: black;
-	font-weight: bold;
+  color: black;
+  font-weight: bold;
 }
 
 #sell {
-	color: chocolate;
-	font-weight: bold;
-	
+  color: chocolate;
+  font-weight: bold;
 }
 
 #buy {
-	color: crimson;
-	font-weight: bold;
+  color: crimson;
+  font-weight: bold;
 }
 
 #price {
-	color: red;
-	font-weight: bold;
+  color: red;
+  font-weight: bold;
 }
 
 .price {
-	color: red;
-	font-size: 2.5rem;
-	font-weight: bold;
+  color: red;
+  font-size: 2.5rem;
+  font-weight: bold;
 }
 
-
 .card {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	width: 100%;
-	margin: auto;
-	padding: 3%;
-	font-size: 2.7rem;
-	font-family: monospace;
-	line-height: 1.5;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  margin: auto;
+  padding: 3%;
+  font-size: 2.7rem;
+  font-family: monospace;
+  line-height: 1.5;
 }
 
 .row1 .row2 .row3 .row4 .row5 {
-	display: flex;
-	justify-content: space-around;
-	font-family: monospace;
+  display: flex;
+  justify-content: space-around;
+  font-family: monospace;
 }
 
 .rowProfit {
-	color: green;
-	font-weight: bold;
+  color: green;
+  font-weight: bold;
 }
 
 .rowLoss {
-	color: red;
-	font-weight: bold;
+  color: red;
+  font-weight: bold;
 }
 
-
 h1.today {
-	font-size: 2.5rem;
-	text-decoration: underline;
+  font-size: 2.5rem;
+  text-decoration: underline;
 }
 
 .hide {
-	display: none;
+  display: none;
 }
 
 #key {
-	font-size: 2rem;
+  font-size: 2rem;
 }
 
 h3.numIdx {
-	width: 30px;
-    line-height: 30px;
-    border-radius: 50%;
-    text-align: center;
-    font-size: 2.5rem;
-    border: 2px solid #666;
-	margin: 0;
-	padding: 0;
-	font-family: monospace;
-
+  width: 30px;
+  line-height: 30px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 2.5rem;
+  border: 2px solid #666;
+  margin: 0;
+  padding: 0;
+  font-family: monospace;
 }
 
 .divHolder {
-	border: 2px dashed black;
-	width: 90%;
-	margin: auto;
-	padding: 3%;
+  border: 2px dashed black;
+  width: 90%;
+  margin: auto;
+  padding: 3%;
 }
 
 .index {
-	color: gray;
-	font-weight: 100;
+  color: gray;
+  font-weight: 100;
+}
+
+.btnHolder {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	margin: 4%;
+}
+
+a {
+	text-decoration: none;
 }
 
 
+button.kenz {
+	margin-top: 2%;
+	margin: 1%;
+	display: flex;
+	font-size: 1.75rem;
+	font-weight: 600;
+	border-radius: 10px;
+	border: 10px solid saddlebrown;
+	background-color: saddlebrown;
+	color: #fff;
+  }
 
 
+  button.qab {
+	margin-top: 2%;
+	margin: 1%;
+	display: flex;
+	font-size: 1.75rem;
+	font-weight: 600;
+	border-radius: 10px;
+	border: 10px solid maroon;
+	background-color: maroon;
+	color: #fff;
+  }
 
+@media (max-width: 520px) {
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+  }
 
+  h1 {
+    font-size: 3.5rem;
+    padding: 1%;
+  }
 
+  h2 {
+    font-size: 2.4rem;
+    padding: 0% 1%;
+  }
 
+  li {
+    font-size: 2.4rem;
+  }
 
-@media(max-width:520px) {
+  #internal {
+    font-size: 2rem;
+  }
 
-    * {
-        box-sizing: border-box;
-        padding: 0;
-        margin: 0;
-        max-width:100%;
-        
-    }
+  #net {
+    font-size: 2rem;
+  }
 
-	h1{
-		font-size: 3.5rem;
-		padding: 1%;
-	}
+  h3 {
+    font-size: 2.1rem;
+    font-weight: bold;
+  }
 
-	h2 {
-		font-size: 2.4rem;
-		padding: 0% 1%;
-	}
+  #totalSold {
+    font-weight: bold;
+  }
 
-	li {
-		font-size: 2.4rem;
-	}
+  p {
+    font-size: 2.6rem;
+  }
 
-	#internal {
-		font-size: 2rem;
-	}
-	
-	#net {
-		font-size: 2rem;
-	}
+  .card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    margin: auto;
+    line-height: 1.5;
+    font-family: monospace;
+    font-size: 2.6rem;
+  }
 
-	h3 {
-		font-size: 2.1rem;
-		font-weight: bold;
-	}
-
-	#totalSold {
-		font-weight: bold;
-	}
-
-	p {
-		font-size: 2.6rem;
-	}
-
-	.card {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		flex-direction: column;
-		width: 100%;
-		margin: auto;
-		line-height: 1.5;
-		font-family: monospace;
-		font-size: 2.6rem;
-	}
-	
-	.row1 .row2 .row3 .row4 .row5 .row6 {
-		display: flex;
-		justify-content: space-around;
-	}
-
+  .row1 .row2 .row3 .row4 .row5 .row6 {
+    display: flex;
+    justify-content: space-around;
+  }
 }
 
-@media(max-width:425px) {
+@media (max-width: 425px) {
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+  }
 
-    * {
-        box-sizing: border-box;
-        padding: 0;
-        margin: 0;
-        max-width:100%;
-        
-    }
+  h1 {
+    font-size: 3rem;
+    padding: 1%;
+  }
 
-	h1{
-		font-size: 3rem;
-		padding: 1%;
-	}
+  h2 {
+    font-size: 2rem;
+    padding: 0% 1%;
+  }
 
-	h2 {
-		font-size: 2rem;
-		padding: 0% 1%;
-	}
+  li {
+    font-size: 2.2rem;
+  }
 
-	li {
-		font-size: 2.2rem;
-	}
+  #internal {
+    font-size: 2rem;
+  }
 
-	#internal {
-		font-size: 2rem;
-	}
-	
-	#net {
-		font-size: 2rem;
-	}
+  #net {
+    font-size: 2rem;
+  }
 
-	h3 {
-		font-size: 1.8rem;
-		font-weight: bold;
-	}
+  h3 {
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
 
-	#totalSold {
-		font-weight: bold;
-	}
-	
-	p {
-		font-size: 2rem;
-	}
+  #totalSold {
+    font-weight: bold;
+  }
 
-	#dailyProfit {
-		font-size: 2rem;
-	}
+  p {
+    font-size: 2rem;
+  }
 
-	.card {
-		font-size: 2.3rem;
-	}
+  #dailyProfit {
+    font-size: 2rem;
+  }
 
-	
-	
-	
-    
+  .card {
+    font-size: 2.3rem;
+  }
 }
 
-@media(max-width:390px) {
+@media (max-width: 390px) {
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+  }
 
-    * {
-        box-sizing: border-box;
-        padding: 0;
-        margin: 0;
-        max-width:100%;
-        
-    }
+  h1 {
+    font-size: 2.5rem;
+    padding: 1%;
+  }
 
-	h1{
-		font-size: 2.5rem;
-		padding: 1%;
-	}
+  h1.today {
+    font-size: 1.5rem;
+  }
 
-	h1.today {
-		font-size: 1.5rem;
-	}
+  h2 {
+    font-size: 2rem;
+    padding: 0% 1%;
+  }
 
-	h2 {
-		font-size: 2rem;
-		padding: 0% 1%;
-	}
+  #internal {
+    font-size: 2rem;
+  }
 
-	#internal {
-		font-size: 2rem;
-	}
-	
-	#net {
-		font-size: 2rem;
-	}
+  #net {
+    font-size: 2rem;
+  }
 
-	h3 {
-		font-size: 1.8rem;
-		font-weight: bold;
-	}
+  h3 {
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
 
-	#totalSold {
-		font-weight: bold;
-	}
-	
-	p {
-		font-size: 2rem;
-	}
+  #totalSold {
+    font-weight: bold;
+  }
 
-	li {
-		font-size: 1.8rem;
-	}
+  p {
+    font-size: 2rem;
+  }
 
-	.card {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		flex-direction: column;
-		width: 100%;
-		margin: auto;
-		font-size: 2rem;
-	}
+  li {
+    font-size: 1.8rem;
+  }
 
-
-	
-    
+  .card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    margin: auto;
+    font-size: 2rem;
+  }
 }

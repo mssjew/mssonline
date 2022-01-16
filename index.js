@@ -91,7 +91,13 @@ axios
     `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${sellRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
-    sellPosCountElement.textContent = resp.data.values.length;
+    if(resp.data.values[0][0] === "#N/A") {
+
+      sellPosCountElement.textContent = 0;
+    } else {
+   
+      sellPosCountElement.textContent = resp.data.values.length;
+    }
   })
   .catch((err) => {
     console.error(err);
@@ -129,8 +135,11 @@ axios
     `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${avgSell}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
-    avgSellElement.textContent = resp.data.values[0];
-  })
+    if(resp.data.values[0][0] === "#DIV/0!") {
+      avgSellElement.textContent = "";
+    } else {
+      avgSellElement.textContent = resp.data.values[0];
+    }  })
   .catch((err) => {
     console.error(err);
   });
@@ -147,7 +156,13 @@ axios
     `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${buyRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
-    buyPosCountElement.textContent = resp.data.values.length;
+    if(resp.data.values[0][0] === "#N/A") {
+
+      buyPosCountElement.textContent = 0;
+    } else {
+   
+      buyPosCountElement.textContent = resp.data.values.length;
+    }
   })
   .catch((err) => {
     console.error(err);
@@ -185,7 +200,11 @@ axios
     `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${avgBuy}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
-    avgBuyElement.textContent = resp.data.values[0];
+    if(resp.data.values[0][0] === "#DIV/0!") {
+      avgBuyElement.textContent = "";
+    } else {
+      avgBuyElement.textContent = resp.data.values[0];
+    }
   })
   .catch((err) => {
     console.error(err);
