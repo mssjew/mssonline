@@ -329,7 +329,7 @@ axios
 
 
 
-  const totalDailyP = "Summary!E63";
+  const totalDailyP = "Summary!E69";
   const totalDailyHTML = document.getElementById("dailyProfit");
 
 // Total Daily Profit
