@@ -22,11 +22,11 @@ const buyPosCount = "Summary!C9";
 const totalSold = "Summary!B10";
 const totalBought = "Summary!C10";
 
-const sellRange = "Summary!B11:B32";
-const buyRange = "Summary!C11:C32";
+const sellRange = "Summary!B11:B38";
+const buyRange = "Summary!C11:C38";
 
-const avgSell = "Summary!B34";
-const avgBuy = "Summary!C34";
+const avgSell = "Summary!B40";
+const avgBuy = "Summary!C40";
 
 function pad(idx) {
   idx = idx.toString();
@@ -303,7 +303,7 @@ function cardMaker(e,idx) {
 
 const todaySection = document.getElementById("todaySec");
 
-const amtToday = "Summary!B49:F60";
+const amtToday = "Summary!B55:F66";
 
 // Today Closing
 axios
