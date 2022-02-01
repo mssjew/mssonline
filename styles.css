@@ -333,41 +333,39 @@ h3.numIdx {
 }
 
 .btnHolder {
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-	margin: 4%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 4%;
 }
 
 a {
-	text-decoration: none;
+  text-decoration: none;
 }
 
-
 button.kenz {
-	margin-top: 2%;
-	margin: 1%;
-	display: flex;
-	font-size: 1.75rem;
-	font-weight: 600;
-	border-radius: 10px;
-	border: 10px solid saddlebrown;
-	background-color: saddlebrown;
-	color: #fff;
-  }
-
+  margin-top: 2%;
+  margin: 1%;
+  display: flex;
+  font-size: 1.75rem;
+  font-weight: 600;
+  border-radius: 10px;
+  border: 10px solid saddlebrown;
+  background-color: saddlebrown;
+  color: #fff;
+}
 
 button.qab {
-	margin-top: 2%;
-	margin: 1%;
-	display: flex;
-	font-size: 1.75rem;
-	font-weight: 600;
-	border-radius: 10px;
-	border: 10px solid maroon;
-	background-color: maroon;
-	color: #fff;
-  }
+  margin-top: 2%;
+  margin: 1%;
+  display: flex;
+  font-size: 1.75rem;
+  font-weight: 600;
+  border-radius: 10px;
+  border: 10px solid maroon;
+  background-color: maroon;
+  color: #fff;
+}
 
 .eventCard {
   display: flex;
@@ -380,13 +378,31 @@ button.qab {
   margin-top: 2%;
   margin-bottom: 2%;
   padding: 2%;
-  border: 2px black dotted ;
+  border: 2px black dotted;
 }
+
+.eventCardStriked {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  width: 75%;
+  margin: auto;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  padding: 2%;
+  border: 2px black dotted;
+  text-decoration: line-through;
+}
+
 .timeBH {
-    color: crimson;
-    font-size: 2rem;
-    line-height: 1.5;
-  }
+  color: crimson;
+  font-size: 2rem;
+  line-height: 1.5;
+}
+
+
 .eventP {
   color: black;
   font-size: 2rem;
@@ -397,10 +413,6 @@ button.qab {
 div.eventCard > p:first-child {
   text-decoration: underline;
 }
-
-
-
-
 
 @media (max-width: 520px) {
   * {
