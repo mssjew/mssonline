@@ -510,13 +510,17 @@ span.signalSign {
     padding: 1%;
   }
 
+  h1.today {
+    font-size: 1.8rem;
+  }
+
   h2 {
     font-size: 2rem;
     padding: 0% 1%;
   }
 
   li {
-    font-size: 2.05rem;
+    font-size: 2.3rem;
   }
 
   #internal {
@@ -550,6 +554,12 @@ span.signalSign {
 
   .card {
     font-size: 2.3rem;
+  }
+}
+
+@media (max-width: 440px) {
+  li {
+    font-size: 2rem;
   }
 }
 
@@ -634,7 +644,7 @@ span.signalSign {
   }
 
   h1.today {
-    font-size: 1.7rem;
+    font-size: 1.5rem;
   }
 
   h2 {

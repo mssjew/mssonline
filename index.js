@@ -79,7 +79,6 @@ function listMakerSell(list, content, idx) {
   listItem.appendChild(signal);
 
   setTimeout(() => {
-    console.log(currentPrice);
     if(currentPrice > 0) {
       if (currentPrice > sellPrice) {
         signal.innerHTML = " &#128308;";
@@ -125,7 +124,6 @@ function listMakerBuy(list, content, idx) {
   listItem.appendChild(signal);
 
   setTimeout(() => {
-    console.log(currentPrice);
     if(currentPrice>0) {
       if (currentPrice > buyPrice) {
         signal.innerHTML = " &#128994;";
