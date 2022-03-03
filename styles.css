@@ -516,7 +516,7 @@ span.signalSign {
   }
 
   li {
-    font-size: 2.2rem;
+    font-size: 2.05rem;
   }
 
   #internal {
@@ -597,7 +597,7 @@ span.signalSign {
   }
 
   li {
-    font-size: 1.7rem;
+    font-size: 1.95rem;
   }
 
   .card {
@@ -608,6 +608,12 @@ span.signalSign {
     width: 100%;
     margin: auto;
     font-size: 2rem;
+  }
+}
+
+@media (max-width: 370px) {
+  li {
+    font-size: 1.7rem;
   }
 }
 
