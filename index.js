@@ -29,17 +29,70 @@ const buyRange = "Summary!C11:C38";
 const avgSell = "Summary!B40";
 const avgBuy = "Summary!C40";
 
+async function goldPrice() {
+  let resp = await axios.get("https://www.goldapi.io/api/XAU/USD", {
+    headers: { "x-access-token": "goldapi-f20pyjatkuagctl5-io" },
+  });
+  return resp.data.price;
+}
+
+
+
 function pad(idx) {
   idx = idx.toString();
   if (idx.length < 2) idx = "0" + idx;
   return idx;
 }
 
+let currentPrice;
+
+goldPrice().then((price) => { 
+  currentPrice = price;
+  document.getElementById("liveGPrice").textContent = `$${price}`;
+})
+.catch((err) => {
+  currentPrice = 0;
+  console.log("Error failed to get price:", err);
+});
+
+
+
 // LIST MAKER FUNCTION
 function listMakerSell(list, content, idx) {
+
+
+  if(content[0].length > 23) {
+    var listedSellValue = content[0].slice(15,23);
+  } else {
+    var listedSellValue = content[0].slice(14,22);
+  }
+  const sellPrice = parseFloat(listedSellValue.replace(',',''));
+
   const listItem = document.createElement("li");
   list.appendChild(listItem);
+
   listItem.textContent = content;
+
+  const signal = document.createElement("span");
+  signal.classList.add("signalSign");
+
+  listItem.appendChild(signal);
+
+  setTimeout(() => {
+    console.log(currentPrice);
+    if(currentPrice > 0) {
+      if (currentPrice > sellPrice) {
+        signal.innerHTML = " &#128308;";
+      } else {
+        signal.innerHTML = " &#128994;";
+      }
+    } else {
+      signal.innerHTML = "";
+    }
+    
+  }, 750);
+ 
+
 
   const indexVal = document.createElement("span");
   indexVal.classList.add("index");
@@ -50,9 +103,42 @@ function listMakerSell(list, content, idx) {
 }
 
 function listMakerBuy(list, content, idx) {
+
+ 
+  if(content[0].length > 25) {
+    var listedBuyValue = content[0].slice(17,25);
+  } else {
+    var listedBuyValue = content[0].slice(16,24);
+  }
+
+
+  const buyPrice = parseFloat(listedBuyValue.replace(',',''));
+
   const listItem = document.createElement("li");
   list.appendChild(listItem);
+
   listItem.textContent = content;
+
+  const signal = document.createElement("span");
+  signal.classList.add("signalSign");
+
+  listItem.appendChild(signal);
+
+  setTimeout(() => {
+    console.log(currentPrice);
+    if(currentPrice>0) {
+      if (currentPrice > buyPrice) {
+        signal.innerHTML = " &#128994;";
+      } else {
+        signal.innerHTML = " &#128308;";
+      }
+    } else {
+      signal.innerHTML = "";
+    }
+   
+  }, 750);
+
+
   const indexVal = document.createElement("span");
   indexVal.classList.add("index");
   listItem.prepend(indexVal);
@@ -305,8 +391,8 @@ function cardMaker(e,idx) {
   divr1.textContent = "Amount: " + e[0];
   divr2.textContent = "Buy Price: " + e[1];
   divr3.textContent = "Sell Price: " + e[2];
-  divr4.textContent = "Profit: BD " + totalProfit;
-  divr5.textContent = "Per TT: BD " + perTT;
+  divr4.textContent = "Profit: BD " + totalProfit.toFixed(3);
+  divr5.textContent = "Per TT: BD " + perTT.toFixed(3);
 
   if (totalProfit > 0 && perTT > 0) {
     divr4.classList.add("rowProfit");
@@ -347,8 +433,6 @@ axios
     console.error(err);
   });
 
-
-
   const totalDailyP = "Summary!E69";
   const totalDailyHTML = document.getElementById("dailyProfit");
 
@@ -358,10 +442,13 @@ axios
   `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${totalDailyP}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
 )
 .then((resp) => {
-  
-  const profitTot = getNum(resp.data.values[0][0]);
+    const profitTot = getNum(resp.data.values[0][0]);
 
-  totalDailyHTML.textContent = "Profit Today: BD " + profitTot.toLocaleString("en-US");
+  
+
+  totalDailyHTML.textContent = "Profit Today: BD " + profitTot.toFixed(3);
+
+
 
 
   if (isNaN(profitTot)) {

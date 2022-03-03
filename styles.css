@@ -414,6 +414,16 @@ div.eventCard > p:first-child {
   text-decoration: underline;
 }
 
+span.signalSign {
+  font-size: 2rem;
+  vertical-align: middle;
+}
+
+#liveGPrice {
+  color: crimson;
+  font-weight: bold;
+}
+
 @media (max-width: 520px) {
   * {
     box-sizing: border-box;
@@ -445,8 +455,12 @@ div.eventCard > p:first-child {
   }
 
   h3 {
-    font-size: 2.1rem;
+    font-size: 2rem;
     font-weight: bold;
+  }
+
+  p.signalKey {
+    font-size: 1.8rem;
   }
 
   #totalSold {
@@ -454,7 +468,7 @@ div.eventCard > p:first-child {
   }
 
   p {
-    font-size: 2.6rem;
+    font-size: 2rem;
   }
 
   .card {
@@ -473,14 +487,22 @@ div.eventCard > p:first-child {
     display: flex;
     justify-content: space-around;
   }
+
+  span.signalSign {
+    font-size: 1.4rem;
+  }
 }
 
-@media (max-width: 425px) {
+@media (max-width: 465px) {
   * {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
     max-width: 100%;
+  }
+
+  span.signalSign {
+    font-size: 1rem;
   }
 
   h1 {
@@ -494,7 +516,7 @@ div.eventCard > p:first-child {
   }
 
   li {
-    font-size: 2.2rem;
+    font-size: 2.1rem;
   }
 
   #internal {
@@ -503,6 +525,10 @@ div.eventCard > p:first-child {
 
   #net {
     font-size: 2rem;
+  }
+
+  p.signalKey {
+    font-size: 1.7rem;
   }
 
   h3 {
@@ -567,11 +593,11 @@ div.eventCard > p:first-child {
   }
 
   p {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 
   li {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
   }
 
   .card {
@@ -583,4 +609,80 @@ div.eventCard > p:first-child {
     margin: auto;
     font-size: 2rem;
   }
+}
+
+
+@media (max-width: 330px) {
+  #logo {
+    margin-top: 5%;
+    height: 7vh;
+  }
+
+  button.kenz, button.qab {
+    font-size: 1.3rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+    padding: 1%;
+  }
+
+  h1.today {
+    font-size: 1.7rem;
+  }
+
+  h2 {
+    font-size: 1.7rem;
+    padding: 0% 1%;
+  }
+
+  p.signalKey {
+    font-size: 1.4rem;
+  }
+
+  #internal {
+    font-size: 1.5rem;
+  }
+
+  #net {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  #totalSold {
+    font-weight: bold;
+  }
+
+  p {
+    font-size: 1.5rem;
+  }
+
+  li {
+    font-size: 1.4rem;
+  }
+
+  #key {
+    font-size: 1.5rem;
+  }
+
+  .card {
+    font-size: 1.5rem;
+  }
+
+  .eventP, .timeBH {
+    font-size: 1.5rem;
+  }
+
+  #dailyProfit {
+    font-size: 1.6rem;
+  }
+
+  
+  
+  
+ 
 }
