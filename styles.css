@@ -415,7 +415,7 @@ div.eventCard > p:first-child {
 }
 
 span.signalSign {
-  font-size: 2rem;
+  font-size: 1.3rem;
   vertical-align: middle;
 }
 
@@ -489,7 +489,7 @@ span.signalSign {
   }
 
   span.signalSign {
-    font-size: 1.4rem;
+    font-size: 1rem;
   }
 }
 
@@ -502,7 +502,7 @@ span.signalSign {
   }
 
   span.signalSign {
-    font-size: 1rem;
+    font-size: .7rem;
   }
 
   h1 {
