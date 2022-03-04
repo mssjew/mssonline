@@ -79,7 +79,7 @@ function listMakerSell(list, content, idx) {
   listItem.appendChild(signal);
 
   setTimeout(() => {
-    if(currentPrice > 0) {
+    if(currentPrice > 0 && !isNaN(sellPrice)) {
       if (currentPrice > sellPrice) {
         signal.innerHTML = " &#128308;";
       } else {
@@ -111,7 +111,11 @@ function listMakerBuy(list, content, idx) {
   }
 
 
+
+
   const buyPrice = parseFloat(listedBuyValue.replace(',',''));
+
+  console.log(buyPrice);
 
   const listItem = document.createElement("li");
   list.appendChild(listItem);
@@ -124,7 +128,7 @@ function listMakerBuy(list, content, idx) {
   listItem.appendChild(signal);
 
   setTimeout(() => {
-    if(currentPrice>0) {
+    if(currentPrice>0 && !isNaN(buyPrice)) {
       if (currentPrice > buyPrice) {
         signal.innerHTML = " &#128994;";
       } else {
