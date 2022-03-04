@@ -89,7 +89,7 @@ function listMakerSell(list, content, idx) {
       signal.innerHTML = "";
     }
     
-  }, 750);
+  }, 1000);
  
 
 
@@ -134,7 +134,7 @@ function listMakerBuy(list, content, idx) {
       signal.innerHTML = "";
     }
    
-  }, 750);
+  }, 1000);
 
 
   const indexVal = document.createElement("span");
