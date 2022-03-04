@@ -625,6 +625,9 @@ span.signalSign {
   li {
     font-size: 1.7rem;
   }
+  .card {
+    font-size: 1.8rem;
+  }
 }
 
 
@@ -678,7 +681,7 @@ span.signalSign {
   }
 
   li {
-    font-size: 1.4rem;
+    font-size: 2rem;
   }
 
   #key {
@@ -686,7 +689,7 @@ span.signalSign {
   }
 
   .card {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
   }
 
   .eventP, .timeBH {
