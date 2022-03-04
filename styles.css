@@ -353,6 +353,7 @@ button.kenz {
   border: 10px solid saddlebrown;
   background-color: saddlebrown;
   color: #fff;
+  font-family: monospace;
 }
 
 button.qab {
@@ -365,6 +366,7 @@ button.qab {
   border: 10px solid maroon;
   background-color: maroon;
   color: #fff;
+  font-family: monospace;
 }
 
 .eventCard {
