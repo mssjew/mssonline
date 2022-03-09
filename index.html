@@ -15,10 +15,6 @@
   </head>
   <body>
 
-  
-
-    
-
     <div id="logo"></div>
 
     <div class="btnHolder">
@@ -47,21 +43,16 @@
 
       <h2>Net: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span id="net"></span></h2>
       <br><br>
-      <h2 style="color: crimson;font-weight: bold;">Live Price:&nbsp;<span id="liveGPrice"></span></h2>
+      <h2 class="liveP">Live Price:&nbsp;<span id="liveGPrice"></span></h2>
       <br>
-      <hr>
+      <!-- <hr> -->
 
-      <h2 style="font-weight: bold;">Price Movement Expected:</h2>
+      <!-- <h2 style="font-weight: bold;">Price Movement Expected:</h2> -->
       
-      <div class="eventHider">
-	      
-	   <div class="eventCard">
-            <p class="eventP">Fri 4th March </p>
-            <p class="timeBH">4.30pm Bahrain Time</p>
-            <p class="eventP">US Unemployment Data</p>
-          </div>
+      <!-- <div class="eventHider">
+	   
 
-    </div>
+    </div> -->
 
     
 
@@ -75,16 +66,14 @@
     
       <!-- SELL DATA -->
 
-      <div class="soldStats">
-        <!-- <h3 id="sellPosCount"></h3> -->
+    
 
-        <h3 id="totalSold"></h3>
-        <h3 >IN <span id="numSoldPos"></span> POSITIONS</h3>
-
-      </div>
-      <p style="color: black;">Avg. Sell Price: &nbsp;<span id="avgSell"></span></p>
+      <h3 id="totalSold"></h3>
+      <p id="avgSell"></p>
+      
       
       <ul id="sell"></ul>
+      
     
       
 
@@ -94,12 +83,8 @@
       
 
       <!-- BUY DATA -->
-      <div class="buyStats">
-
-        <h3 id="totalBought"></h3>
-        <h3 >IN <span id="numBoughtPos"></span> POSITIONS</h3>
-      </div>
-      <p style="color: black;">Avg. Buy Price: &nbsp;<span id="avgBuy"></span></p>
+      <h3 id="totalBought"></h3>
+      <p id="avgBuy"></p>
      
 
       <ul id="buy"></ul>

@@ -13,7 +13,6 @@ const totalBoughtElement = document.getElementById("totalBought");
 const avgSellElement = document.getElementById("avgSell");
 const avgBuyElement = document.getElementById("avgBuy");
 
-
 const internalPos = "Summary!C3";
 const netPos = "Summary!C5";
 
@@ -23,11 +22,11 @@ const buyPosCount = "Summary!C9";
 const totalSold = "Summary!B10";
 const totalBought = "Summary!C10";
 
-const sellRange = "Summary!B11:B38";
-const buyRange = "Summary!C11:C38";
+const sellRange = "Summary!B11:B48";
+const buyRange = "Summary!C11:C48";
 
-const avgSell = "Summary!B40";
-const avgBuy = "Summary!C40";
+const avgSell = "Summary!B50";
+const avgBuy = "Summary!C50";
 
 async function goldPrice() {
   let resp = await axios.get("https://www.goldapi.io/api/XAU/USD", {
@@ -35,8 +34,6 @@ async function goldPrice() {
   });
   return resp.data.price;
 }
-
-
 
 function pad(idx) {
   idx = idx.toString();
@@ -46,32 +43,33 @@ function pad(idx) {
 
 let currentPrice;
 
-goldPrice().then((price) => { 
-  currentPrice = price;
-  document.getElementById("liveGPrice").textContent = `$${price}`;
-})
-.catch((err) => {
-  currentPrice = 0;
-  console.log("Error failed to get price:", err);
-});
-
-
+goldPrice()
+  .then((price) => {
+    currentPrice = price;
+    document.getElementById("liveGPrice").textContent = `$${price}`;
+  })
+  .catch((err) => {
+    currentPrice = 0;
+    console.log("Error failed to get price:", err);
+  });
 
 // LIST MAKER FUNCTION
 function listMakerSell(list, content, idx) {
-
-
-  if(content[0].length > 23) {
-    var listedSellValue = content[0].slice(15,23);
+  if (content[0].length > 23) {
+    var listedSellValue = content[0].slice(15, 23);
   } else {
-    var listedSellValue = content[0].slice(14,22);
+    var listedSellValue = content[0].slice(14, 22);
   }
-  const sellPrice = parseFloat(listedSellValue.replace(',',''));
+  const sellPrice = parseFloat(listedSellValue.replace(",", ""));
 
   const listItem = document.createElement("li");
   list.appendChild(listItem);
 
-  listItem.textContent = content;
+  if (content[0].length <= 23) {
+    listItem.textContent = "\xa0" + content;
+  } else {
+    listItem.textContent = content;
+  }
 
   const signal = document.createElement("span");
   signal.classList.add("signalSign");
@@ -79,7 +77,7 @@ function listMakerSell(list, content, idx) {
   listItem.appendChild(signal);
 
   setTimeout(() => {
-    if(currentPrice > 0 && !isNaN(sellPrice)) {
+    if (currentPrice > 0 && !isNaN(sellPrice)) {
       if (currentPrice > sellPrice) {
         signal.innerHTML = " &#128308;";
       } else {
@@ -88,39 +86,31 @@ function listMakerSell(list, content, idx) {
     } else {
       signal.innerHTML = "";
     }
-    
   }, 1000);
- 
-
 
   const indexVal = document.createElement("span");
   indexVal.classList.add("index");
   listItem.prepend(indexVal);
-  indexVal.textContent = pad(idx+1) + ".  ";
-  
-
+  indexVal.textContent = pad(idx + 1) + ".  ";
 }
 
 function listMakerBuy(list, content, idx) {
-
- 
-  if(content[0].length > 25) {
-    var listedBuyValue = content[0].slice(17,25);
+  if (content[0].length > 25) {
+    var listedBuyValue = content[0].slice(17, 25);
   } else {
-    var listedBuyValue = content[0].slice(16,24);
+    var listedBuyValue = content[0].slice(16, 24);
   }
 
-
-
-
-  const buyPrice = parseFloat(listedBuyValue.replace(',',''));
-
-  console.log(buyPrice);
+  const buyPrice = parseFloat(listedBuyValue.replace(",", ""));
 
   const listItem = document.createElement("li");
   list.appendChild(listItem);
 
-  listItem.textContent = content;
+  if (content[0].length <= 25) {
+    listItem.textContent = "\xa0" + content;
+  } else {
+    listItem.textContent = content;
+  }
 
   const signal = document.createElement("span");
   signal.classList.add("signalSign");
@@ -128,7 +118,7 @@ function listMakerBuy(list, content, idx) {
   listItem.appendChild(signal);
 
   setTimeout(() => {
-    if(currentPrice>0 && !isNaN(buyPrice)) {
+    if (currentPrice > 0 && !isNaN(buyPrice)) {
       if (currentPrice > buyPrice) {
         signal.innerHTML = " &#128994;";
       } else {
@@ -137,15 +127,12 @@ function listMakerBuy(list, content, idx) {
     } else {
       signal.innerHTML = "";
     }
-   
   }, 1000);
-
 
   const indexVal = document.createElement("span");
   indexVal.classList.add("index");
   listItem.prepend(indexVal);
-  indexVal.textContent = pad(idx+1) + ".  ";
-  
+  indexVal.textContent = pad(idx + 1) + ".  ";
 }
 
 // INTERNAL POSITION
@@ -174,23 +161,21 @@ axios
 
 // -------------------- SELL SIDE START ---------------------
 
-// SELL POSITION COUNT
-axios
-  .get(
-    `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${sellRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
-  )
-  .then((resp) => {
-    if(resp.data.values[0][0] === "#N/A") {
-
-      sellPosCountElement.textContent = 0;
-    } else {
-   
-      sellPosCountElement.textContent = resp.data.values.length;
-    }
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+// // SELL POSITION COUNT
+// axios
+//   .get(
+//     `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${sellRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+//   )
+//   .then((resp) => {
+//     if (resp.data.values[0][0] === "#N/A") {
+//       sellPosCountElement.textContent = 0;
+//     } else {
+//       sellPosCountElement.textContent = resp.data.values[0][0];
+//     }
+//   })
+//   .catch((err) => {
+//     console.error(err);
+//   });
 
 // TOTAL SOLD TT
 axios
@@ -198,6 +183,7 @@ axios
     `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${totalSold}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
+    console.log(resp.data.values);
     totalSoldElement.textContent = resp.data.values[0];
   })
   .catch((err) => {
@@ -210,8 +196,8 @@ axios
     `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${sellRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
-    resp.data.values.forEach((element,idx) => {
-      listMakerSell(sellList, element,idx);
+    resp.data.values.forEach((element, idx) => {
+      listMakerSell(sellList, element, idx);
     });
   })
   .catch((err) => {
@@ -224,11 +210,12 @@ axios
     `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${avgSell}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
-    if(resp.data.values[0][0] === "#DIV/0!") {
+    if (resp.data.values[0][0] === "#DIV/0!") {
       avgSellElement.textContent = "";
     } else {
-      avgSellElement.textContent = resp.data.values[0];
-    }  })
+      avgSellElement.textContent = "AVG SELL: "+resp.data.values[0];
+    }
+  })
   .catch((err) => {
     console.error(err);
   });
@@ -240,22 +227,21 @@ axios
 // -------------------- BUY SIDE START ---------------------
 
 // BUY POSITION COUNT
-axios
-  .get(
-    `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${buyRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
-  )
-  .then((resp) => {
-    if(resp.data.values[0][0] === "#N/A") {
-
-      buyPosCountElement.textContent = 0;
-    } else {
-   
-      buyPosCountElement.textContent = resp.data.values.length;
-    }
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+// axios
+//   .get(
+//     `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${buyRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+//   )
+//   .then((resp) => {
+//     console.log(resp.data.values);
+//     if (resp.data.values[0][0] === "#N/A") {
+//       buyPosCountElement.textContent = "NO BUY POSITIONS";
+//     } else {
+//       buyPosCountElement.textContent = "IN " + resp.data.values.length + " POSITIONS";
+//     }
+//   })
+//   .catch((err) => {
+//     console.error(err);
+//   });
 
 // TOTAL BOUGHT TT
 axios
@@ -275,8 +261,8 @@ axios
     `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${buyRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
-    resp.data.values.forEach((element,idx) => {
-      listMakerBuy(buyList, element,idx);
+    resp.data.values.forEach((element, idx) => {
+      listMakerBuy(buyList, element, idx);
     });
   })
   .catch((err) => {
@@ -289,10 +275,10 @@ axios
     `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${avgBuy}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
-    if(resp.data.values[0][0] === "#DIV/0!") {
+    if (resp.data.values[0][0] === "#DIV/0!") {
       avgBuyElement.textContent = "";
     } else {
-      avgBuyElement.textContent = resp.data.values[0];
+      avgBuyElement.textContent = "AVG BUY: " + resp.data.values[0];
     }
   })
   .catch((err) => {
@@ -300,8 +286,6 @@ axios
   });
 
 // -------------------- BUY SIDE END ---------------------
-
-
 
 // -------------------- Live Price --------------------
 // const priceSpan = document.getElementById("price");
@@ -316,23 +300,15 @@ axios
 //   redirect: 'follow'
 // };
 
-
 // fetch("https://www.goldapi.io/api/XAU/USD", requestOptions)
 //   .then(response => response.json())
 //   .then(result => priceSpan.textContent = result.price)
 //   .catch(error => console.log('error', error));
 
-
-
-
-
-
 // -------------------- Closing Today --------------------
 
 function getNum(arr) {
-    
   const profit = arr.split("");
-
 
   if (profit[0] === "-") {
     profit.splice(1, 4);
@@ -340,22 +316,20 @@ function getNum(arr) {
     profit.splice(0, 4);
   }
 
-  
-  for (let i = 0; i < profit.length; i++){
-      if (profit[i] === ",") {
-        profit.splice(i,1);
-      }
+  for (let i = 0; i < profit.length; i++) {
+    if (profit[i] === ",") {
+      profit.splice(i, 1);
+    }
   }
 
-  let num = profit.join('');
+  let num = profit.join("");
 
   let retval = parseFloat(num);
 
-  return retval
+  return retval;
 }
 
-
-function cardMaker(e,idx) {
+function cardMaker(e, idx) {
   const totalProfit = getNum(e[3]);
   const perTT = getNum(e[4]);
 
@@ -369,7 +343,7 @@ function cardMaker(e,idx) {
   const divr4 = document.createElement("div");
   const divr5 = document.createElement("div");
   // const divSep = document.createElement("br");
-  
+
   divHolder.classList.add("divHolder");
   num.classList.add("numIdx");
   divHolder.appendChild(num);
@@ -381,7 +355,6 @@ function cardMaker(e,idx) {
   cardDiv.appendChild(divr5);
   // cardDiv.appendChild(divSep);
 
-
   cardDiv.classList.add("card");
   divr1.classList.add("row1");
   divr2.classList.add("row2");
@@ -389,7 +362,7 @@ function cardMaker(e,idx) {
   divr4.classList.add("row4");
   divr5.classList.add("row5");
 
-  num.textContent = idx+1; 
+  num.textContent = idx + 1;
   divr1.textContent = "Amount: " + e[0];
   divr2.textContent = "Buy Price: " + e[1];
   divr3.textContent = "Sell Price: " + e[2];
@@ -403,15 +376,13 @@ function cardMaker(e,idx) {
     divr4.classList.add("rowLoss");
     divr5.classList.add("rowLoss");
   }
-  
 
   return divHolder;
 }
 
-
 const todaySection = document.getElementById("todaySec");
 
-const amtToday = "Summary!B55:F66";
+const amtToday = "Summary!B65:F85";
 
 // Today Closing
 axios
@@ -425,45 +396,36 @@ axios
       todaySection.appendChild(noneP);
       noneP.textContent = "None";
     } else {
-      resp.data.values.forEach(function(e,idx) {
-        todaySection.appendChild(cardMaker(e,idx));
+      resp.data.values.forEach(function (e, idx) {
+        todaySection.appendChild(cardMaker(e, idx));
       });
-      
     }
   })
   .catch((err) => {
     console.error(err);
   });
 
-  const totalDailyP = "Summary!E69";
-  const totalDailyHTML = document.getElementById("dailyProfit");
+const totalDailyP = "Summary!E88";
+const totalDailyHTML = document.getElementById("dailyProfit");
 
 // Total Daily Profit
 axios
-.get(
-  `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${totalDailyP}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
-)
-.then((resp) => {
+  .get(
+    `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${totalDailyP}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+  )
+  .then((resp) => {
     const profitTot = getNum(resp.data.values[0][0]);
 
-  
-
-  totalDailyHTML.textContent = "Profit Today: BD " + profitTot.toFixed(3);
-
-
-
-
-  if (isNaN(profitTot)) {
-    totalDailyHTML.classList.add("hide");
-  } else if (profitTot > 0) {
-    totalDailyHTML.classList.add("rowProfit");
-  } else {
-    totalDailyHTML.classList.add("rowLoss");
-  }
-
-  
-
-})
-.catch((err) => {
-  console.error(err);
-});
+    if (isNaN(profitTot)) {
+      totalDailyHTML.classList.add("hide");
+    } else if (profitTot > 0) {
+      totalDailyHTML.textContent = "Profit Today: BD " + profitTot.toFixed(3);
+      totalDailyHTML.classList.add("rowProfit");
+    } else {
+      totalDailyHTML.textContent = "Loss Today: BD " + profitTot.toFixed(3);
+      totalDailyHTML.classList.add("rowLoss");
+    }
+  })
+  .catch((err) => {
+    console.error(err);
+  });
