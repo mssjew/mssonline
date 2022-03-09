@@ -13,6 +13,8 @@ const totalBoughtElement = document.getElementById("totalBought");
 const avgSellElement = document.getElementById("avgSell");
 const avgBuyElement = document.getElementById("avgBuy");
 
+const sellPLCalc = document.getElementById("sellPL");
+
 const internalPos = "Summary!C3";
 const netPos = "Summary!C5";
 

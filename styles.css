@@ -200,7 +200,10 @@ p.signalKey {
 
 hr {
   border: 2px dashed black;
-  margin: 3%;
+  margin-right: 3%;
+  margin-left: 3%;
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
 
 .soldStats {
