@@ -37,6 +37,20 @@ async function goldPrice() {
   return resp.data.price;
 }
 
+async function goldPriceHigh() {
+  let resp = await axios.get("https://www.goldapi.io/api/XAU/USD", {
+    headers: { "x-access-token": "goldapi-f20pyjatkuagctl5-io" },
+  });
+  return resp.data.high_price;
+}
+
+async function goldPriceLow() {
+  let resp = await axios.get("https://www.goldapi.io/api/XAU/USD", {
+    headers: { "x-access-token": "goldapi-f20pyjatkuagctl5-io" },
+  });
+  return resp.data.low_price;
+}
+
 function pad(idx) {
   idx = idx.toString();
   if (idx.length < 2) idx = "0" + idx;
@@ -53,6 +67,22 @@ goldPrice()
   .catch((err) => {
     currentPrice = 0;
     console.log("Error failed to get price:", err);
+  });
+
+goldPriceHigh()
+  .then((highPrice) => {
+    document.getElementById("gPriceH").textContent = `$${highPrice}`;
+  })
+  .catch((err) => {
+    console.log("Error failed to get high price:", err);
+  });
+
+  goldPriceLow()
+  .then((lowPrice) => {
+    document.getElementById("gPriceL").textContent = `$${lowPrice}`;
+  })
+  .catch((err) => {
+    console.log("Error failed to get low price:", err);
   });
 
 // LIST MAKER FUNCTION

@@ -452,6 +452,10 @@ span.signalSign {
   font-size: 3rem;
 }
 
+.dataP {
+  font-size: 2.5rem;
+}
+
 #dailyProfit {
   font-size: 2.5rem;
 }
@@ -480,6 +484,10 @@ span.signalSign {
 
   .liveP {
     font-size: 2.7rem;
+  }
+
+  .dataP {
+    font-size: 2.3rem;
   }
 
   p.signalKey {
@@ -568,6 +576,10 @@ span.signalSign {
     font-size: 2.5rem;
   }
 
+  .dataP {
+    font-size: 2.1rem;
+  }
+
   li {
     font-size: 2.3rem;
   }
@@ -612,6 +624,10 @@ span.signalSign {
     font-size: 2.3rem;
   }
 
+  .dataP {
+    font-size: 2rem;
+  }
+
   #avgBuy, #avgSell {
     font-size: 2.5rem;
   }
@@ -641,6 +657,10 @@ span.signalSign {
 
   .liveP {
     font-size: 2rem;
+  }
+
+  .dataP {
+    font-size: 1.8rem;
   }
 
   p.signalKey {
@@ -709,6 +729,10 @@ span.signalSign {
 
   .liveP {
     font-size: 1.7rem;
+  }
+
+  .dataP {
+    font-size: 1.6rem;
   }
 
   #avgBuy, #avgSell {
