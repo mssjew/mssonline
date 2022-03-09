@@ -318,7 +318,7 @@ p {
 }
 
 h1.today {
-  font-size: 2.5rem;
+  font-size: 3rem;
   text-decoration: underline;
 }
 
@@ -466,6 +466,10 @@ span.signalSign {
     padding: 1%;
   }
 
+  h1.today {
+    font-size: 2.7rem;
+  }
+
   h2 {
     font-size: 2.4rem;
     padding: 0% 1%;
@@ -549,7 +553,7 @@ span.signalSign {
   }
 
   h1.today {
-    font-size: 2rem;
+    font-size: 2.3rem;
   }
 
   h2 {
@@ -628,8 +632,9 @@ span.signalSign {
   }
 
   h1.today {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
+
 
   .liveP {
     font-size: 2rem;
