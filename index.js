@@ -30,6 +30,14 @@ const buyRange = "Summary!C11:C48";
 const avgSell = "Summary!B50";
 const avgBuy = "Summary!C50";
 
+// let totalSoldTTBars;
+// let avgPriceSoldTTBars;
+
+// setTimeout(() => {
+//   sellPLCalc.innerHTML = totalSoldTTBars + avgPriceSoldTTBars;
+// }, 1000);
+
+
 async function goldPrice() {
   let resp = await axios.get("https://www.goldapi.io/api/XAU/USD", {
     headers: { "x-access-token": "goldapi-f20pyjatkuagctl5-io" },
@@ -59,18 +67,26 @@ function pad(idx) {
 
 let currentPrice;
 
-setInterval(() => {
-  goldPrice()
+
+goldPrice()
   .then((price) => {
-    currentPrice = price;
     document.getElementById("liveGPrice").textContent = `$${price}`;
   })
   .catch((err) => {
     currentPrice = 0;
     console.log("Error failed to get price:", err);
   });
-}, 2000);
 
+
+
+goldPrice()
+  .then((price) => {
+    currentPrice = price;
+  })
+  .catch((err) => {
+    currentPrice = 0;
+    console.log("Error failed to get price:", err);
+  });
 
 
 goldPriceHigh()
@@ -219,6 +235,7 @@ axios
     `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${totalSold}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
+    totalSoldTTBars = resp.data.values[0];
     totalSoldElement.textContent = resp.data.values[0];
   })
   .catch((err) => {
@@ -247,7 +264,9 @@ axios
   .then((resp) => {
     if (resp.data.values[0][0] === "#DIV/0!") {
       avgSellElement.textContent = "";
+      avgPriceSoldTTBars = "Zero Buy Positions";
     } else {
+      avgPriceSoldTTBars = resp.data.values[0];
       avgSellElement.textContent = "AVG SELL: "+resp.data.values[0];
     }
   })
