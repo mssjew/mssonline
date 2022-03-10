@@ -229,7 +229,7 @@ ul {
 
 li {
   font-family: monospace;
-  font-size: 2.6rem;
+  font-size: 2.4rem;
   margin: 0.5% 0%;
 }
 
@@ -504,7 +504,7 @@ span.signalSign {
 
 
   li {
-    font-size: 2.4rem;
+    font-size: 2.2rem;
   }
 
   #internal {
@@ -581,7 +581,7 @@ span.signalSign {
   }
 
   li {
-    font-size: 2.3rem;
+    font-size: 2.1rem;
   }
 
   #internal {
@@ -617,7 +617,7 @@ span.signalSign {
 
 @media (max-width: 440px) {
   li {
-    font-size: 2rem;
+    font-size: 1.9rem;
   }
 
   .liveP {
@@ -699,7 +699,7 @@ span.signalSign {
   }
 
   li {
-    font-size: 1.95rem;
+    font-size: 1.8rem;
   }
 
   #dailyProfit {
@@ -713,7 +713,7 @@ span.signalSign {
 
 @media (max-width: 370px) {
   li {
-    font-size: 1.7rem;
+    font-size: 1.6rem;
   }
   .card {
     font-size: 1.8rem;
@@ -785,7 +785,7 @@ span.signalSign {
   }
 
   li {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
   }
 
   #key {

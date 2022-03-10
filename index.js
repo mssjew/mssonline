@@ -215,7 +215,6 @@ axios
     `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${totalSold}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
-    console.log(resp.data.values);
     totalSoldElement.textContent = resp.data.values[0];
   })
   .catch((err) => {
