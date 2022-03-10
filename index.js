@@ -59,7 +59,8 @@ function pad(idx) {
 
 let currentPrice;
 
-goldPrice()
+setInterval(() => {
+  goldPrice()
   .then((price) => {
     currentPrice = price;
     document.getElementById("liveGPrice").textContent = `$${price}`;
@@ -68,6 +69,9 @@ goldPrice()
     currentPrice = 0;
     console.log("Error failed to get price:", err);
   });
+}, 2000);
+
+
 
 goldPriceHigh()
   .then((highPrice) => {
