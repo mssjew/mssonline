@@ -163,6 +163,7 @@ h1 {
   margin: 1%;
 }
 
+
 h2 {
   font-size: 2.5rem;
   font-weight: 500;
@@ -460,6 +461,85 @@ span.signalSign {
   font-size: 2.5rem;
 }
 
+.livePL {
+
+  text-align: center;
+  word-wrap: break-word;
+
+}
+
+.livePLHolder{
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+#sellPL {
+  text-align: center;
+  border: 1px dashed black;
+}
+
+.physicalUnfixed {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 3%;
+  margin-bottom: 5%;
+
+}
+
+.physicalUnfixed > table {
+  font-family: monospace;
+  margin: 5%;
+  font-size: 2rem; 
+}
+
+.physicalUnfixed > table tr > td:nth-child(3) {
+  font-size: 1.7rem;
+}
+
+.physicalUnfixed > table, td, tr, th {
+  border: 1px solid black;
+  background-color: #f8f8f8;
+  padding: 8px;
+  text-align: center;
+  
+}
+
+.physicalUnfixed > table th {
+  background-color: black;
+  border: 1px solid black;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  font-size: 2rem;
+  
+}
+
+
+.physicalUnfixed > table tr > td:nth-child(2) {
+  color: crimson;
+  font-weight: bold;
+}
+
+
+
+p.unfixStats {
+  font-size: 2.1rem;
+}
+
+
+#totalUnfix, #averageUnfixTarget {
+  color: crimson;
+}
+
+
+
 @media (max-width: 520px) {
   * {
     box-sizing: border-box;
@@ -613,6 +693,10 @@ span.signalSign {
   .card {
     font-size: 2.3rem;
   }
+
+  p.unfixStats {
+    font-size: 1.9rem;
+  }
 }
 
 @media (max-width: 440px) {
@@ -634,6 +718,16 @@ span.signalSign {
   
   #totalSold, #totalBought {
     font-size: 2.5rem;
+  }
+
+  .physicalUnfixed > table {
+    font-family: monospace;
+    margin: 5%;
+    font-size: 1.8rem; 
+  }
+  
+  .physicalUnfixed > table tr > td:nth-child(3) {
+    font-size: 1.5rem;
   }
 }
 
@@ -709,6 +803,10 @@ span.signalSign {
   .card {
     font-size: 2rem;
   }
+
+  p.unfixStats {
+    font-size: 1.7rem;
+  }
 }
 
 @media (max-width: 370px) {
@@ -717,6 +815,20 @@ span.signalSign {
   }
   .card {
     font-size: 1.8rem;
+  }
+
+  .physicalUnfixed > table {
+    font-family: monospace;
+    margin: 5%;
+    font-size: 1.5rem; 
+  }
+  
+  .physicalUnfixed > table tr > td:nth-child(3) {
+    font-size: 1.2rem;
+  }
+
+  p.unfixStats {
+    font-size: 1.5rem;
   }
 }
 
@@ -804,8 +916,21 @@ span.signalSign {
     font-size: 1.6rem;
   }
 
+  .physicalUnfixed > table {
+    font-family: monospace;
+    margin: 5%;
+    font-size: 1.2rem; 
+
+  }
+
+  .physicalUnfixed > table tr > td:nth-child(3) {
+    font-size: .9rem;
+  }
+
+  .physicalUnfixed > table, td, tr, th {
+    padding: 4px;
+    
+  }
+
   
-  
-  
- 
 }

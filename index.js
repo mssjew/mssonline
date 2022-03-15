@@ -15,6 +15,11 @@ const avgBuyElement = document.getElementById("avgBuy");
 
 const sellPLCalc = document.getElementById("sellPL");
 
+const unfixTable = document.getElementById("unfixTable");
+
+const totalUnfixP = document.getElementById("totalUnfix");
+const averageUnfixTargetP = document.getElementById("averageUnfixTarget");
+
 const internalPos = "Summary!C3";
 const netPos = "Summary!C5";
 
@@ -30,12 +35,50 @@ const buyRange = "Summary!C11:C48";
 const avgSell = "Summary!B50";
 const avgBuy = "Summary!C50";
 
-// let totalSoldTTBars;
-// let avgPriceSoldTTBars;
+const totalSoldPlainText = "Summary!F50";
+const totalBoughtPlainText = "Summary!G50";
+
+const avgSoldPlainText = "Summary!D50";
+const avgBoughtPlainText = "Summary!E50";
+
+const unfixedRange = "UNFIXED!A2:C33";
+const totalUnfixed = "UNFIXED!A36";
+const averageFixingTarget = "UNFIXED!B36";
+
+
+
+let currentPrice;
+
+let totalSoldNumber;
+let totalBoughtNumber;
+
+let avgSoldNumber;
+let avgBoughtNumber;
 
 // setTimeout(() => {
-//   sellPLCalc.innerHTML = totalSoldTTBars + avgPriceSoldTTBars;
-// }, 1000);
+  
+// }, 500);
+
+
+// setTimeout(() => {
+
+
+  
+//   const soldDifference =  avgSoldNumber - currentPrice;
+
+//   const plValueBHD = (soldDifference * totalSoldNumber * 3.7463)/2.6494990909256;
+
+//   const plValueBHDString = plValueBHD.toFixed(3).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); 
+
+//   console.log(plValueBHDString);
+
+
+ 
+  
+//   sellPLCalc.innerHTML = `<h2>Online Sold</h2><p class="livePL">${totalSoldNumber} TT Sold > Avg Rate $${avgSoldNumber.toFixed(2)}</p><br>
+//   <p class="livePL">Live ${plValueBHD>0?"Profit":"Loss"} if Closed Now: </p><br><p>BHD ${plValueBHDString}</p>`
+// }, 2000);
+
 
 
 async function goldPrice() {
@@ -64,8 +107,6 @@ function pad(idx) {
   if (idx.length < 2) idx = "0" + idx;
   return idx;
 }
-
-let currentPrice;
 
 
 goldPrice()
@@ -186,6 +227,119 @@ function listMakerBuy(list, content, idx) {
   listItem.prepend(indexVal);
   indexVal.textContent = pad(idx + 1) + ".  ";
 }
+
+function unfixedRowMaker(list) {
+
+  const trow = document.createElement("tr"); 
+  const td1 = document.createElement("td");
+  const td2 = document.createElement("td"); 
+  const td3 = document.createElement("td");  
+
+  unfixTable.appendChild(trow);
+  trow.appendChild(td1);
+  trow.appendChild(td2);
+  trow.appendChild(td3);
+
+  td1.textContent = list[0];
+  td2.textContent = list[1];
+  td3.textContent = list[2];
+
+
+}
+
+
+// UNFIXED RANGE
+// DAILY FIXING SHEET
+axios
+  .get(
+    `https://sheets.googleapis.com/v4/spreadsheets/1On8IDb0uBl6DKtH95yMSU2DkULE-IsDWwwc4L0ODXNs/values/${unfixedRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+  )
+  .then((resp) => {
+    resp.data.values.forEach((row) => {
+      unfixedRowMaker(row);
+    });
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
+
+// TOTAL UNFIXED 
+// DAILY FIXING SHEET
+axios
+  .get(
+    `https://sheets.googleapis.com/v4/spreadsheets/1On8IDb0uBl6DKtH95yMSU2DkULE-IsDWwwc4L0ODXNs/values/${totalUnfixed}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+  )
+  .then((resp) => {
+    totalUnfixP.textContent = resp.data.values[0][0];
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
+// UNFIXED AVERAGE TARGET
+// DAILY FIXING SHEET
+axios
+  .get(
+    `https://sheets.googleapis.com/v4/spreadsheets/1On8IDb0uBl6DKtH95yMSU2DkULE-IsDWwwc4L0ODXNs/values/${averageFixingTarget}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+  )
+  .then((resp) => {
+    averageUnfixTargetP.textContent = resp.data.values[0][0];
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
+// TOTAL SOLD PLAIN TEXT
+axios
+  .get(
+    `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${totalSoldPlainText}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+  )
+  .then((resp) => {
+    totalSoldNumber = parseFloat(resp.data.values[0][0]);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
+
+// TOTAL BOUGHT PLAIN TEXT
+axios
+  .get(
+    `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${totalBoughtPlainText}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+  )
+  .then((resp) => {
+    totalBoughtNumber = parseFloat(resp.data.values[0][0]);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
+// AVG SOLD PLAIN TEXT
+axios
+  .get(
+    `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${avgSoldPlainText}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+  )
+  .then((resp) => {
+    avgSoldNumber = parseFloat(resp.data.values[0][0]);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
+// AVG BOUGHT PLAIN TEXT
+axios
+  .get(
+    `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${avgBoughtPlainText}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+  )
+  .then((resp) => {
+    avgBoughtNumber = parseFloat(resp.data.values[0][0]);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
+
 
 // INTERNAL POSITION
 axios
