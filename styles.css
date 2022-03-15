@@ -729,6 +729,11 @@ p.unfixStats {
   .physicalUnfixed > table tr > td:nth-child(3) {
     font-size: 1.5rem;
   }
+
+  .physicalUnfixed > table th {
+    font-size: 1.8rem;
+    
+  }
 }
 
 @media (max-width: 390px) {
@@ -830,6 +835,11 @@ p.unfixStats {
   p.unfixStats {
     font-size: 1.5rem;
   }
+
+  .physicalUnfixed > table th {
+    font-size: 1.5rem;
+    
+  }
 }
 
 
@@ -929,6 +939,11 @@ p.unfixStats {
 
   .physicalUnfixed > table, td, tr, th {
     padding: 4px;
+    
+  }
+
+  .physicalUnfixed > table th {
+    font-size: 1.2rem;
     
   }
 
