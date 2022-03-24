@@ -294,11 +294,11 @@ function unfixedTotalRow() {
 
   td2.style.color = "crimson";
   td2.style.fontWeight = "bold";
-  td2.style.fontSize = "2.75rem"
+  td2.style.fontSize = "2.5rem"
 
   td4.style.color = "crimson";
   td4.style.fontWeight = "bold";
-  td4.style.fontSize = "2.75rem"
+  td4.style.fontSize = "2.5rem"
 
 
 
