@@ -136,12 +136,15 @@
 
     <h2 id="dailyProfit"></h2>
 
-
     <hr>
-
+    <nav class="sausage-links">
+      <ul>
+          <li><a onclick="myFunction()">Toggle</a></li>
+      </ul>
+    </nav>
     <h1 class="today">Physical TT Unfixed</h1>
 
-    <div class="physicalUnfixed">
+    <div id="unfixedSection" class="physicalUnfixed">
 
       <table id="unfixTable">
         <tr>
@@ -150,9 +153,20 @@
           <th> Date </th>
         </tr>
       </table>
+      <table>
+        <tr>
+          <th> Total </th>
+          <th> Avg. Target </th>
+        </tr>
+        <tr>
+          <td id="totalUnfix"> Total Unfixed </td>
+          <td id="averageUnfixTarget"> Average Fixing Target </td>
+        </tr>
+      </table>
+      
 
-      <p class="unfixStats">Total Pending Fixing:&nbsp;<span id="totalUnfix"></span></p>
-      <p class="unfixStats">Average Fixing Target:&nbsp;<span id="averageUnfixTarget"></span></p>
+      <!-- <p class="unfixStats">Total Pending Fixing:&nbsp;<span id="totalUnfix"></span></p>
+      <p class="unfixStats">Average Fixing Target:&nbsp;<span id="averageUnfixTarget"></span></p> -->
     
 
     </div>    

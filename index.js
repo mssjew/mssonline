@@ -79,6 +79,9 @@ let avgBoughtNumber;
 //   <p class="livePL">Live ${plValueBHD>0?"Profit":"Loss"} if Closed Now: </p><br><p>BHD ${plValueBHDString}</p>`
 // }, 2000);
 
+function myFunction() {
+  document.getElementById("unfixedSection").classList.toggle("hider");
+}
 
 
 async function goldPrice() {
@@ -179,7 +182,7 @@ function listMakerSell(list, content, idx) {
     } else {
       signal.innerHTML = "";
     }
-  }, 1000);
+  }, 2500);
 
   const indexVal = document.createElement("span");
   indexVal.classList.add("index");
@@ -220,7 +223,7 @@ function listMakerBuy(list, content, idx) {
     } else {
       signal.innerHTML = "";
     }
-  }, 1000);
+  }, 2500);
 
   const indexVal = document.createElement("span");
   indexVal.classList.add("index");

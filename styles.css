@@ -375,11 +375,12 @@ button.kenz {
   display: flex;
   font-size: 1.75rem;
   font-weight: 600;
-  border-radius: 10px;
+  border-radius: 30px;
   border: 10px solid saddlebrown;
   background-color: saddlebrown;
   color: #fff;
   font-family: monospace;
+  vertical-align: middle;
 }
 
 button.qab {
@@ -388,11 +389,12 @@ button.qab {
   display: flex;
   font-size: 1.75rem;
   font-weight: 600;
-  border-radius: 10px;
+  border-radius: 30px;
   border: 10px solid maroon;
   background-color: maroon;
   color: #fff;
   font-family: monospace;
+  vertical-align: middle;
 }
 
 .eventCard {
@@ -527,15 +529,66 @@ span.signalSign {
   font-weight: bold;
 }
 
-
-
-p.unfixStats {
-  font-size: 2.1rem;
+.physicalUnfixed > table:nth-child(2) th {
+  background-color: darkred;
+  font-weight: bold;
 }
-
 
 #totalUnfix, #averageUnfixTarget {
   color: crimson;
+  font-weight: bold;
+}
+
+.sausage-links {
+  position: relative;
+}
+.sausage-links:before, .sausage-links:after {
+  content: '';
+  height: calc(100% - 2em);
+  pointer-events: none;
+  position: absolute;
+  top: 1em;
+  width: 10px;
+  z-index: 2;
+}
+.sausage-links:before {
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, white 100%);
+  right: 0;
+}
+.sausage-links:after {
+  background: linear-gradient(to left, rgba(255, 255, 255, 0) 0%, white 100%);
+  left: 0;
+}
+.sausage-links ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow: auto;
+  padding: 1em 0;
+  -webkit-overflow-scrolling: touch;
+}
+.sausage-links ul li {
+  font-size: 2rem;
+  padding: 0 8px;
+  white-space: nowrap;
+}
+.sausage-links ul li a, .sausage-links ul li a:visited {
+  border: 1px solid lightgrey;
+  border-radius: 50px;
+  color: dodgerblue;
+  display: inline-block;
+  padding: 10px 15px;
+  text-decoration: none;
+}
+.sausage-links ul li a:hover, .sausage-links ul li a:visited:hover {
+  background: #ebf5ff;
+  border-color: dodgerblue;
+  box-shadow: 0 2px 4px rgba(0, 90, 156, 0.15);
+}
+
+
+.hider {
+  display: none;
 }
 
 
