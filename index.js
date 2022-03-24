@@ -289,16 +289,18 @@ function unfixedTotalRow() {
   td.style.backgroundColor = "black";
   td.style.color = "white";
 
+
   td3.style.backgroundColor = "black";
   td3.style.color = "white";
 
+
   td2.style.color = "crimson";
   td2.style.fontWeight = "bold";
-  td2.style.fontSize = "2.5rem"
+  td2.style.fontSize = "2.4rem"
 
   td4.style.color = "crimson";
   td4.style.fontWeight = "bold";
-  td4.style.fontSize = "2.5rem"
+  td4.style.fontSize = "2.4rem"
 
 
 
