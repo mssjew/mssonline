@@ -25,10 +25,6 @@ const unfixedDiv = document.getElementById("unfixedSection");
 const livePLDiv = document.getElementById("livePLSection"); 
 const oldUnfixDiv = document.getElementById("oldUnfixSection"); 
 
-
-
-
-
 const internalPos = "Summary!C3";
 const netPos = "Summary!C5";
 
@@ -98,7 +94,7 @@ function toggleUnfixed() {
 
 function togglePL() {
   livePLDiv.classList.remove("hider");
-  unfixedDiv.classList.add("physicalUnfixed");
+  unfixedDiv.classList.remove("physicalUnfixed");
   unfixedDiv.classList.add("hider");
 }
 
