@@ -524,24 +524,6 @@ span.signalSign {
   
 }
 
-
-.physicalUnfixed > table tr > td:nth-child(2) {
-  color: crimson;
-  font-weight: bold;
-}
-
-.physicalUnfixed > table:nth-child(2) th {
-  background-color: darkred;
-  font-weight: bold;
-}
-
-#totalUnfix, #averageUnfixTarget {
-  color: crimson;
-  font-weight: bold;
-}
-
-
-
 .hider {
   display: none;
 }
@@ -573,6 +555,7 @@ span.signalSign {
   overflow: auto;
   padding: 1em 0;
   -webkit-overflow-scrolling: touch;
+  justify-content: start;
 }
 .sausage-links ul li {
   padding: 0 8px;

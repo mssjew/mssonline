@@ -139,16 +139,17 @@
     <hr>
     <nav class="sausage-links">
       <ul>
-          <li><a onclick="toggleView()">Pending Fixing</a></li>
-          <li><a>Live Profit/Loss</a></li>
-          <li><a>Old Unfixed</a></li>
+          <li><a onclick="toggleUnfixed()">Pending Fixing</a></li>
+          <li><a onclick="togglePL()">Live Profit/Loss</a></li>
+          <li><a onclick="toggleOldUnfix()">Old Unfixed</a></li>
           <li><a>Old Unfixed2</a></li>
           <li><a>Old Unfixed3</a></li>
       </ul>
     </nav>
-    <h1 class="today">Physical TT Unfixed</h1>
+    
 
     <div id="unfixedSection" class="physicalUnfixed">
+      <h1 class="today">Physical TT Unfixed</h1>
 
       <table id="unfixTable">
         <tr>
@@ -157,7 +158,26 @@
           <th> Date </th>
         </tr>
       </table>
-    </div>    
+    </div>
+    
+    <div id="livePLSection" class="hider">
+
+      <h2>LIVE PL</h2>
+
+      <p>This Month</p>
+
+      <ul><li>1</li></ul>
+    </div> 
+    
+    <div id="oldUnfixSection" class="hider">
+
+      <h2>OLD TT PENDING</h2>
+
+      <p>Total 500TT</p>
+
+      <ul><li>$1600</li></ul>
+    </div>  
+
  
 
 

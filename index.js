@@ -22,6 +22,12 @@ const averageUnfixTargetP = document.getElementById("averageUnfixTarget");
 
 
 const unfixedDiv = document.getElementById("unfixedSection"); 
+const livePLDiv = document.getElementById("livePLSection"); 
+const oldUnfixDiv = document.getElementById("oldUnfixSection"); 
+
+
+
+
 
 const internalPos = "Summary!C3";
 const netPos = "Summary!C5";
@@ -82,9 +88,27 @@ let avgBoughtNumber;
 //   <p class="livePL">Live ${plValueBHD>0?"Profit":"Loss"} if Closed Now: </p><br><p>BHD ${plValueBHDString}</p>`
 // }, 2000);
 
-function toggleView() {
-  unfixedDiv.classList.toggle("hider");
+function toggleUnfixed() {
+  unfixedDiv.classList.remove("hider");
+  unfixedDiv.classList.add("physicalUnfixed")
+  livePLDiv.classList.add("hider");
+  oldUnfixDiv.classList.add("hider");
+
 }
+
+function togglePL() {
+  livePLDiv.classList.remove("hider");
+  unfixedDiv.classList.add("physicalUnfixed");
+  unfixedDiv.classList.add("hider");
+}
+
+function toggleOldUnfix() {
+  oldUnfixDiv.classList.remove("hider");
+  livePLDiv.classList.add("hider");
+  unfixedDiv.classList.remove("physicalUnfixed");
+  unfixedDiv.classList.add("hider");
+}
+
 
 
 async function goldPrice() {
