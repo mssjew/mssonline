@@ -20,6 +20,9 @@ const unfixTable = document.getElementById("unfixTable");
 const totalUnfixP = document.getElementById("totalUnfix");
 const averageUnfixTargetP = document.getElementById("averageUnfixTarget");
 
+
+const unfixedDiv = document.getElementById("unfixedSection"); 
+
 const internalPos = "Summary!C3";
 const netPos = "Summary!C5";
 
@@ -79,8 +82,8 @@ let avgBoughtNumber;
 //   <p class="livePL">Live ${plValueBHD>0?"Profit":"Loss"} if Closed Now: </p><br><p>BHD ${plValueBHDString}</p>`
 // }, 2000);
 
-function myFunction() {
-  document.getElementById("unfixedSection").classList.toggle("hider");
+function toggleView() {
+  unfixedDiv.classList.toggle("hider");
 }
 
 
