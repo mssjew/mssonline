@@ -247,7 +247,65 @@ function unfixedRowMaker(list) {
   td2.textContent = list[1];
   td3.textContent = list[2];
 
+}
 
+function unfixedTotalRow() {
+
+  const trow = document.createElement("tr"); 
+  const td = document.createElement("td");
+  const trow2 = document.createElement("tr"); 
+  const td2 = document.createElement("td");
+  const trow3 = document.createElement("tr"); 
+  const td3 = document.createElement("td");
+  const trow4 = document.createElement("tr"); 
+  const td4 = document.createElement("td");
+
+  td.setAttribute("colspan", "3");
+  td2.setAttribute("colspan", "3");
+  td3.setAttribute("colspan", "3");
+  td4.setAttribute("colspan", "3");
+
+  unfixTable.appendChild(trow);
+  unfixTable.appendChild(trow2);
+  unfixTable.appendChild(trow3);
+  unfixTable.appendChild(trow4);
+  trow.appendChild(td);
+  trow2.appendChild(td2);
+  trow3.appendChild(td3);
+  trow4.appendChild(td4);
+
+  
+  td.textContent = "TOTAL PENDING FIXING";
+  td3.textContent = "AVERAGE FIXING TARGET"; 
+
+  getTotalUnfixed().then((total) => {
+    td2.textContent = total;
+  });
+
+  getUnfixedTarget().then((target) => {
+    td4.textContent = target;
+  });
+
+  td.style.backgroundColor = "black";
+  td.style.color = "white";
+
+  td3.style.backgroundColor = "black";
+  td3.style.color = "white";
+
+  td2.style.color = "crimson";
+  td2.style.fontWeight = "bold";
+  td2.style.fontSize = "2.75rem"
+
+  td4.style.color = "crimson";
+  td4.style.fontWeight = "bold";
+  td4.style.fontSize = "2.75rem"
+
+
+
+  
+
+  
+  
 }
 
 
@@ -261,6 +319,7 @@ axios
     resp.data.values.forEach((row) => {
       unfixedRowMaker(row);
     });
+    unfixedTotalRow();
   })
   .catch((err) => {
     console.error(err);
@@ -269,29 +328,20 @@ axios
 
 // TOTAL UNFIXED 
 // DAILY FIXING SHEET
-axios
-  .get(
-    `https://sheets.googleapis.com/v4/spreadsheets/1On8IDb0uBl6DKtH95yMSU2DkULE-IsDWwwc4L0ODXNs/values/${totalUnfixed}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
-  )
-  .then((resp) => {
-    totalUnfixP.textContent = resp.data.values[0][0];
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+  async function getTotalUnfixed() {
+    let resp = await axios.get(`https://sheets.googleapis.com/v4/spreadsheets/1On8IDb0uBl6DKtH95yMSU2DkULE-IsDWwwc4L0ODXNs/values/${totalUnfixed}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+    );
+    return resp.data.values[0][0];
+  }
 
 // UNFIXED AVERAGE TARGET
 // DAILY FIXING SHEET
-axios
-  .get(
-    `https://sheets.googleapis.com/v4/spreadsheets/1On8IDb0uBl6DKtH95yMSU2DkULE-IsDWwwc4L0ODXNs/values/${averageFixingTarget}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
-  )
-  .then((resp) => {
-    averageUnfixTargetP.textContent = resp.data.values[0][0];
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+
+async function getUnfixedTarget() {
+  let resp = await axios.get(`https://sheets.googleapis.com/v4/spreadsheets/1On8IDb0uBl6DKtH95yMSU2DkULE-IsDWwwc4L0ODXNs/values/${averageFixingTarget}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+  );
+  return resp.data.values[0][0];
+}
 
 // TOTAL SOLD PLAIN TEXT
 axios
