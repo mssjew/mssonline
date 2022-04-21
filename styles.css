@@ -569,7 +569,7 @@ span.signalSign {
   padding: 10px 15px;
   text-decoration: none;
 }
-.sausage-links ul li a:hover, .sausage-links ul li a:visited:hover {
+.sausage-links ul li a:hover{
   background: chocolate;
   border-color: chocolate;
   color: white;

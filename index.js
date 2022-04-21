@@ -23,7 +23,7 @@ const averageUnfixTargetP = document.getElementById("averageUnfixTarget");
 
 const unfixedDiv = document.getElementById("unfixedSection"); 
 const livePLDiv = document.getElementById("livePLSection"); 
-const oldUnfixDiv = document.getElementById("oldUnfixSection"); 
+const oldUnfixDiv = document.getElementById("oldUnfixSection");
 
 const internalPos = "Summary!C3";
 const netPos = "Summary!C5";
@@ -92,6 +92,8 @@ function toggleUnfixed() {
 
 }
 
+
+
 function togglePL() {
   livePLDiv.classList.remove("hider");
   unfixedDiv.classList.remove("physicalUnfixed");
@@ -111,6 +113,7 @@ async function goldPrice() {
   let resp = await axios.get("https://www.goldapi.io/api/XAU/USD", {
     headers: { "x-access-token": "goldapi-f20pyjatkuagctl5-io" },
   });
+
   return resp.data.price;
 }
 
