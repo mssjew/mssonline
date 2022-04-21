@@ -112,22 +112,16 @@ function pad(idx) {
 goldPrice()
   .then((price) => {
     document.getElementById("liveGPrice").textContent = `$${price}`;
-  })
-  .catch((err) => {
-    currentPrice = 0;
-    console.log("Error failed to get price:", err);
-  });
-
-
-
-goldPrice()
-  .then((price) => {
     currentPrice = price;
   })
   .catch((err) => {
     currentPrice = 0;
     console.log("Error failed to get price:", err);
   });
+
+
+
+
 
 
 goldPriceHigh()
@@ -179,7 +173,7 @@ function listMakerSell(list, content, idx) {
     } else {
       signal.innerHTML = "";
     }
-  }, 2500);
+  }, 4000);
 
   const indexVal = document.createElement("span");
   indexVal.classList.add("index");
@@ -220,7 +214,7 @@ function listMakerBuy(list, content, idx) {
     } else {
       signal.innerHTML = "";
     }
-  }, 2500);
+  }, 4000);
 
   const indexVal = document.createElement("span");
   indexVal.classList.add("index");
