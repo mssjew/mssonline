@@ -60,6 +60,8 @@ let totalBoughtNumber;
 let avgSoldNumber;
 let avgBoughtNumber;
 
+
+
 // setTimeout(() => {
   
 // }, 500);
@@ -177,6 +179,7 @@ goldPriceHigh()
 
 // LIST MAKER FUNCTION
 function listMakerSell(list, content, idx) {
+
   if (content[0].length > 23) {
     var listedSellValue = content[0].slice(15, 23);
   } else {
@@ -224,6 +227,7 @@ function listMakerBuy(list, content, idx) {
   }
 
   const buyPrice = parseFloat(listedBuyValue.replace(",", ""));
+
 
   const listItem = document.createElement("li");
   list.appendChild(listItem);
@@ -327,13 +331,6 @@ function unfixedTotalRow() {
   td4.style.color = "crimson";
   td4.style.fontWeight = "bold";
   td4.style.fontSize = "2.4rem"
-
-
-
-  
-
-  
-  
 }
 
 
@@ -347,7 +344,7 @@ axios
     resp.data.values.forEach((row) => {
       unfixedRowMaker(row);
     });
-    unfixedTotalRow();
+    unfixedTotalRow(); 
   })
   .catch((err) => {
     console.error(err);
@@ -718,3 +715,98 @@ axios
   .catch((err) => {
     console.error(err);
   });
+
+
+// LIVE PROFIT AND LOSS
+
+
+// var formatter = new Intl.NumberFormat('en-US', {
+//   style: 'currency',
+//   currency: 'BHD',
+//   maximumFractionDigits: 0,
+// });
+
+
+
+function getSellProfit(content) {
+  if (content[0].length > 23) {
+    var listedSellValue = content[0].slice(15, 23);
+  } else {
+    var listedSellValue = content[0].slice(14, 22);
+  }
+  let sellPrice = parseFloat(listedSellValue.replace(",", ""));
+
+
+  if (content[0].length > 23) {
+    var listedSellAmount = content[0].slice(0, 4);
+  } else {
+    var listedSellAmount = content[0].slice(0, 3);
+  }
+
+  let sellAmount = parseFloat(listedSellAmount);
+
+
+  let pAndL = (sellPrice - currentPrice)*sellAmount*3.746*.377;
+
+  
+
+  let formattedPL = pAndL.toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'BHD',
+    minimumIntegerDigits: 5
+    
+  }); /* $2,500.00 */
+
+  console.log(formattedPL.length)
+
+  
+  if (formattedPL.length == 15) {
+    return formattedPL
+  } else {
+    return "+" + formattedPL
+  }
+
+
+  
+
+  
+
+
+
+
+}
+
+function getBuyProfit(content) {
+  if (content[0].length > 25) {
+    var listedBuyValue = content[0].slice(17, 25);
+  } else {
+    var listedBuyValue = content[0].slice(16, 24);
+  }
+  return parseFloat(listedBuyValue.replace(",", ""));
+}
+
+
+setTimeout(() => {
+  axios
+  .get(
+    `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${sellRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+  )
+  .then((resp) => {
+    let list = document.createElement("ul");
+    livePLDiv.appendChild(list)
+    resp.data.values.forEach((element, idx) => {
+      let data = getSellProfit(element)
+      let eachItem = document.createElement("li");
+      if(data[0] === "-") eachItem.style.color = "red";
+      if(data[0] === "+") eachItem.style.color = "green"
+      list.appendChild(eachItem);
+      eachItem.textContent = pad(idx)+". "+data
+    });
+  })
+  .catch((err) => {
+    let p = document.createElement("p");
+    livePLDiv.appendChild(p)
+    p.textContent = "Error fetching data, try refreshing."
+    console.error(err);
+  });
+}, 5000);

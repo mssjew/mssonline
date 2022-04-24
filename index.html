@@ -57,9 +57,6 @@
 
     </div> -->
 
-    
-
-      
      
     <p class="signalKey">* = New Position Today</p>
     <p class="signalKey">&#128994; = Position in Profit</p>
@@ -139,7 +136,7 @@
     <hr>
     <nav class="sausage-links">
       <ul>
-          <li><a onclick="toggleUnfixed()">Pending Fixing</a></li>
+          <li><a id="firstSausage" onclick="toggleUnfixed()">Pending Fixing</a></li>
           <li><a onclick="togglePL()">Live Profit and Loss</a></li>
           <li><a onclick="toggleOldUnfix()">Old Unfixed</a></li>
 
@@ -161,11 +158,8 @@
     
     <div id="livePLSection" class="hider">
 
-      <h2>LIVE PL</h2>
+     <p>Live Profit/Loss for each Position number as listed above:</p>
 
-      <p>This Month</p>
-
-      <ul><li>1</li></ul>
     </div> 
     
     <div id="oldUnfixSection" class="hider">
