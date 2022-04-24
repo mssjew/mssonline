@@ -801,7 +801,7 @@ setTimeout(() => {
       if(data[0] === "-") eachItem.style.color = "red";
       if(data[0] === "+") eachItem.style.color = "green"
       list.appendChild(eachItem);
-      eachItem.textContent = pad(idx)+". "+data
+      eachItem.textContent = pad(idx+1)+". "+data
     });
   })
   .catch((err) => {
