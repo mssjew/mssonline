@@ -753,14 +753,15 @@ function getSellProfit(content) {
   let formattedPL = pAndL.toLocaleString('en-US', {
     style: 'currency',
     currency: 'BHD',
-    minimumIntegerDigits: 5
+    minimumIntegerDigits: 5,
+    maximumFractionDigits: 0
     
   }); /* $2,500.00 */
 
   console.log(formattedPL.length)
 
   
-  if (formattedPL.length == 15) {
+  if (formattedPL.length == 11) {
     return formattedPL
   } else {
     return "+" + formattedPL
