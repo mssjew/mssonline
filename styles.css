@@ -471,9 +471,19 @@ span.signalSign {
 
 }
 
-#livePLSection > ul > li {
-  font-size: 2.6rem;
-}
+/* #livePLSection > table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: none;
+
+
+} */
+
+/* #livePlSection > tr, td {
+  font-size: 2rem;
+} */
 
 .livePLHolder{
   display: flex;
@@ -740,9 +750,6 @@ span.signalSign {
     font-size: 1.9rem;
   }
 
-  #livePLSection > ul > li {
-    font-size: 2.6rem;
-  }
 }
 
 @media (max-width: 440px) {
@@ -781,9 +788,6 @@ span.signalSign {
     
   }
 
-  #livePLSection > ul > li {
-    font-size: 2.6rem;
-  }
 }
 
 @media (max-width: 390px) {
@@ -849,10 +853,6 @@ span.signalSign {
 
   li {
     font-size: 1.8rem;
-  }
-
-  #livePLSection > ul > li {
-    font-size: 2.6rem;
   }
 
   #dailyProfit {
