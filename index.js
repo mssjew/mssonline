@@ -863,7 +863,7 @@ setTimeout(() => {
       totalRowLabel.appendChild(tdTotal);
       tdTotal.colSpan = 3;
       tdTotal.textContent = formattedTotalSellPL[0] === "+" ? `Total Profit: ${formattedTotalSellPL}` : `Total Loss: ${formattedTotalSellPL}`;
-      tdTotal.style.fontSize = "2rem";
+      tdTotal.style.fontSize = "1.9rem";
       
 
 
@@ -963,7 +963,7 @@ setTimeout(() => {
       totalRowLabel.appendChild(tdTotal);
       tdTotal.colSpan = 3;
       tdTotal.textContent = formattedTotalBuyPL[0] === "+" ? `Total Profit: ${formattedTotalBuyPL}` : `Total Loss: ${formattedTotalBuyPL}`;
-      tdTotal.style.fontSize = "2rem";
+      tdTotal.style.fontSize = "1.9rem";
     })
     .catch((err) => {
       let p = document.createElement("p");
@@ -986,7 +986,7 @@ setTimeout(() => {
   livePLDiv.appendChild(pOrL)
   livePLDiv.appendChild(totalPL)
 
-  totalPL_Label.textContent = "Total P/L Live";
+  totalPL_Label.textContent = "All Positions";
   totalPL_Label.style.textDecoration = "underline";
   totalPL_Label.style.fontSize = "2.3rem";
 
@@ -1000,7 +1000,7 @@ setTimeout(() => {
     signDisplay: "exceptZero",
   });
 
-  pOrL.textContent = formattedTotalPL[0] === "+" ? "In Profit" : "In Loss:";
+  pOrL.textContent = formattedTotalPL[0] === "+" ? "Live Profit" : "Live Loss:";
 
   totalPL.textContent = formattedTotalPL;
 
