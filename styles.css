@@ -164,7 +164,6 @@ h1 {
   margin: 1%;
 }
 
-
 h2 {
   font-size: 2.5rem;
   font-weight: 500;
@@ -244,22 +243,19 @@ p {
   font-weight: bold;
 }
 
-
-#avgBuy, #avgSell {
+#avgBuy,
+#avgSell {
   color: black;
   font-weight: bold;
   font-size: 3rem;
 }
 
 #totalSold {
-
   text-align: center;
   color: chocolate;
   font-size: 3rem;
   text-decoration: underline;
   margin-top: 4%;
-
-
 }
 
 #totalBought {
@@ -269,8 +265,6 @@ p {
   text-decoration: underline;
   margin-top: 4%;
 }
-
-
 
 #sell {
   color: chocolate;
@@ -433,7 +427,6 @@ button.qab {
   line-height: 1.5;
 }
 
-
 .eventP {
   color: black;
   font-size: 2rem;
@@ -465,10 +458,8 @@ span.signalSign {
 }
 
 .livePL {
-
   text-align: center;
   word-wrap: break-word;
-
 }
 
 .livePLDiv {
@@ -484,7 +475,9 @@ span.signalSign {
   font-size: 1.9rem;
 }
 
-.livePLDiv > table, td, tr {
+.livePLDiv > table,
+td,
+tr {
   border-collapse: collapse;
   font-family: monospace;
 }
@@ -514,8 +507,7 @@ span.signalSign {
   flex-direction: column;
 }
 
-
-.livePLHolder{
+.livePLHolder {
   display: flex;
   flex-direction: column;
   width: 90%;
@@ -537,25 +529,26 @@ span.signalSign {
   flex-direction: column;
   margin: 3%;
   margin-bottom: 5%;
-
 }
 
 .physicalUnfixed > table {
   font-family: monospace;
   margin: 5%;
-  font-size: 2rem; 
+  font-size: 2rem;
 }
 
 .physicalUnfixed > table tr > td:nth-child(3) {
   font-size: 1.7rem;
 }
 
-.physicalUnfixed > table, td, tr, th {
+.physicalUnfixed > table,
+td,
+tr,
+th {
   border: 1px solid black;
   background-color: #f8f8f8;
   padding: 8px;
   text-align: center;
-  
 }
 
 .physicalUnfixed > table th {
@@ -565,7 +558,6 @@ span.signalSign {
   padding: 10px;
   text-align: center;
   font-size: 2rem;
-  
 }
 
 .hider {
@@ -575,7 +567,8 @@ span.signalSign {
 .sausage-links {
   position: relative;
 }
-.sausage-links:before, .sausage-links:after {
+.sausage-links:before,
+.sausage-links:after {
   content: "";
   height: calc(100% - 2em);
   pointer-events: none;
@@ -605,7 +598,8 @@ span.signalSign {
   padding: 0 8px;
   white-space: nowrap;
 }
-.sausage-links ul li a, .sausage-links ul li a:visited {
+.sausage-links ul li a,
+.sausage-links ul li a:visited {
   border: 1px solid black;
   border-radius: 50px;
   color: black;
@@ -613,14 +607,88 @@ span.signalSign {
   padding: 10px 15px;
   text-decoration: none;
 }
-.sausage-links ul li a:hover{
+.sausage-links ul li a:hover {
   background: chocolate;
   border-color: chocolate;
   color: white;
   box-shadow: 0 2px 4px rgba(0, 90, 156, 0.15);
 }
 
+.loadingDiv {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-family: monospace;
+}
+.sbl-circ {
+  height: 48px;
+  width: 48px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #5a5a5a;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  border: 5px solid;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: rotate 1s linear infinite;
+}
 
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  text-align: center;
+}
+
+.progress2 {
+  padding: 1px;
+  border-radius: 10px;
+  background: black;
+}
+
+.progress-bar2 {
+  height: 15px;
+  border-radius: 10px;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.05)
+  );
+  transition: 0.4s linear;
+  transition-property: width, background-color;
+}
+
+.progress-moved .progress-bar2 {
+  width: 100%;
+  background-color: chocolate;
+  animation: progressAnimation 8.5s;
+}
+
+@keyframes progressAnimation {
+  0% {
+    width: 1%;
+    background-color: chocolate;
+  }
+  100% {
+    width: 100%;
+    background-color: chocolate;
+  }
+}
 
 @media (max-width: 520px) {
   * {
@@ -656,14 +724,15 @@ span.signalSign {
     font-size: 2.3rem;
   }
 
-  #avgBuy, #avgSell {
-    font-size: 2.7rem;
-  }
-  
-  #totalSold, #totalBought {
+  #avgBuy,
+  #avgSell {
     font-size: 2.7rem;
   }
 
+  #totalSold,
+  #totalBought {
+    font-size: 2.7rem;
+  }
 
   li {
     font-size: 2.2rem;
@@ -717,7 +786,7 @@ span.signalSign {
   }
 
   span.signalSign {
-    font-size: .7rem;
+    font-size: 0.7rem;
   }
 
   h1 {
@@ -763,7 +832,6 @@ span.signalSign {
     font-weight: bold;
   }
 
-
   p {
     font-size: 2rem;
   }
@@ -779,11 +847,9 @@ span.signalSign {
   p.unfixStats {
     font-size: 1.9rem;
   }
-
 }
 
 @media (max-width: 440px) {
-
   .livePLDiv > table {
     font-size: 1.8rem;
   }
@@ -799,29 +865,29 @@ span.signalSign {
     font-size: 2rem;
   }
 
-  #avgBuy, #avgSell {
+  #avgBuy,
+  #avgSell {
     font-size: 2.5rem;
   }
-  
-  #totalSold, #totalBought {
+
+  #totalSold,
+  #totalBought {
     font-size: 2.5rem;
   }
 
   .physicalUnfixed > table {
     font-family: monospace;
     margin: 5%;
-    font-size: 1.8rem; 
+    font-size: 1.8rem;
   }
-  
+
   .physicalUnfixed > table tr > td:nth-child(3) {
     font-size: 1.5rem;
   }
 
   .physicalUnfixed > table th {
     font-size: 1.8rem;
-    
   }
-
 }
 
 @media (max-width: 390px) {
@@ -840,7 +906,6 @@ span.signalSign {
   h1.today {
     font-size: 2rem;
   }
-
 
   .liveP {
     font-size: 2rem;
@@ -872,14 +937,15 @@ span.signalSign {
     font-weight: bold;
   }
 
-  #avgBuy, #avgSell {
-    font-size: 2.1rem;
-  }
-  
-  #totalSold, #totalBought {
+  #avgBuy,
+  #avgSell {
     font-size: 2.1rem;
   }
 
+  #totalSold,
+  #totalBought {
+    font-size: 2.1rem;
+  }
 
   p {
     font-size: 1.8rem;
@@ -903,7 +969,6 @@ span.signalSign {
 }
 
 @media (max-width: 370px) {
-
   .livePLDiv > table {
     font-size: 1.5rem;
   }
@@ -917,9 +982,9 @@ span.signalSign {
   .physicalUnfixed > table {
     font-family: monospace;
     margin: 5%;
-    font-size: 1.5rem; 
+    font-size: 1.5rem;
   }
-  
+
   .physicalUnfixed > table tr > td:nth-child(3) {
     font-size: 1.2rem;
   }
@@ -930,10 +995,8 @@ span.signalSign {
 
   .physicalUnfixed > table th {
     font-size: 1.5rem;
-    
   }
 }
-
 
 @media (max-width: 330px) {
   #logo {
@@ -949,15 +1012,18 @@ span.signalSign {
     font-size: 1.6rem;
   }
 
-  #avgBuy, #avgSell {
-    font-size: 1.7rem;
-  }
-  
-  #totalSold, #totalBought {
+  #avgBuy,
+  #avgSell {
     font-size: 1.7rem;
   }
 
-  button.kenz, button.qab {
+  #totalSold,
+  #totalBought {
+    font-size: 1.7rem;
+  }
+
+  button.kenz,
+  button.qab {
     font-size: 1.3rem;
   }
 
@@ -992,8 +1058,6 @@ span.signalSign {
     font-weight: bold;
   }
 
- 
-
   p {
     font-size: 1.5rem;
   }
@@ -1010,7 +1074,8 @@ span.signalSign {
     font-size: 1.7rem;
   }
 
-  .eventP, .timeBH {
+  .eventP,
+  .timeBH {
     font-size: 1.5rem;
   }
 
@@ -1021,23 +1086,21 @@ span.signalSign {
   .physicalUnfixed > table {
     font-family: monospace;
     margin: 5%;
-    font-size: 1.2rem; 
-
+    font-size: 1.2rem;
   }
 
   .physicalUnfixed > table tr > td:nth-child(3) {
-    font-size: .9rem;
+    font-size: 0.9rem;
   }
 
-  .physicalUnfixed > table, td, tr, th {
+  .physicalUnfixed > table,
+  td,
+  tr,
+  th {
     padding: 4px;
-    
   }
 
   .physicalUnfixed > table th {
     font-size: 1.2rem;
-    
   }
-
-  
 }

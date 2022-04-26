@@ -24,6 +24,17 @@ const unfixedDiv = document.getElementById("unfixedSection");
 const livePLDiv = document.getElementById("livePLSection");
 const oldUnfixDiv = document.getElementById("oldUnfixSection");
 
+let loader = `<div class="container">
+<p>Calculating Profit/Loss</p>   
+ <div class="progress2 progress-moved">
+   <div class="progress-bar2" >
+   </div>                       
+ </div> 
+</div>`;
+
+livePLDiv.innerHTML = loader;
+
+
 const internalPos = "Summary!C3";
 const netPos = "Summary!C5";
 
@@ -776,12 +787,17 @@ function getBuyProfit(content) {
   }
 }
 
+
+
+    
+
 setTimeout(() => {
   axios
     .get(
       `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${sellRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
     )
     .then((resp) => {
+      livePLDiv.innerHTML = "";
       const plTable = document.createElement("table");
       livePLDiv.appendChild(plTable);
 
@@ -874,7 +890,9 @@ setTimeout(() => {
       p.textContent = "Error fetching sell position data. Refresh the page.";
       console.error(err);
     });
-}, 6000);
+}, 7000);
+
+
 
 setTimeout(() => {
   axios
@@ -971,7 +989,7 @@ setTimeout(() => {
       p.textContent = "Error fetching buy position data. Refresh the page.";
       console.error(err);
     });
-}, 7000);
+}, 8000);
 
 setTimeout(() => {
   livePLDiv.appendChild(document.createElement("br"));
@@ -1003,4 +1021,4 @@ setTimeout(() => {
   totalPL.style.color = formattedTotalPL[0] === "+" ? "forestgreen" : "crimson";
   totalPL.style.fontSize = "1.9rem";
   
-}, 8000);
+}, 9000);
