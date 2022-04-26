@@ -57,7 +57,6 @@ let totalBoughtNumber;
 let avgSoldNumber;
 let avgBoughtNumber;
 
-
 function toggleUnfixed() {
   unfixedDiv.style.display = "flex";
   livePLDiv.style.display = "none";
@@ -107,20 +106,21 @@ function pad(idx) {
 goldPrice()
   .then((price) => {
     document.getElementById("liveGPrice").textContent = `$${price}`;
-  })
-  .catch((err) => {
-    currentPrice = 0;
-    console.log("Error failed to get price:", err);
-  });
-
-goldPrice()
-  .then((price) => {
     currentPrice = price;
   })
   .catch((err) => {
     currentPrice = 0;
     console.log("Error failed to get price:", err);
   });
+
+// goldPrice()
+//   .then((price) => {
+    
+//   })
+//   .catch((err) => {
+//     currentPrice = 0;
+//     console.log("Error failed to get price:", err);
+//   });
 
 goldPriceHigh()
   .then((highPrice) => {
@@ -171,7 +171,7 @@ function listMakerSell(list, content, idx) {
     } else {
       signal.innerHTML = "";
     }
-  }, 2500);
+  }, 3000);
 
   const indexVal = document.createElement("span");
   indexVal.classList.add("index");
@@ -212,7 +212,7 @@ function listMakerBuy(list, content, idx) {
     } else {
       signal.innerHTML = "";
     }
-  }, 2500);
+  }, 3000);
 
   const indexVal = document.createElement("span");
   indexVal.classList.add("index");
@@ -675,43 +675,48 @@ axios
 // });
 
 function getSellProfit(content) {
-  if (content[0].length > 23) {
-    var listedSellValue = content[0].slice(15, 23);
+
+  if(currentPrice) {
+    if (content[0].length > 23) {
+      var listedSellValue = content[0].slice(15, 23);
+    } else {
+      var listedSellValue = content[0].slice(14, 22);
+    }
+    let sellPrice = parseFloat(listedSellValue.replace(",", ""));
+  
+    if (content[0].length > 23) {
+      var listedSellAmount = content[0].slice(0, 4);
+    } else {
+      var listedSellAmount = content[0].slice(0, 3);
+    }
+  
+    let sellAmount = parseFloat(listedSellAmount);
+  
+    let pAndL = (sellPrice - currentPrice) * sellAmount * 3.746 * 0.377;
+    let perTT_PL = (sellPrice - currentPrice) * 3.746 * 0.377;
+  
+    let formattedPL = pAndL.toLocaleString("en-US", {
+      style: "currency",
+      currency: "BHD",
+      minimumIntegerDigits: 3,
+      maximumFractionDigits: 0,
+      signDisplay: "exceptZero",
+    });
+  
+    let formattedPerTT = perTT_PL.toLocaleString("en-US", {
+      style: "currency",
+      currency: "BHD",
+      minimumIntegerDigits: 3,
+      maximumFractionDigits: 3,
+      signDisplay: "exceptZero"
+    });
+  
+    return formattedPL + formattedPerTT;
+
   } else {
-    var listedSellValue = content[0].slice(14, 22);
+    return "Error.     Refresh page."
   }
-  let sellPrice = parseFloat(listedSellValue.replace(",", ""));
-
-  if (content[0].length > 23) {
-    var listedSellAmount = content[0].slice(0, 4);
-  } else {
-    var listedSellAmount = content[0].slice(0, 3);
-  }
-
-  let sellAmount = parseFloat(listedSellAmount);
-
-  let pAndL = (sellPrice - currentPrice) * sellAmount * 3.746 * 0.377;
-  let perTT_PL = (sellPrice - currentPrice) * 3.746 * 0.377;
-
-  let formattedPL = pAndL.toLocaleString("en-US", {
-    style: "currency",
-    currency: "BHD",
-    minimumIntegerDigits: 5,
-    maximumFractionDigits: 0,
-    signDisplay: "exceptZero"
-  });
-
-  let formattedPerTT = perTT_PL.toLocaleString("en-US", {
-    style: "currency",
-    currency: "BHD",
-    minimumIntegerDigits: 3,
-    maximumFractionDigits: 0,
-    signDisplay: "exceptZero"
-  });
-
-  return formattedPL + formattedPerTT;
-
-
+  
 
   // if ((formattedPL.length = 11)) {
   //   return formattedPL + formattedPerTT;
@@ -735,14 +740,33 @@ setTimeout(() => {
       `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${sellRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
     )
     .then((resp) => {
-
-      const plTable =  document.createElement("table");
+      const plTable = document.createElement("table");
       livePLDiv.appendChild(plTable);
-      
 
-    
+      const headerRow = document.createElement("tr");
+      const th1 = document.createElement("th");
+      const th2 = document.createElement("th");
+      const th3 = document.createElement("th");
+
+      plTable.appendChild(headerRow);
+      headerRow.appendChild(th1);
+      headerRow.appendChild(th2);
+      headerRow.appendChild(th3);
+      th1.textContent = 'No.';
+      th2.textContent = 'Profit/Loss';
+      th3.textContent = 'Per TT';
+
+      th1.style.backgroundColor = "black";
+      th2.style.backgroundColor = "black";
+      th3.style.backgroundColor = "black";
+
+      th1.style.color = "white";
+      th2.style.color = "white";
+      th3.style.color = "white";
+
+
+
       resp.data.values.forEach((element, idx) => {
-
         const trow = document.createElement("tr");
         const td1 = document.createElement("td");
         const td2 = document.createElement("td");
@@ -754,18 +778,16 @@ setTimeout(() => {
         trow.appendChild(td3);
         let data = getSellProfit(element);
 
-        td1.textContent = idx+1;
-        td2.textContent = data.slice(0,11);
+        td1.textContent = idx + 1;
+        td2.textContent = data.slice(0, 11);
         td3.textContent = data.slice(11);
 
-        if(data[0] === "+") {
-          trow.style.color = "green";
+        if (data[0] === "+") {
+          trow.style.color = "forestgreen";
         }
-        if(data[0] === "-") {
-          trow.style.color = "red";
+        if (data[0] === "-") {
+          trow.style.color = "crimson";
         }
-
-
 
         // if (data[0] === "-") eachItem.style.color = "red";
         // if (data[0] === "+") eachItem.style.color = "green";
@@ -779,4 +801,4 @@ setTimeout(() => {
       p.textContent = "Error fetching data, try refreshing.";
       console.error(err);
     });
-}, 5000);
+}, 6000);

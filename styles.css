@@ -471,18 +471,24 @@ span.signalSign {
 
 }
 
-#livePLSection {
+.livePLDiv {
   display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 90%;
+  margin: auto;
 }
 
-#livePLSection > table {
+.livePLDiv > table {
   font-size: 2rem;
 }
 
-div#livePLSection > p {
+.livePLDiv > table, td, tr {
+  border-collapse: collapse;
+}
+
+.livePLDiv > p {
   text-align: center;
 }
 
@@ -876,6 +882,10 @@ div#livePLSection > p {
 }
 
 @media (max-width: 370px) {
+
+  #livePLSection > table {
+    font-size: 1.7rem;
+  }
   li {
     font-size: 1.6rem;
   }
