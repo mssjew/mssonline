@@ -57,39 +57,23 @@ let totalBoughtNumber;
 let avgSoldNumber;
 let avgBoughtNumber;
 
-// setTimeout(() => {
-
-// }, 500);
-
-// setTimeout(() => {
-
-//   const soldDifference =  avgSoldNumber - currentPrice;
-
-//   const plValueBHD = (soldDifference * totalSoldNumber * 3.7463)/2.6494990909256;
-
-//   const plValueBHDString = plValueBHD.toFixed(3).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-//   console.log(plValueBHDString);
-
-//   sellPLCalc.innerHTML = `<h2>Online Sold</h2><p class="livePL">${totalSoldNumber} TT Sold > Avg Rate $${avgSoldNumber.toFixed(2)}</p><br>
-//   <p class="livePL">Live ${plValueBHD>0?"Profit":"Loss"} if Closed Now: </p><br><p>BHD ${plValueBHDString}</p>`
-// }, 2000);
 
 function toggleUnfixed() {
-  livePLDiv.classList.toggle("hider");
-  oldUnfixDiv.classList.toggle("hider");
+  unfixedDiv.style.display = "flex";
+  livePLDiv.style.display = "none";
+  oldUnfixDiv.style.display = "none";
 }
 
 function togglePL() {
-  livePLDiv.classList.toggle("hider");
-  oldUnfixDiv.classList.toggle("hider");
-  livePLDiv.classList.add("hider");
+  unfixedDiv.style.display = "none";
+  livePLDiv.style.display = "flex";
+  oldUnfixDiv.style.display = "none";
 }
 
 function toggleOldUnfix() {
-  livePLDiv.classList.toggle("hider");
-  oldUnfixDiv.classList.toggle("hider");
-  livePLDiv.classList.add("hider");
+  unfixedDiv.style.display = "none";
+  livePLDiv.style.display = "none";
+  oldUnfixDiv.style.display = "flex";
 }
 
 async function goldPrice() {
