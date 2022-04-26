@@ -490,13 +490,23 @@ span.signalSign {
 }
 
 .livePLDiv > table > tr:first-child {
-  font-size: 2.3rem;
+  font-size: 2rem;
   font-weight: bold;
+}
+
+.livePLDiv > table > tr:last-child {
+  font-size: 2rem;
+  font-style: italic;
 }
 
 .livePLDiv > p {
   text-align: center;
-  width: 85%;
+  width: 95%;
+}
+
+.livePLDiv > p {
+  text-align: center;
+  width: 95%;
 }
 
 #oldUnfixSection {

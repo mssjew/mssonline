@@ -871,7 +871,7 @@ setTimeout(() => {
     .catch((err) => {
       let p = document.createElement("p");
       livePLDiv.appendChild(p);
-      p.textContent = "Error fetching data, try refreshing.";
+      p.textContent = "Error fetching sell position data. Refresh the page.";
       console.error(err);
     });
 }, 6000);
@@ -968,7 +968,7 @@ setTimeout(() => {
     .catch((err) => {
       let p = document.createElement("p");
       livePLDiv.appendChild(p);
-      p.textContent = "Error fetching data, try refreshing.";
+      p.textContent = "Error fetching buy position data. Refresh the page.";
       console.error(err);
     });
 }, 7000);
@@ -980,15 +980,13 @@ setTimeout(() => {
 
   const totalPL_Label = document.createElement("p");
   const totalPL = document.createElement("p");
-  const pOrL = document.createElement("p");
 
   livePLDiv.appendChild(totalPL_Label)
-  livePLDiv.appendChild(pOrL)
   livePLDiv.appendChild(totalPL)
 
   totalPL_Label.textContent = "All Positions";
   totalPL_Label.style.textDecoration = "underline";
-  totalPL_Label.style.fontSize = "2.3rem";
+  totalPL_Label.style.fontSize = "2.2rem";
 
   const totalPLValue = liveBuyTotalPL + liveSellTotalPL;
 
@@ -1000,13 +998,9 @@ setTimeout(() => {
     signDisplay: "exceptZero",
   });
 
-  pOrL.textContent = formattedTotalPL[0] === "+" ? "Live Profit" : "Live Loss:";
-
-  totalPL.textContent = formattedTotalPL;
+  totalPL.textContent = formattedTotalPL[0] === "+" ? `Live Profit: ${formattedTotalPL}` : `Live Loss: ${formattedTotalPL}`;
 
   totalPL.style.color = formattedTotalPL[0] === "+" ? "forestgreen" : "crimson";
-  pOrL.style.color = formattedTotalPL[0] === "+" ? "forestgreen" : "crimson";
-  totalPL.style.fontSize = "2.3rem";
-  pOrL.style.fontSize = "2.3rem";
+  totalPL.style.fontSize = "1.9rem";
   
 }, 8000);
