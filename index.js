@@ -798,6 +798,25 @@ setTimeout(() => {
     )
     .then((resp) => {
       livePLDiv.innerHTML = "";
+
+      const livePLHeader = document.createElement("h1");
+      livePLDiv.appendChild(livePLHeader);
+      livePLHeader.innerHTML = "Live P/L for all<br>Open Positions";
+      livePLHeader.classList.add("today");
+      
+
+      const infoP =  document.createElement("p");
+      livePLDiv.appendChild(infoP);
+      infoP.innerHTML = `Position numbers same as above. Calculated on live gold price of $${currentPrice}`
+      infoP.style.lineHeight = 1.2;
+      infoP.style.fontWeight = 100;
+      infoP.style.width = "80%";
+
+
+
+      livePLDiv.appendChild(document.createElement("br"));
+      livePLDiv.appendChild(document.createElement("br"));
+
       const plTable = document.createElement("table");
       livePLDiv.appendChild(plTable);
 
@@ -1034,7 +1053,7 @@ setTimeout(() => {
   allRow.style.color = "white";
   allRow.style.fontSize = "1.9rem";
 
-  totalPL.textContent = formattedTotalPL;
+  totalPL.textContent = totalPLValue ===  0 ? `Error. Refresh Page.` : formattedTotalPL;
 
   totalPL.style.color = formattedTotalPL[0] === "+" ? "forestgreen" : "crimson";
   totalPL.style.fontSize = "2.1rem";

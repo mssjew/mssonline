@@ -319,6 +319,8 @@ p {
 h1.today {
   font-size: 3rem;
   text-decoration: underline;
+  text-align: center;
+  line-height: 1.5;
 }
 
 .hide {
@@ -492,9 +494,9 @@ tr {
   font-style: italic;
 }
 
-.livePLDiv > p {
+.livePLDiv > p:first-child {
   text-align: center;
-  width: 95%;
+  width: 90%;
 }
 
 .livePLDiv > p {
