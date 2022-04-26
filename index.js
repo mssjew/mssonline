@@ -996,15 +996,28 @@ setTimeout(() => {
   livePLDiv.appendChild(document.createElement("br"));
   livePLDiv.appendChild(document.createElement("br"));
 
-  const totalPL_Label = document.createElement("p");
-  const totalPL = document.createElement("p");
+  const totalPL_Table = document.createElement("table");
+  const row1 = document.createElement("tr");
+  const row2 = document.createElement("tr");
+  const row3 = document.createElement("tr");
 
-  livePLDiv.appendChild(totalPL_Label)
-  livePLDiv.appendChild(totalPL)
+  const total_Label = document.createElement("td");
+  const totalPL = document.createElement("td");
+  const allRow =  document.createElement("td");
 
-  totalPL_Label.textContent = "All Positions";
-  totalPL_Label.style.textDecoration = "underline";
-  totalPL_Label.style.fontSize = "2.2rem";
+  livePLDiv.appendChild(totalPL_Table)
+  totalPL_Table.appendChild(row1);
+  totalPL_Table.appendChild(row2);
+  totalPL_Table.appendChild(row3);
+
+  row1.appendChild(total_Label);
+  row2.appendChild(allRow);
+  row3.appendChild(totalPL);
+
+  total_Label.textContent = "All Positions";
+
+
+  // totalPL_Label.style.fontSize = "2.2rem";
 
   const totalPLValue = liveBuyTotalPL + liveSellTotalPL;
 
@@ -1016,9 +1029,16 @@ setTimeout(() => {
     signDisplay: "exceptZero",
   });
 
-  totalPL.textContent = formattedTotalPL[0] === "+" ? `Live Profit: ${formattedTotalPL}` : `Live Loss: ${formattedTotalPL}`;
+  allRow.textContent = formattedTotalPL[0] === "+" ? `Live Total Profit` : `Live Total Loss`;
+  allRow.style.backgroundColor = "black";
+  allRow.style.color = "white";
+  allRow.style.fontSize = "1.9rem";
+
+  totalPL.textContent = formattedTotalPL;
 
   totalPL.style.color = formattedTotalPL[0] === "+" ? "forestgreen" : "crimson";
-  totalPL.style.fontSize = "1.9rem";
+  totalPL.style.fontSize = "2.1rem";
+  totalPL.style.fontWeight = "bold";
+  totalPL.style.fontStyle = "normal";
   
 }, 9000);
