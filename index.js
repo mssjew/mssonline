@@ -698,7 +698,7 @@ function getSellProfit(content) {
     let formattedPL = pAndL.toLocaleString("en-US", {
       style: "currency",
       currency: "BHD",
-      minimumIntegerDigits: 3,
+      minimumIntegerDigits: 5,
       maximumFractionDigits: 0,
       signDisplay: "exceptZero",
     });

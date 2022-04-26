@@ -486,6 +486,7 @@ span.signalSign {
 
 .livePLDiv > table, td, tr {
   border-collapse: collapse;
+  font-family: monospace;
 }
 
 .livePLDiv > p {
@@ -884,7 +885,7 @@ span.signalSign {
 @media (max-width: 370px) {
 
   #livePLSection > table {
-    font-size: 1.7rem;
+    font-size: 1.4rem;
   }
   li {
     font-size: 1.6rem;
