@@ -481,7 +481,7 @@ span.signalSign {
 }
 
 .livePLDiv > table {
-  font-size: 2rem;
+  font-size: 1.9rem;
 }
 
 .livePLDiv > table, td, tr {
@@ -490,13 +490,13 @@ span.signalSign {
 }
 
 .livePLDiv > table > tr:first-child {
-  font-size: 2.4rem;
+  font-size: 2.3rem;
   font-weight: bold;
 }
 
 .livePLDiv > p {
   text-align: center;
-  width: 80%;
+  width: 85%;
 }
 
 #oldUnfixSection {
@@ -773,6 +773,10 @@ span.signalSign {
 }
 
 @media (max-width: 440px) {
+
+  .livePLDiv > table {
+    font-size: 1.8rem;
+  }
   li {
     font-size: 1.9rem;
   }
@@ -890,8 +894,8 @@ span.signalSign {
 
 @media (max-width: 370px) {
 
-  #livePLSection > table {
-    font-size: 1.4rem;
+  .livePLDiv > table {
+    font-size: 1.5rem;
   }
   li {
     font-size: 1.6rem;

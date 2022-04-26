@@ -674,6 +674,9 @@ axios
 //   maximumFractionDigits: 0,
 // });
 
+var liveSellTotalPL = 0;
+var liveBuyTotalPL = 0;
+
 function getSellProfit(content) {
 
   if(currentPrice) {
@@ -694,6 +697,8 @@ function getSellProfit(content) {
   
     let pAndL = (sellPrice - currentPrice) * sellAmount * 3.746 * 0.377;
     let perTT_PL = (sellPrice - currentPrice) * 3.746 * 0.377;
+
+    liveSellTotalPL += pAndL;
   
     let formattedPL = pAndL.toLocaleString("en-US", {
       style: "currency",
@@ -732,6 +737,7 @@ function getBuyProfit(content) {
     } else {
       var listedBuyValue2 = content[0].slice(16, 24);
     }
+
     let buyPrice = parseFloat(listedBuyValue2.replace(",", ""));
   
     if (content[0].length > 25) {
@@ -742,10 +748,12 @@ function getBuyProfit(content) {
   
     let buyAmount = parseFloat(listedBuyAmount);
   
-    let pAndL = (currentPrice - buyPrice) * buyAmount * 3.746 * 0.377;
+    let pAndL2 = (currentPrice - buyPrice) * buyAmount * 3.746 * 0.377;
     let perTT_PL = (currentPrice - buyPrice) * 3.746 * 0.377;
+
+    liveBuyTotalPL += pAndL2; 
   
-    let formattedPL = pAndL.toLocaleString("en-US", {
+    let formattedPL = pAndL2.toLocaleString("en-US", {
       style: "currency",
       currency: "BHD",
       minimumIntegerDigits: 5,
@@ -820,6 +828,8 @@ setTimeout(() => {
         trow.appendChild(td3);
         let data = getSellProfit(element);
 
+  
+
         td1.textContent = idx + 1;
         td2.textContent = data.slice(0, 11);
         td3.textContent = data.slice(11);
@@ -836,6 +846,27 @@ setTimeout(() => {
         // list.appendChild(eachItem);
         // eachItem.textContent = pad(idx + 1) + ". " + data;
       });
+
+      let formattedTotalSellPL = liveSellTotalPL.toLocaleString("en-US", {
+        style: "currency",
+        currency: "BHD",
+        minimumIntegerDigits: 5,
+        maximumFractionDigits: 0,
+        signDisplay: "exceptZero",
+      });
+
+
+      const totalRowLabel = document.createElement("tr");
+      const tdTotal = document.createElement("td");
+
+      plTable.appendChild(totalRowLabel);
+      totalRowLabel.appendChild(tdTotal);
+      tdTotal.colSpan = 3;
+      tdTotal.textContent = formattedTotalSellPL[0] === "+" ? `Total Profit: ${formattedTotalSellPL}` : `Total Loss: ${formattedTotalSellPL}`;
+      tdTotal.style.fontSize = "2rem";
+      
+
+
     })
     .catch((err) => {
       let p = document.createElement("p");
@@ -853,11 +884,11 @@ setTimeout(() => {
     .then((resp) => {
       livePLDiv.appendChild(document.createElement("br"));
       livePLDiv.appendChild(document.createElement("br"));
-      const plTable = document.createElement("table");
-      livePLDiv.appendChild(plTable);
+      const plTable2 = document.createElement("table");
+      livePLDiv.appendChild(plTable2);
 
       const buyHeader = document.createElement("tr");
-      plTable.appendChild(buyHeader);
+      plTable2.appendChild(buyHeader);
       
       const buyLabel = document.createElement("td");
       buyHeader.appendChild(buyLabel);
@@ -869,7 +900,7 @@ setTimeout(() => {
       const th2 = document.createElement("th");
       const th3 = document.createElement("th");
 
-      plTable.appendChild(labelRow);
+      plTable2.appendChild(labelRow);
       labelRow.appendChild(th1);
       labelRow.appendChild(th2);
       labelRow.appendChild(th3);
@@ -893,7 +924,7 @@ setTimeout(() => {
         const td2 = document.createElement("td");
         const td3 = document.createElement("td");
 
-        plTable.appendChild(trow);
+        plTable2.appendChild(trow);
         trow.appendChild(td1);
         trow.appendChild(td2);
         trow.appendChild(td3);
@@ -915,6 +946,24 @@ setTimeout(() => {
         // list.appendChild(eachItem);
         // eachItem.textContent = pad(idx + 1) + ". " + data;
       });
+
+      let formattedTotalBuyPL = liveBuyTotalPL.toLocaleString("en-US", {
+        style: "currency",
+        currency: "BHD",
+        minimumIntegerDigits: 5,
+        maximumFractionDigits: 0,
+        signDisplay: "exceptZero",
+      });
+
+
+      const totalRowLabel = document.createElement("tr");
+      const tdTotal = document.createElement("td");
+
+      plTable2.appendChild(totalRowLabel);
+      totalRowLabel.appendChild(tdTotal);
+      tdTotal.colSpan = 3;
+      tdTotal.textContent = formattedTotalBuyPL[0] === "+" ? `Total Profit: ${formattedTotalBuyPL}` : `Total Loss: ${formattedTotalBuyPL}`;
+      tdTotal.style.fontSize = "2rem";
     })
     .catch((err) => {
       let p = document.createElement("p");
@@ -923,3 +972,41 @@ setTimeout(() => {
       console.error(err);
     });
 }, 7000);
+
+setTimeout(() => {
+  livePLDiv.appendChild(document.createElement("br"));
+  livePLDiv.appendChild(document.createElement("br"));
+  livePLDiv.appendChild(document.createElement("br"));
+
+  const totalPL_Label = document.createElement("p");
+  const totalPL = document.createElement("p");
+  const pOrL = document.createElement("p");
+
+  livePLDiv.appendChild(totalPL_Label)
+  livePLDiv.appendChild(pOrL)
+  livePLDiv.appendChild(totalPL)
+
+  totalPL_Label.textContent = "Total P/L Live";
+  totalPL_Label.style.textDecoration = "underline";
+  totalPL_Label.style.fontSize = "2.3rem";
+
+  const totalPLValue = liveBuyTotalPL + liveSellTotalPL;
+
+  let formattedTotalPL = totalPLValue.toLocaleString("en-US", {
+    style: "currency",
+    currency: "BHD",
+    minimumIntegerDigits: 5,
+    maximumFractionDigits: 0,
+    signDisplay: "exceptZero",
+  });
+
+  pOrL.textContent = formattedTotalPL[0] === "+" ? "In Profit" : "In Loss:";
+
+  totalPL.textContent = formattedTotalPL;
+
+  totalPL.style.color = formattedTotalPL[0] === "+" ? "forestgreen" : "crimson";
+  pOrL.style.color = formattedTotalPL[0] === "+" ? "forestgreen" : "crimson";
+  totalPL.style.fontSize = "2.3rem";
+  pOrL.style.fontSize = "2.3rem";
+  
+}, 8000);
