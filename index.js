@@ -76,23 +76,20 @@ let avgBoughtNumber;
 // }, 2000);
 
 function toggleUnfixed() {
-  unfixedDiv.classList.remove("hider");
-  unfixedDiv.classList.add("physicalUnfixed");
-  livePLDiv.classList.add("hider");
-  oldUnfixDiv.classList.add("hider");
+  livePLDiv.classList.toggle("hider");
+  oldUnfixDiv.classList.toggle("hider");
 }
 
 function togglePL() {
-  livePLDiv.classList.remove("hider");
-  unfixedDiv.classList.remove("physicalUnfixed");
-  unfixedDiv.classList.add("hider");
+  livePLDiv.classList.toggle("hider");
+  oldUnfixDiv.classList.toggle("hider");
+  livePLDiv.classList.add("hider");
 }
 
 function toggleOldUnfix() {
-  oldUnfixDiv.classList.remove("hider");
+  livePLDiv.classList.toggle("hider");
+  oldUnfixDiv.classList.toggle("hider");
   livePLDiv.classList.add("hider");
-  unfixedDiv.classList.remove("physicalUnfixed");
-  unfixedDiv.classList.add("hider");
 }
 
 async function goldPrice() {
@@ -728,7 +725,6 @@ function getSellProfit(content) {
     signDisplay: "exceptZero"
   });
 
-  console.log((formattedPL + formattedPerTT))
   return formattedPL + formattedPerTT;
 
 
@@ -777,6 +773,13 @@ setTimeout(() => {
         td1.textContent = idx+1;
         td2.textContent = data.slice(0,11);
         td3.textContent = data.slice(11);
+
+        if(data[0] === "+") {
+          trow.style.color = "green";
+        }
+        if(data[0] === "-") {
+          trow.style.color = "red";
+        }
 
 
 
