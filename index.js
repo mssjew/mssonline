@@ -726,12 +726,46 @@ function getSellProfit(content) {
 }
 
 function getBuyProfit(content) {
-  if (content[0].length > 25) {
-    var listedBuyValue = content[0].slice(17, 25);
+  if(currentPrice) {
+    if (content[0].length > 25) {
+      var listedBuyValue2 = content[0].slice(17, 25);
+    } else {
+      var listedBuyValue2 = content[0].slice(16, 24);
+    }
+    let buyPrice = parseFloat(listedBuyValue2.replace(",", ""));
+  
+    if (content[0].length > 25) {
+      var listedBuyAmount = content[0].slice(0, 4);
+    } else {
+      var listedBuyAmount = content[0].slice(0, 3);
+    }
+  
+    let buyAmount = parseFloat(listedBuyAmount);
+  
+    let pAndL = (currentPrice - buyPrice) * buyAmount * 3.746 * 0.377;
+    let perTT_PL = (currentPrice - buyPrice) * 3.746 * 0.377;
+  
+    let formattedPL = pAndL.toLocaleString("en-US", {
+      style: "currency",
+      currency: "BHD",
+      minimumIntegerDigits: 5,
+      maximumFractionDigits: 0,
+      signDisplay: "exceptZero",
+    });
+  
+    let formattedPerTT = perTT_PL.toLocaleString("en-US", {
+      style: "currency",
+      currency: "BHD",
+      minimumIntegerDigits: 3,
+      maximumFractionDigits: 3,
+      signDisplay: "exceptZero"
+    });
+  
+    return formattedPL + formattedPerTT;
+
   } else {
-    var listedBuyValue = content[0].slice(16, 24);
+    return "Error.     Refresh page."
   }
-  return parseFloat(listedBuyValue.replace(",", ""));
 }
 
 setTimeout(() => {
@@ -743,15 +777,23 @@ setTimeout(() => {
       const plTable = document.createElement("table");
       livePLDiv.appendChild(plTable);
 
-      const headerRow = document.createElement("tr");
+      const sellHeader = document.createElement("tr");
+      plTable.appendChild(sellHeader);
+      
+      const sellLabel = document.createElement("td");
+      sellHeader.appendChild(sellLabel);
+      sellLabel.textContent = "SELL POSITIONS"
+      sellLabel.colSpan = 3; 
+
+      const labelRow = document.createElement("tr");
       const th1 = document.createElement("th");
       const th2 = document.createElement("th");
       const th3 = document.createElement("th");
 
-      plTable.appendChild(headerRow);
-      headerRow.appendChild(th1);
-      headerRow.appendChild(th2);
-      headerRow.appendChild(th3);
+      plTable.appendChild(labelRow);
+      labelRow.appendChild(th1);
+      labelRow.appendChild(th2);
+      labelRow.appendChild(th3);
       th1.textContent = 'No.';
       th2.textContent = 'Profit/Loss';
       th3.textContent = 'Per TT';
@@ -802,3 +844,82 @@ setTimeout(() => {
       console.error(err);
     });
 }, 6000);
+
+setTimeout(() => {
+  axios
+    .get(
+      `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${buyRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+    )
+    .then((resp) => {
+      livePLDiv.appendChild(document.createElement("br"));
+      livePLDiv.appendChild(document.createElement("br"));
+      const plTable = document.createElement("table");
+      livePLDiv.appendChild(plTable);
+
+      const buyHeader = document.createElement("tr");
+      plTable.appendChild(buyHeader);
+      
+      const buyLabel = document.createElement("td");
+      buyHeader.appendChild(buyLabel);
+      buyLabel.textContent = "BUY POSITIONS"
+      buyLabel.colSpan = 3; 
+
+      const labelRow = document.createElement("tr");
+      const th1 = document.createElement("th");
+      const th2 = document.createElement("th");
+      const th3 = document.createElement("th");
+
+      plTable.appendChild(labelRow);
+      labelRow.appendChild(th1);
+      labelRow.appendChild(th2);
+      labelRow.appendChild(th3);
+      th1.textContent = 'No.';
+      th2.textContent = 'Profit/Loss';
+      th3.textContent = 'Per TT';
+
+      th1.style.backgroundColor = "black";
+      th2.style.backgroundColor = "black";
+      th3.style.backgroundColor = "black";
+
+      th1.style.color = "white";
+      th2.style.color = "white";
+      th3.style.color = "white";
+
+
+
+      resp.data.values.forEach((element, idx) => {
+        const trow = document.createElement("tr");
+        const td1 = document.createElement("td");
+        const td2 = document.createElement("td");
+        const td3 = document.createElement("td");
+
+        plTable.appendChild(trow);
+        trow.appendChild(td1);
+        trow.appendChild(td2);
+        trow.appendChild(td3);
+        let data = getBuyProfit(element);
+
+        td1.textContent = idx + 1;
+        td2.textContent = data.slice(0, 11);
+        td3.textContent = data.slice(11);
+
+        if (data[0] === "+") {
+          trow.style.color = "forestgreen";
+        }
+        if (data[0] === "-") {
+          trow.style.color = "crimson";
+        }
+
+        // if (data[0] === "-") eachItem.style.color = "red";
+        // if (data[0] === "+") eachItem.style.color = "green";
+        // list.appendChild(eachItem);
+        // eachItem.textContent = pad(idx + 1) + ". " + data;
+      });
+    })
+    .catch((err) => {
+      let p = document.createElement("p");
+      livePLDiv.appendChild(p);
+      p.textContent = "Error fetching data, try refreshing.";
+      console.error(err);
+    });
+}, 7000);

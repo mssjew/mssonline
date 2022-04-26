@@ -489,8 +489,14 @@ span.signalSign {
   font-family: monospace;
 }
 
+.livePLDiv > table > tr:first-child {
+  font-size: 2.4rem;
+  font-weight: bold;
+}
+
 .livePLDiv > p {
   text-align: center;
+  width: 80%;
 }
 
 #oldUnfixSection {
