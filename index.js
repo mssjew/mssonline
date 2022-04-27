@@ -1050,5 +1050,7 @@ setTimeout(() => {
   totalPL.style.fontSize = "2.1rem";
   totalPL.style.fontWeight = "bold";
   totalPL.style.fontStyle = "normal";
+
+  console.log("test")
   
 }, 9000);

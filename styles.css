@@ -1104,5 +1104,6 @@ th {
 
   .physicalUnfixed > table th {
     font-size: 1.2rem;
+    text-align: center;
   }
 }
