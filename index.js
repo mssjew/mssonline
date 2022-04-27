@@ -124,15 +124,6 @@ goldPrice()
     console.log("Error failed to get price:", err);
   });
 
-// goldPrice()
-//   .then((price) => {
-    
-//   })
-//   .catch((err) => {
-//     currentPrice = 0;
-//     console.log("Error failed to get price:", err);
-//   });
-
 goldPriceHigh()
   .then((highPrice) => {
     document.getElementById("gPriceH").textContent = `$${highPrice}`;
