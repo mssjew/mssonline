@@ -182,7 +182,7 @@ function listMakerSell(list, content, idx) {
     } else {
       signal.innerHTML = "";
     }
-  }, 3000);
+  }, 4000);
 
   const indexVal = document.createElement("span");
   indexVal.classList.add("index");
@@ -223,7 +223,7 @@ function listMakerBuy(list, content, idx) {
     } else {
       signal.innerHTML = "";
     }
-  }, 3000);
+  }, 4000);
 
   const indexVal = document.createElement("span");
   indexVal.classList.add("index");
