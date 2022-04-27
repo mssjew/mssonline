@@ -20,6 +20,21 @@ const unfixTable = document.getElementById("unfixTable");
 const totalUnfixP = document.getElementById("totalUnfix");
 const averageUnfixTargetP = document.getElementById("averageUnfixTarget");
 
+const unfixedDiv = document.getElementById("unfixedSection");
+const livePLDiv = document.getElementById("livePLSection");
+const oldUnfixDiv = document.getElementById("oldUnfixSection");
+
+let loader = `<div class="container">
+<p>Calculating Profit/Loss</p>   
+ <div class="progress2 progress-moved">
+   <div class="progress-bar2" >
+   </div>                       
+ </div> 
+</div>`;
+
+livePLDiv.innerHTML = loader;
+
+
 const internalPos = "Summary!C3";
 const netPos = "Summary!C5";
 
@@ -45,8 +60,6 @@ const unfixedRange = "UNFIXED!A2:C33";
 const totalUnfixed = "UNFIXED!A36";
 const averageFixingTarget = "UNFIXED!B36";
 
-
-
 let currentPrice;
 
 let totalSoldNumber;
@@ -55,36 +68,29 @@ let totalBoughtNumber;
 let avgSoldNumber;
 let avgBoughtNumber;
 
-// setTimeout(() => {
-  
-// }, 500);
+function toggleUnfixed() {
+  unfixedDiv.style.display = "flex";
+  livePLDiv.style.display = "none";
+  oldUnfixDiv.style.display = "none";
+}
 
+function togglePL() {
+  unfixedDiv.style.display = "none";
+  livePLDiv.style.display = "flex";
+  oldUnfixDiv.style.display = "none";
+}
 
-// setTimeout(() => {
-
-
-  
-//   const soldDifference =  avgSoldNumber - currentPrice;
-
-//   const plValueBHD = (soldDifference * totalSoldNumber * 3.7463)/2.6494990909256;
-
-//   const plValueBHDString = plValueBHD.toFixed(3).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); 
-
-//   console.log(plValueBHDString);
-
-
- 
-  
-//   sellPLCalc.innerHTML = `<h2>Online Sold</h2><p class="livePL">${totalSoldNumber} TT Sold > Avg Rate $${avgSoldNumber.toFixed(2)}</p><br>
-//   <p class="livePL">Live ${plValueBHD>0?"Profit":"Loss"} if Closed Now: </p><br><p>BHD ${plValueBHDString}</p>`
-// }, 2000);
-
-
+function toggleOldUnfix() {
+  unfixedDiv.style.display = "none";
+  livePLDiv.style.display = "none";
+  oldUnfixDiv.style.display = "flex";
+}
 
 async function goldPrice() {
   let resp = await axios.get("https://www.goldapi.io/api/XAU/USD", {
     headers: { "x-access-token": "goldapi-f20pyjatkuagctl5-io" },
   });
+
   return resp.data.price;
 }
 
@@ -108,7 +114,6 @@ function pad(idx) {
   return idx;
 }
 
-
 goldPrice()
   .then((price) => {
     document.getElementById("liveGPrice").textContent = `$${price}`;
@@ -119,11 +124,6 @@ goldPrice()
     console.log("Error failed to get price:", err);
   });
 
-
-
-
-
-
 goldPriceHigh()
   .then((highPrice) => {
     document.getElementById("gPriceH").textContent = `$${highPrice}`;
@@ -132,7 +132,7 @@ goldPriceHigh()
     console.log("Error failed to get high price:", err);
   });
 
-  goldPriceLow()
+goldPriceLow()
   .then((lowPrice) => {
     document.getElementById("gPriceL").textContent = `$${lowPrice}`;
   })
@@ -223,11 +223,10 @@ function listMakerBuy(list, content, idx) {
 }
 
 function unfixedRowMaker(list) {
-
-  const trow = document.createElement("tr"); 
+  const trow = document.createElement("tr");
   const td1 = document.createElement("td");
-  const td2 = document.createElement("td"); 
-  const td3 = document.createElement("td");  
+  const td2 = document.createElement("td");
+  const td3 = document.createElement("td");
 
   unfixTable.appendChild(trow);
   trow.appendChild(td1);
@@ -237,10 +236,57 @@ function unfixedRowMaker(list) {
   td1.textContent = list[0];
   td2.textContent = list[1];
   td3.textContent = list[2];
-
-
 }
 
+function unfixedTotalRow() {
+  const trow = document.createElement("tr");
+  const td = document.createElement("td");
+  const trow2 = document.createElement("tr");
+  const td2 = document.createElement("td");
+  const trow3 = document.createElement("tr");
+  const td3 = document.createElement("td");
+  const trow4 = document.createElement("tr");
+  const td4 = document.createElement("td");
+
+  td.setAttribute("colspan", "3");
+  td2.setAttribute("colspan", "3");
+  td3.setAttribute("colspan", "3");
+  td4.setAttribute("colspan", "3");
+
+  unfixTable.appendChild(trow);
+  unfixTable.appendChild(trow2);
+  unfixTable.appendChild(trow3);
+  unfixTable.appendChild(trow4);
+  trow.appendChild(td);
+  trow2.appendChild(td2);
+  trow3.appendChild(td3);
+  trow4.appendChild(td4);
+
+  td.textContent = "TOTAL PENDING FIXING";
+  td3.textContent = "AVERAGE FIXING TARGET";
+
+  getTotalUnfixed().then((total) => {
+    td2.textContent = total;
+  });
+
+  getUnfixedTarget().then((target) => {
+    td4.textContent = target;
+  });
+
+  td.style.backgroundColor = "black";
+  td.style.color = "white";
+
+  td3.style.backgroundColor = "black";
+  td3.style.color = "white";
+
+  td2.style.color = "crimson";
+  td2.style.fontWeight = "bold";
+  td2.style.fontSize = "2.4rem";
+
+  td4.style.color = "crimson";
+  td4.style.fontWeight = "bold";
+  td4.style.fontSize = "2.4rem";
+}
 
 // UNFIXED RANGE
 // DAILY FIXING SHEET
@@ -252,37 +298,30 @@ axios
     resp.data.values.forEach((row) => {
       unfixedRowMaker(row);
     });
+    unfixedTotalRow();
   })
   .catch((err) => {
     console.error(err);
   });
 
-
-// TOTAL UNFIXED 
+// TOTAL UNFIXED
 // DAILY FIXING SHEET
-axios
-  .get(
+async function getTotalUnfixed() {
+  let resp = await axios.get(
     `https://sheets.googleapis.com/v4/spreadsheets/1On8IDb0uBl6DKtH95yMSU2DkULE-IsDWwwc4L0ODXNs/values/${totalUnfixed}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
-  )
-  .then((resp) => {
-    totalUnfixP.textContent = resp.data.values[0][0];
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+  );
+  return resp.data.values[0][0];
+}
 
 // UNFIXED AVERAGE TARGET
 // DAILY FIXING SHEET
-axios
-  .get(
+
+async function getUnfixedTarget() {
+  let resp = await axios.get(
     `https://sheets.googleapis.com/v4/spreadsheets/1On8IDb0uBl6DKtH95yMSU2DkULE-IsDWwwc4L0ODXNs/values/${averageFixingTarget}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
-  )
-  .then((resp) => {
-    averageUnfixTargetP.textContent = resp.data.values[0][0];
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+  );
+  return resp.data.values[0][0];
+}
 
 // TOTAL SOLD PLAIN TEXT
 axios
@@ -295,7 +334,6 @@ axios
   .catch((err) => {
     console.error(err);
   });
-
 
 // TOTAL BOUGHT PLAIN TEXT
 axios
@@ -332,8 +370,6 @@ axios
   .catch((err) => {
     console.error(err);
   });
-
-
 
 // INTERNAL POSITION
 axios
@@ -415,7 +451,7 @@ axios
       avgPriceSoldTTBars = "Zero Buy Positions";
     } else {
       avgPriceSoldTTBars = resp.data.values[0];
-      avgSellElement.textContent = "AVG SELL: "+resp.data.values[0];
+      avgSellElement.textContent = "AVG SELL: " + resp.data.values[0];
     }
   })
   .catch((err) => {
@@ -631,3 +667,388 @@ axios
   .catch((err) => {
     console.error(err);
   });
+
+// LIVE PROFIT AND LOSS
+
+// var formatter = new Intl.NumberFormat('en-US', {
+//   style: 'currency',
+//   currency: 'BHD',
+//   maximumFractionDigits: 0,
+// });
+
+var liveSellTotalPL = 0;
+var liveBuyTotalPL = 0;
+
+function getSellProfit(content) {
+
+  if(currentPrice) {
+    if (content[0].length > 23) {
+      var listedSellValue = content[0].slice(15, 23);
+    } else {
+      var listedSellValue = content[0].slice(14, 22);
+    }
+    let sellPrice = parseFloat(listedSellValue.replace(",", ""));
+  
+    if (content[0].length > 23) {
+      var listedSellAmount = content[0].slice(0, 4);
+    } else {
+      var listedSellAmount = content[0].slice(0, 3);
+    }
+  
+    let sellAmount = parseFloat(listedSellAmount);
+  
+    let pAndL = (sellPrice - currentPrice) * sellAmount * 3.746 * 0.377;
+    let perTT_PL = (sellPrice - currentPrice) * 3.746 * 0.377;
+
+    liveSellTotalPL += pAndL;
+  
+    let formattedPL = pAndL.toLocaleString("en-US", {
+      style: "currency",
+      currency: "BHD",
+      minimumIntegerDigits: 5,
+      maximumFractionDigits: 0,
+      signDisplay: "exceptZero",
+    });
+  
+    let formattedPerTT = perTT_PL.toLocaleString("en-US", {
+      style: "currency",
+      currency: "BHD",
+      minimumIntegerDigits: 3,
+      maximumFractionDigits: 3,
+      signDisplay: "exceptZero"
+    });
+  
+    return formattedPL + formattedPerTT;
+
+  } else {
+    return "Error.     Refresh page."
+  }
+  
+
+  // if ((formattedPL.length = 11)) {
+  //   return formattedPL + formattedPerTT;
+  // } else {
+  //   return "+" + formattedPL + formattedPerTT;
+  // }
+}
+
+function getBuyProfit(content) {
+  if(currentPrice) {
+    if (content[0].length > 25) {
+      var listedBuyValue2 = content[0].slice(17, 25);
+    } else {
+      var listedBuyValue2 = content[0].slice(16, 24);
+    }
+
+    let buyPrice = parseFloat(listedBuyValue2.replace(",", ""));
+  
+    if (content[0].length > 25) {
+      var listedBuyAmount = content[0].slice(0, 4);
+    } else {
+      var listedBuyAmount = content[0].slice(0, 3);
+    }
+  
+    let buyAmount = parseFloat(listedBuyAmount);
+  
+    let pAndL2 = (currentPrice - buyPrice) * buyAmount * 3.746 * 0.377;
+    let perTT_PL = (currentPrice - buyPrice) * 3.746 * 0.377;
+
+    liveBuyTotalPL += pAndL2; 
+  
+    let formattedPL = pAndL2.toLocaleString("en-US", {
+      style: "currency",
+      currency: "BHD",
+      minimumIntegerDigits: 5,
+      maximumFractionDigits: 0,
+      signDisplay: "exceptZero",
+    });
+  
+    let formattedPerTT = perTT_PL.toLocaleString("en-US", {
+      style: "currency",
+      currency: "BHD",
+      minimumIntegerDigits: 3,
+      maximumFractionDigits: 3,
+      signDisplay: "exceptZero"
+    });
+  
+    return formattedPL + formattedPerTT;
+
+  } else {
+    return "Error.     Refresh page."
+  }
+}
+
+
+
+    
+
+setTimeout(() => {
+  axios
+    .get(
+      `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${sellRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+    )
+    .then((resp) => {
+      livePLDiv.innerHTML = "";
+
+      const livePLHeader = document.createElement("h1");
+      livePLDiv.appendChild(livePLHeader);
+      livePLHeader.innerHTML = "Live P/L for all<br>Open Positions";
+      livePLHeader.classList.add("today");
+      
+
+      const infoP =  document.createElement("p");
+      livePLDiv.appendChild(infoP);
+      infoP.innerHTML = `Position numbers same as above. Calculated on live gold price of $${currentPrice}`
+      infoP.style.lineHeight = 1.2;
+      infoP.style.fontWeight = 100;
+      infoP.style.width = "80%";
+
+
+
+      livePLDiv.appendChild(document.createElement("br"));
+      livePLDiv.appendChild(document.createElement("br"));
+
+      const plTable = document.createElement("table");
+      livePLDiv.appendChild(plTable);
+
+      const sellHeader = document.createElement("tr");
+      plTable.appendChild(sellHeader);
+      
+      const sellLabel = document.createElement("td");
+      sellHeader.appendChild(sellLabel);
+      sellLabel.textContent = "SELL POSITIONS"
+      sellLabel.colSpan = 3; 
+
+      const labelRow = document.createElement("tr");
+      const th1 = document.createElement("th");
+      const th2 = document.createElement("th");
+      const th3 = document.createElement("th");
+
+      plTable.appendChild(labelRow);
+      labelRow.appendChild(th1);
+      labelRow.appendChild(th2);
+      labelRow.appendChild(th3);
+      th1.textContent = 'No.';
+      th2.textContent = 'Profit/Loss';
+      th3.textContent = 'Per TT';
+
+      th1.style.backgroundColor = "black";
+      th2.style.backgroundColor = "black";
+      th3.style.backgroundColor = "black";
+
+      th1.style.color = "white";
+      th2.style.color = "white";
+      th3.style.color = "white";
+
+
+
+      resp.data.values.forEach((element, idx) => {
+        const trow = document.createElement("tr");
+        const td1 = document.createElement("td");
+        const td2 = document.createElement("td");
+        const td3 = document.createElement("td");
+
+        plTable.appendChild(trow);
+        trow.appendChild(td1);
+        trow.appendChild(td2);
+        trow.appendChild(td3);
+        let data = getSellProfit(element);
+
+  
+
+        td1.textContent = idx + 1;
+        td2.textContent = data.slice(0, 11);
+        td3.textContent = data.slice(11);
+
+        if (data[0] === "+") {
+          trow.style.color = "forestgreen";
+        }
+        if (data[0] === "-") {
+          trow.style.color = "crimson";
+        }
+
+        // if (data[0] === "-") eachItem.style.color = "red";
+        // if (data[0] === "+") eachItem.style.color = "green";
+        // list.appendChild(eachItem);
+        // eachItem.textContent = pad(idx + 1) + ". " + data;
+      });
+
+      let formattedTotalSellPL = liveSellTotalPL.toLocaleString("en-US", {
+        style: "currency",
+        currency: "BHD",
+        minimumIntegerDigits: 5,
+        maximumFractionDigits: 0,
+        signDisplay: "exceptZero",
+      });
+
+
+      const totalRowLabel = document.createElement("tr");
+      const tdTotal = document.createElement("td");
+
+      plTable.appendChild(totalRowLabel);
+      totalRowLabel.appendChild(tdTotal);
+      tdTotal.colSpan = 3;
+      tdTotal.textContent = formattedTotalSellPL[0] === "+" ? `Total Profit: ${formattedTotalSellPL}` : `Total Loss: ${formattedTotalSellPL}`;
+      tdTotal.style.fontSize = "1.9rem";
+      
+
+
+    })
+    .catch((err) => {
+      let p = document.createElement("p");
+      livePLDiv.appendChild(p);
+      p.textContent = "Error fetching sell position data. Refresh the page.";
+      console.error(err);
+    });
+}, 7000);
+
+
+
+setTimeout(() => {
+  axios
+    .get(
+      `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${buyRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+    )
+    .then((resp) => {
+      livePLDiv.appendChild(document.createElement("br"));
+      livePLDiv.appendChild(document.createElement("br"));
+      const plTable2 = document.createElement("table");
+      livePLDiv.appendChild(plTable2);
+
+      const buyHeader = document.createElement("tr");
+      plTable2.appendChild(buyHeader);
+      
+      const buyLabel = document.createElement("td");
+      buyHeader.appendChild(buyLabel);
+      buyLabel.textContent = "BUY POSITIONS"
+      buyLabel.colSpan = 3; 
+
+      const labelRow = document.createElement("tr");
+      const th1 = document.createElement("th");
+      const th2 = document.createElement("th");
+      const th3 = document.createElement("th");
+
+      plTable2.appendChild(labelRow);
+      labelRow.appendChild(th1);
+      labelRow.appendChild(th2);
+      labelRow.appendChild(th3);
+      th1.textContent = 'No.';
+      th2.textContent = 'Profit/Loss';
+      th3.textContent = 'Per TT';
+
+      th1.style.backgroundColor = "black";
+      th2.style.backgroundColor = "black";
+      th3.style.backgroundColor = "black";
+
+      th1.style.color = "white";
+      th2.style.color = "white";
+      th3.style.color = "white";
+
+
+
+      resp.data.values.forEach((element, idx) => {
+        const trow = document.createElement("tr");
+        const td1 = document.createElement("td");
+        const td2 = document.createElement("td");
+        const td3 = document.createElement("td");
+
+        plTable2.appendChild(trow);
+        trow.appendChild(td1);
+        trow.appendChild(td2);
+        trow.appendChild(td3);
+        let data = getBuyProfit(element);
+
+        td1.textContent = idx + 1;
+        td2.textContent = data.slice(0, 11);
+        td3.textContent = data.slice(11);
+
+        if (data[0] === "+") {
+          trow.style.color = "forestgreen";
+        }
+        if (data[0] === "-") {
+          trow.style.color = "crimson";
+        }
+
+        // if (data[0] === "-") eachItem.style.color = "red";
+        // if (data[0] === "+") eachItem.style.color = "green";
+        // list.appendChild(eachItem);
+        // eachItem.textContent = pad(idx + 1) + ". " + data;
+      });
+
+      let formattedTotalBuyPL = liveBuyTotalPL.toLocaleString("en-US", {
+        style: "currency",
+        currency: "BHD",
+        minimumIntegerDigits: 5,
+        maximumFractionDigits: 0,
+        signDisplay: "exceptZero",
+      });
+
+
+      const totalRowLabel = document.createElement("tr");
+      const tdTotal = document.createElement("td");
+
+      plTable2.appendChild(totalRowLabel);
+      totalRowLabel.appendChild(tdTotal);
+      tdTotal.colSpan = 3;
+      tdTotal.textContent = formattedTotalBuyPL[0] === "+" ? `Total Profit: ${formattedTotalBuyPL}` : `Total Loss: ${formattedTotalBuyPL}`;
+      tdTotal.style.fontSize = "1.9rem";
+    })
+    .catch((err) => {
+      let p = document.createElement("p");
+      livePLDiv.appendChild(p);
+      p.textContent = "Error fetching buy position data. Refresh the page.";
+      console.error(err);
+    });
+}, 8000);
+
+setTimeout(() => {
+  livePLDiv.appendChild(document.createElement("br"));
+  livePLDiv.appendChild(document.createElement("br"));
+  livePLDiv.appendChild(document.createElement("br"));
+
+  const totalPL_Table = document.createElement("table");
+  const row1 = document.createElement("tr");
+  const row2 = document.createElement("tr");
+  const row3 = document.createElement("tr");
+
+  const total_Label = document.createElement("td");
+  const totalPL = document.createElement("td");
+  const allRow =  document.createElement("td");
+
+  livePLDiv.appendChild(totalPL_Table)
+  totalPL_Table.appendChild(row1);
+  totalPL_Table.appendChild(row2);
+  totalPL_Table.appendChild(row3);
+
+  row1.appendChild(total_Label);
+  row2.appendChild(allRow);
+  row3.appendChild(totalPL);
+
+  total_Label.textContent = "All Positions";
+
+
+  // totalPL_Label.style.fontSize = "2.2rem";
+
+  const totalPLValue = liveBuyTotalPL + liveSellTotalPL;
+
+  let formattedTotalPL = totalPLValue.toLocaleString("en-US", {
+    style: "currency",
+    currency: "BHD",
+    minimumIntegerDigits: 5,
+    maximumFractionDigits: 0,
+    signDisplay: "exceptZero",
+  });
+
+  allRow.textContent = formattedTotalPL[0] === "+" ? `Live Total Profit` : `Live Total Loss`;
+  allRow.style.backgroundColor = "black";
+  allRow.style.color = "white";
+  allRow.style.fontSize = "1.9rem";
+
+  totalPL.textContent = totalPLValue ===  0 ? `Error. Refresh Page.` : formattedTotalPL;
+
+  totalPL.style.color = formattedTotalPL[0] === "+" ? "forestgreen" : "crimson";
+  totalPL.style.fontSize = "2.1rem";
+  totalPL.style.fontWeight = "bold";
+  totalPL.style.fontStyle = "normal";
+  
+}, 9000);

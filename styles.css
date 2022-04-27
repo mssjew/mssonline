@@ -107,6 +107,7 @@ section {
 }
 body {
   line-height: 1;
+  margin-bottom: 10%;
 }
 ol,
 ul {
@@ -162,7 +163,6 @@ h1 {
   font-weight: bold;
   margin: 1%;
 }
-
 
 h2 {
   font-size: 2.5rem;
@@ -243,22 +243,19 @@ p {
   font-weight: bold;
 }
 
-
-#avgBuy, #avgSell {
+#avgBuy,
+#avgSell {
   color: black;
   font-weight: bold;
   font-size: 3rem;
 }
 
 #totalSold {
-
   text-align: center;
   color: chocolate;
   font-size: 3rem;
   text-decoration: underline;
   margin-top: 4%;
-
-
 }
 
 #totalBought {
@@ -268,8 +265,6 @@ p {
   text-decoration: underline;
   margin-top: 4%;
 }
-
-
 
 #sell {
   color: chocolate;
@@ -324,6 +319,8 @@ p {
 h1.today {
   font-size: 3rem;
   text-decoration: underline;
+  text-align: center;
+  line-height: 1.5;
 }
 
 .hide {
@@ -375,11 +372,12 @@ button.kenz {
   display: flex;
   font-size: 1.75rem;
   font-weight: 600;
-  border-radius: 10px;
+  border-radius: 30px;
   border: 10px solid saddlebrown;
   background-color: saddlebrown;
   color: #fff;
   font-family: monospace;
+  vertical-align: middle;
 }
 
 button.qab {
@@ -388,11 +386,12 @@ button.qab {
   display: flex;
   font-size: 1.75rem;
   font-weight: 600;
-  border-radius: 10px;
+  border-radius: 30px;
   border: 10px solid maroon;
   background-color: maroon;
   color: #fff;
   font-family: monospace;
+  vertical-align: middle;
 }
 
 .eventCard {
@@ -430,7 +429,6 @@ button.qab {
   line-height: 1.5;
 }
 
-
 .eventP {
   color: black;
   font-size: 2rem;
@@ -462,13 +460,56 @@ span.signalSign {
 }
 
 .livePL {
-
   text-align: center;
   word-wrap: break-word;
-
 }
 
-.livePLHolder{
+.livePLDiv {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  margin: auto;
+}
+
+.livePLDiv > table {
+  font-size: 1.9rem;
+}
+
+.livePLDiv > table,
+td,
+tr {
+  border-collapse: collapse;
+  font-family: monospace;
+}
+
+.livePLDiv > table > tr:first-child {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.livePLDiv > table > tr:last-child {
+  font-size: 2rem;
+  font-style: italic;
+}
+
+.livePLDiv > p:first-child {
+  text-align: center;
+  width: 90%;
+}
+
+.livePLDiv > p {
+  text-align: center;
+  width: 95%;
+}
+
+#oldUnfixSection {
+  display: none;
+  flex-direction: column;
+}
+
+.livePLHolder {
   display: flex;
   flex-direction: column;
   width: 90%;
@@ -490,25 +531,26 @@ span.signalSign {
   flex-direction: column;
   margin: 3%;
   margin-bottom: 5%;
-
 }
 
 .physicalUnfixed > table {
   font-family: monospace;
   margin: 5%;
-  font-size: 2rem; 
+  font-size: 2rem;
 }
 
 .physicalUnfixed > table tr > td:nth-child(3) {
   font-size: 1.7rem;
 }
 
-.physicalUnfixed > table, td, tr, th {
+.physicalUnfixed > table,
+td,
+tr,
+th {
   border: 1px solid black;
   background-color: #f8f8f8;
   padding: 8px;
   text-align: center;
-  
 }
 
 .physicalUnfixed > table th {
@@ -518,27 +560,137 @@ span.signalSign {
   padding: 10px;
   text-align: center;
   font-size: 2rem;
-  
 }
 
-
-.physicalUnfixed > table tr > td:nth-child(2) {
-  color: crimson;
-  font-weight: bold;
+.hider {
+  display: none;
 }
 
-
-
-p.unfixStats {
-  font-size: 2.1rem;
+.sausage-links {
+  position: relative;
+}
+.sausage-links:before,
+.sausage-links:after {
+  content: "";
+  height: calc(100% - 2em);
+  pointer-events: none;
+  position: absolute;
+  top: 1em;
+  width: 10px;
+  z-index: 2;
+}
+.sausage-links:before {
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, white 100%);
+  right: 0;
+}
+.sausage-links:after {
+  background: linear-gradient(to left, rgba(255, 255, 255, 0) 0%, white 100%);
+  left: 0;
+}
+.sausage-links ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow: auto;
+  padding: 1em 0;
+  -webkit-overflow-scrolling: touch;
+  justify-content: start;
+}
+.sausage-links ul li {
+  padding: 0 8px;
+  white-space: nowrap;
+}
+.sausage-links ul li a,
+.sausage-links ul li a:visited {
+  border: 1px solid black;
+  border-radius: 50px;
+  color: black;
+  display: inline-block;
+  padding: 10px 15px;
+  text-decoration: none;
+}
+.sausage-links ul li a:hover {
+  background: chocolate;
+  border-color: chocolate;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 90, 156, 0.15);
 }
 
-
-#totalUnfix, #averageUnfixTarget {
-  color: crimson;
+.loadingDiv {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-family: monospace;
+}
+.sbl-circ {
+  height: 48px;
+  width: 48px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #5a5a5a;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  border: 5px solid;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: rotate 1s linear infinite;
 }
 
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
+.container {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  text-align: center;
+}
+
+.progress2 {
+  padding: 1px;
+  border-radius: 10px;
+  background: black;
+}
+
+.progress-bar2 {
+  height: 15px;
+  border-radius: 10px;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.05)
+  );
+  transition: 0.4s linear;
+  transition-property: width, background-color;
+}
+
+.progress-moved .progress-bar2 {
+  width: 100%;
+  background-color: chocolate;
+  animation: progressAnimation 8.5s;
+}
+
+@keyframes progressAnimation {
+  0% {
+    width: 1%;
+    background-color: chocolate;
+  }
+  100% {
+    width: 100%;
+    background-color: chocolate;
+  }
+}
 
 @media (max-width: 520px) {
   * {
@@ -574,14 +726,15 @@ p.unfixStats {
     font-size: 2.3rem;
   }
 
-  #avgBuy, #avgSell {
-    font-size: 2.7rem;
-  }
-  
-  #totalSold, #totalBought {
+  #avgBuy,
+  #avgSell {
     font-size: 2.7rem;
   }
 
+  #totalSold,
+  #totalBought {
+    font-size: 2.7rem;
+  }
 
   li {
     font-size: 2.2rem;
@@ -635,7 +788,7 @@ p.unfixStats {
   }
 
   span.signalSign {
-    font-size: .7rem;
+    font-size: 0.7rem;
   }
 
   h1 {
@@ -681,7 +834,6 @@ p.unfixStats {
     font-weight: bold;
   }
 
-
   p {
     font-size: 2rem;
   }
@@ -700,6 +852,9 @@ p.unfixStats {
 }
 
 @media (max-width: 440px) {
+  .livePLDiv > table {
+    font-size: 1.8rem;
+  }
   li {
     font-size: 1.9rem;
   }
@@ -712,27 +867,28 @@ p.unfixStats {
     font-size: 2rem;
   }
 
-  #avgBuy, #avgSell {
+  #avgBuy,
+  #avgSell {
     font-size: 2.5rem;
   }
-  
-  #totalSold, #totalBought {
+
+  #totalSold,
+  #totalBought {
     font-size: 2.5rem;
   }
 
   .physicalUnfixed > table {
     font-family: monospace;
     margin: 5%;
-    font-size: 1.8rem; 
+    font-size: 1.8rem;
   }
-  
+
   .physicalUnfixed > table tr > td:nth-child(3) {
     font-size: 1.5rem;
   }
 
   .physicalUnfixed > table th {
     font-size: 1.8rem;
-    
   }
 }
 
@@ -752,7 +908,6 @@ p.unfixStats {
   h1.today {
     font-size: 2rem;
   }
-
 
   .liveP {
     font-size: 2rem;
@@ -784,14 +939,15 @@ p.unfixStats {
     font-weight: bold;
   }
 
-  #avgBuy, #avgSell {
-    font-size: 2.1rem;
-  }
-  
-  #totalSold, #totalBought {
+  #avgBuy,
+  #avgSell {
     font-size: 2.1rem;
   }
 
+  #totalSold,
+  #totalBought {
+    font-size: 2.1rem;
+  }
 
   p {
     font-size: 1.8rem;
@@ -815,6 +971,9 @@ p.unfixStats {
 }
 
 @media (max-width: 370px) {
+  .livePLDiv > table {
+    font-size: 1.5rem;
+  }
   li {
     font-size: 1.6rem;
   }
@@ -825,9 +984,9 @@ p.unfixStats {
   .physicalUnfixed > table {
     font-family: monospace;
     margin: 5%;
-    font-size: 1.5rem; 
+    font-size: 1.5rem;
   }
-  
+
   .physicalUnfixed > table tr > td:nth-child(3) {
     font-size: 1.2rem;
   }
@@ -838,10 +997,8 @@ p.unfixStats {
 
   .physicalUnfixed > table th {
     font-size: 1.5rem;
-    
   }
 }
-
 
 @media (max-width: 330px) {
   #logo {
@@ -857,15 +1014,18 @@ p.unfixStats {
     font-size: 1.6rem;
   }
 
-  #avgBuy, #avgSell {
-    font-size: 1.7rem;
-  }
-  
-  #totalSold, #totalBought {
+  #avgBuy,
+  #avgSell {
     font-size: 1.7rem;
   }
 
-  button.kenz, button.qab {
+  #totalSold,
+  #totalBought {
+    font-size: 1.7rem;
+  }
+
+  button.kenz,
+  button.qab {
     font-size: 1.3rem;
   }
 
@@ -900,8 +1060,6 @@ p.unfixStats {
     font-weight: bold;
   }
 
- 
-
   p {
     font-size: 1.5rem;
   }
@@ -918,7 +1076,8 @@ p.unfixStats {
     font-size: 1.7rem;
   }
 
-  .eventP, .timeBH {
+  .eventP,
+  .timeBH {
     font-size: 1.5rem;
   }
 
@@ -929,23 +1088,21 @@ p.unfixStats {
   .physicalUnfixed > table {
     font-family: monospace;
     margin: 5%;
-    font-size: 1.2rem; 
-
+    font-size: 1.2rem;
   }
 
   .physicalUnfixed > table tr > td:nth-child(3) {
-    font-size: .9rem;
+    font-size: 0.9rem;
   }
 
-  .physicalUnfixed > table, td, tr, th {
+  .physicalUnfixed > table,
+  td,
+  tr,
+  th {
     padding: 4px;
-    
   }
 
   .physicalUnfixed > table th {
     font-size: 1.2rem;
-    
   }
-
-  
 }

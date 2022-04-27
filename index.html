@@ -57,9 +57,6 @@
 
     </div> -->
 
-    
-
-      
      
     <p class="signalKey">* = New Position Today</p>
     <p class="signalKey">&#128994; = Position in Profit</p>
@@ -136,12 +133,19 @@
 
     <h2 id="dailyProfit"></h2>
 
-
     <hr>
+    <nav class="sausage-links">
+      <ul>
+          <li><a id="firstSausage" onclick="toggleUnfixed()">Pending Physical Fixing</a></li>
+          <li><a onclick="togglePL()">Live Profit and Loss</a></li>
+          <!-- <li><a onclick="toggleOldUnfix()">Old Unfixed</a></li> -->
 
-    <h1 class="today">Physical TT Unfixed</h1>
+      </ul>
+    </nav>
+    
 
-    <div class="physicalUnfixed">
+    <div id="unfixedSection" class="physicalUnfixed">
+      <h1 class="today">Physical TT Unfixed</h1>
 
       <table id="unfixTable">
         <tr>
@@ -150,13 +154,31 @@
           <th> Date </th>
         </tr>
       </table>
+    </div>
+    
+    <div id="livePLSection" class="livePLDiv">
 
-      <p class="unfixStats">Total Pending Fixing:&nbsp;<span id="totalUnfix"></span></p>
-      <p class="unfixStats">Average Fixing Target:&nbsp;<span id="averageUnfixTarget"></span></p>
+     <p style="text-decoration: underline;">Live Profit/Loss</p>
+     <p>Position numbers match<br>to the list above.</p>
+
+    </div> 
+    
+    <div id="oldUnfixSection">
+
+      <h2>OLD TT PENDING</h2>
+
+      <p>Total 500TT</p>
+
+      <ul><li>$1600</li></ul>
+    </div>  
+
+
     
 
-    </div>    
+    
 
+
+ 
 
 
 
