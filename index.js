@@ -57,8 +57,8 @@ const avgSoldPlainText = "Summary!D50";
 const avgBoughtPlainText = "Summary!E50";
 
 const unfixedRange = "UNFIXED!A2:C33";
-const totalUnfixed = "UNFIXED!A36";
-const averageFixingTarget = "UNFIXED!B36";
+const totalUnfixed = "UNFIXED!A35";
+const averageFixingTarget = "UNFIXED!B35";
 
 let currentPrice;
 
@@ -1073,7 +1073,7 @@ setTimeout(() => {
   totalPL.textContent = totalPLValue ===  0 ? `Error. Refresh Page.` : formattedTotalPL;
 
   totalPL.style.color = formattedTotalPL[0] === "+" ? "forestgreen" : "crimson";
-  totalPL.style.fontSize = "2.1rem";
+  totalPL.style.fontSize = "2.5rem";
   totalPL.style.fontWeight = "bold";
   totalPL.style.fontStyle = "normal";
 
