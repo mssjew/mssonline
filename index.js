@@ -1053,7 +1053,7 @@ setTimeout(() => {
 
   totalPL_Table.style.border = "2pt solid black";
 
-  // totalPL_Label.style.fontSize = "2.2rem";
+  total_Label.style.fontSize = "2.1rem";
 
   const totalPLValue = liveBuyTotalPL + liveSellTotalPL;
 
