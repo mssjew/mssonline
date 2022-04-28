@@ -1049,7 +1049,7 @@ setTimeout(() => {
   row2.appendChild(allRow);
   row3.appendChild(totalPL);
 
-  total_Label.textContent = "All Positions";
+  total_Label.textContent = "All Open Positions";
 
   totalPL_Table.style.border = "2pt solid black";
 
@@ -1073,7 +1073,7 @@ setTimeout(() => {
   totalPL.textContent = totalPLValue ===  0 ? `Error. Refresh Page.` : formattedTotalPL;
 
   totalPL.style.color = formattedTotalPL[0] === "+" ? "forestgreen" : "crimson";
-  totalPL.style.fontSize = "2.5rem";
+  totalPL.style.fontSize = "2.3rem";
   totalPL.style.fontWeight = "bold";
   totalPL.style.fontStyle = "normal";
 
