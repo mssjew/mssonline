@@ -798,7 +798,7 @@ setTimeout(() => {
 
       const infoP =  document.createElement("p");
       livePLDiv.appendChild(infoP);
-      infoP.innerHTML = `Position numbers same as above. Calculated on live gold price of $${currentPrice}`
+      infoP.innerHTML = `Calculated on live gold price of $${currentPrice}`
       infoP.style.lineHeight = 1.2;
       infoP.style.fontWeight = 100;
       infoP.style.width = "80%";
