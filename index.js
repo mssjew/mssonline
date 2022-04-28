@@ -1065,7 +1065,7 @@ setTimeout(() => {
     signDisplay: "exceptZero",
   });
 
-  allRow.textContent = formattedTotalPL[0] === "+" ? `Live Total Profit` : `Live Total Loss`;
+  allRow.textContent = formattedTotalPL[0] === "+" ? `Total Profit at $${currentPrice}` : `Total Loss at $${currentPrice}`;
   allRow.style.backgroundColor = "black";
   allRow.style.color = "white";
   allRow.style.fontSize = "2.1rem";
