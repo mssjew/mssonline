@@ -855,7 +855,7 @@ setTimeout(() => {
         const td2 = document.createElement("td");
         const td3 = document.createElement("td");
 
-        trow.style.borderBottom = "2pt solid black";
+        trow.style.borderBottom = "3pt solid black";
 
         plTable.appendChild(trow);
         trow.appendChild(td2);
@@ -894,8 +894,8 @@ setTimeout(() => {
 
       plTable.appendChild(totalRowLabel);
       totalRowLabel.appendChild(tdTotal);
-      totalRowLabel.style.borderTop = "2pt solid black";
-      totalRowLabel.style.borderBottom = "2pt solid black";
+      totalRowLabel.style.borderTop = "3pt solid black";
+      totalRowLabel.style.borderBottom = "3pt solid black";
       tdTotal.colSpan = 3;
       tdTotal.textContent = formattedTotalSellPL[0] === "+" ? `Total Profit: ${formattedTotalSellPL}` : `Total Loss: ${formattedTotalSellPL}`;
       tdTotal.style.fontSize = "2.1rem";
@@ -972,7 +972,7 @@ setTimeout(() => {
         const td2 = document.createElement("td");
         const td3 = document.createElement("td");
 
-        trow.style.borderBottom = "2pt solid black";
+        trow.style.borderBottom = "3pt solid black";
 
 
         plTable2.appendChild(trow);
@@ -1008,8 +1008,8 @@ setTimeout(() => {
       const totalRowLabel = document.createElement("tr");
       const tdTotal = document.createElement("td");
 
-      totalRowLabel.style.borderTop = "2pt solid black";
-      totalRowLabel.style.borderBottom = "2pt solid black";
+      totalRowLabel.style.borderTop = "3pt solid black";
+      totalRowLabel.style.borderBottom = "3pt solid black";
 
       plTable2.appendChild(totalRowLabel);
       totalRowLabel.appendChild(tdTotal);
