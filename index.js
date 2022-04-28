@@ -808,6 +808,7 @@ setTimeout(() => {
       livePLDiv.appendChild(document.createElement("br"));
       livePLDiv.appendChild(document.createElement("br"));
 
+
       const plTable = document.createElement("table");
       livePLDiv.appendChild(plTable);
 
@@ -820,43 +821,49 @@ setTimeout(() => {
       sellLabel.colSpan = 3; 
 
       const labelRow = document.createElement("tr");
-      const th1 = document.createElement("th");
       const th2 = document.createElement("th");
       const th3 = document.createElement("th");
 
       plTable.appendChild(labelRow);
-      labelRow.appendChild(th1);
       labelRow.appendChild(th2);
       labelRow.appendChild(th3);
-      th1.textContent = 'No.';
       th2.textContent = 'Profit/Loss';
       th3.textContent = 'Per TT';
 
-      th1.style.backgroundColor = "black";
       th2.style.backgroundColor = "black";
       th3.style.backgroundColor = "black";
 
-      th1.style.color = "white";
       th2.style.color = "white";
       th3.style.color = "white";
 
 
 
       resp.data.values.forEach((element, idx) => {
+        const preRow = document.createElement("tr");
+        const positionText = document.createElement("td");
+        positionText.colSpan = 2;
+
+        plTable.appendChild(preRow);
+        preRow.appendChild(positionText);
+        positionText.textContent = element[0];
+        // positionText.style.backgroundColor = "#0D3D56";
+        positionText.style.color = "#333333";
+        positionText.style.fontWeight = "bold";
+
+
         const trow = document.createElement("tr");
-        const td1 = document.createElement("td");
         const td2 = document.createElement("td");
         const td3 = document.createElement("td");
 
+        trow.style.borderBottom = "2pt solid black";
+
         plTable.appendChild(trow);
-        trow.appendChild(td1);
         trow.appendChild(td2);
         trow.appendChild(td3);
         let data = getSellProfit(element);
 
   
 
-        td1.textContent = idx + 1;
         td2.textContent = data.slice(0, 11);
         td3.textContent = data.slice(11);
 
@@ -887,9 +894,11 @@ setTimeout(() => {
 
       plTable.appendChild(totalRowLabel);
       totalRowLabel.appendChild(tdTotal);
+      totalRowLabel.style.borderTop = "2pt solid black";
+      totalRowLabel.style.borderBottom = "2pt solid black";
       tdTotal.colSpan = 3;
       tdTotal.textContent = formattedTotalSellPL[0] === "+" ? `Total Profit: ${formattedTotalSellPL}` : `Total Loss: ${formattedTotalSellPL}`;
-      tdTotal.style.fontSize = "1.9rem";
+      tdTotal.style.fontSize = "2.1rem";
       
 
 
@@ -912,6 +921,9 @@ setTimeout(() => {
     .then((resp) => {
       livePLDiv.appendChild(document.createElement("br"));
       livePLDiv.appendChild(document.createElement("br"));
+      livePLDiv.appendChild(document.createElement("br"));
+      livePLDiv.appendChild(document.createElement("br"));
+      
       const plTable2 = document.createElement("table");
       livePLDiv.appendChild(plTable2);
 
@@ -924,41 +936,50 @@ setTimeout(() => {
       buyLabel.colSpan = 3; 
 
       const labelRow = document.createElement("tr");
-      const th1 = document.createElement("th");
       const th2 = document.createElement("th");
       const th3 = document.createElement("th");
 
       plTable2.appendChild(labelRow);
-      labelRow.appendChild(th1);
       labelRow.appendChild(th2);
       labelRow.appendChild(th3);
-      th1.textContent = 'No.';
+
       th2.textContent = 'Profit/Loss';
       th3.textContent = 'Per TT';
 
-      th1.style.backgroundColor = "black";
       th2.style.backgroundColor = "black";
       th3.style.backgroundColor = "black";
 
-      th1.style.color = "white";
       th2.style.color = "white";
       th3.style.color = "white";
 
 
-
       resp.data.values.forEach((element, idx) => {
+        const preRow = document.createElement("tr");
+        const positionText = document.createElement("td");
+        positionText.colSpan = 2;
+
+        plTable2.appendChild(preRow);
+        preRow.appendChild(positionText);
+        positionText.textContent = element[0];
+        // positionText.style.backgroundColor = "#0D3D56";
+        positionText.style.color = "#333333";
+        positionText.style.fontWeight = "bold";
+
+
+
+
         const trow = document.createElement("tr");
-        const td1 = document.createElement("td");
         const td2 = document.createElement("td");
         const td3 = document.createElement("td");
 
+        trow.style.borderBottom = "2pt solid black";
+
+
         plTable2.appendChild(trow);
-        trow.appendChild(td1);
         trow.appendChild(td2);
         trow.appendChild(td3);
         let data = getBuyProfit(element);
 
-        td1.textContent = idx + 1;
         td2.textContent = data.slice(0, 11);
         td3.textContent = data.slice(11);
 
@@ -987,11 +1008,14 @@ setTimeout(() => {
       const totalRowLabel = document.createElement("tr");
       const tdTotal = document.createElement("td");
 
+      totalRowLabel.style.borderTop = "2pt solid black";
+      totalRowLabel.style.borderBottom = "2pt solid black";
+
       plTable2.appendChild(totalRowLabel);
       totalRowLabel.appendChild(tdTotal);
       tdTotal.colSpan = 3;
       tdTotal.textContent = formattedTotalBuyPL[0] === "+" ? `Total Profit: ${formattedTotalBuyPL}` : `Total Loss: ${formattedTotalBuyPL}`;
-      tdTotal.style.fontSize = "1.9rem";
+      tdTotal.style.fontSize = "2.1rem";
     })
     .catch((err) => {
       let p = document.createElement("p");
@@ -1002,6 +1026,7 @@ setTimeout(() => {
 }, 8000);
 
 setTimeout(() => {
+  livePLDiv.appendChild(document.createElement("br"));
   livePLDiv.appendChild(document.createElement("br"));
   livePLDiv.appendChild(document.createElement("br"));
   livePLDiv.appendChild(document.createElement("br"));
@@ -1026,6 +1051,7 @@ setTimeout(() => {
 
   total_Label.textContent = "All Positions";
 
+  totalPL_Table.style.border = "2pt solid black";
 
   // totalPL_Label.style.fontSize = "2.2rem";
 
@@ -1042,7 +1068,7 @@ setTimeout(() => {
   allRow.textContent = formattedTotalPL[0] === "+" ? `Live Total Profit` : `Live Total Loss`;
   allRow.style.backgroundColor = "black";
   allRow.style.color = "white";
-  allRow.style.fontSize = "1.9rem";
+  allRow.style.fontSize = "2.1rem";
 
   totalPL.textContent = totalPLValue ===  0 ? `Error. Refresh Page.` : formattedTotalPL;
 
@@ -1050,5 +1076,8 @@ setTimeout(() => {
   totalPL.style.fontSize = "2.1rem";
   totalPL.style.fontWeight = "bold";
   totalPL.style.fontStyle = "normal";
+
+  console.log("test")
   
-}, 9000);
+}, 9500);
+
