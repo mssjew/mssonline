@@ -380,6 +380,21 @@ button.kenz {
   vertical-align: middle;
 }
 
+button.reset {
+  margin-top: 2%;
+  margin: 1%;
+  padding: 5px;
+  display: flex;
+  font-size: 1.6rem;
+  border-radius: 20px;
+  font-weight: bold;
+  border: 5px solid saddlebrown;
+  background-color: saddlebrown;
+  color: #fff;
+  font-family: monospace;
+  vertical-align: middle;
+}
+
 button.qab {
   margin-top: 2%;
   margin: 1%;
@@ -694,20 +709,24 @@ th {
 
 
 .slidecontainer {
-  width: 80%; /* Width of the outside container */
+  width: 100%; /* Width of the outside container */
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* The slider itself */
 .slider {
   -webkit-appearance: none;  /* Override default CSS styles */
   appearance: none;
-  width: 100%; /* Full-width */
+  width: 80%; /* Full-width */
   height: 25px; /* Specified height */
   background: black; /* Grey background */
   outline: none; /* Remove outline */
   opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
   -webkit-transition: .2s; /* 0.2 seconds transition on hover */
   transition: opacity .2s;
+  
 }
 
 /* Mouse-over effects */
@@ -1039,6 +1058,10 @@ th {
 
   .physicalUnfixed > table th {
     font-size: 1.5rem;
+  }
+
+  p{
+    font-size: 1.6rem;
   }
 }
 

@@ -677,6 +677,36 @@ axios
 
 var liveSellTotalPL = 0;
 var liveBuyTotalPL = 0;
+var sellPositions = [];
+var sellAmounts = [];
+var buyPositions = [];
+var buyAmounts = [];
+
+const customProfit = (price) => {
+  let sellCustomPL = 0;
+  let buyCustomPL = 0;
+  let customProfitAmount = 0;
+
+  for(let i=0; i<sellPositions.length; i++) {
+    sellCustomPL += ((sellPositions[i]-price)*sellAmounts[i]*3.746*.377);
+  }
+
+  for(let i=0; i<buyPositions.length; i++) {
+    buyCustomPL += ((price-buyPositions[i])*buyAmounts[i]*3.746*.377);
+  }
+
+  customProfitAmount = sellCustomPL + buyCustomPL;
+
+  return customProfitAmount.toLocaleString("en-US", {
+    style: "currency",
+    currency: "BHD",
+    minimumIntegerDigits: 5,
+    maximumFractionDigits: 0,
+    signDisplay: "exceptZero",
+  });
+
+
+}
 
 function getSellProfit(content) {
   if (currentPrice) {
@@ -687,6 +717,8 @@ function getSellProfit(content) {
     }
     let sellPrice = parseFloat(listedSellValue.replace(",", ""));
 
+    sellPositions.push(sellPrice);
+
     if (content[0].length > 23) {
       var listedSellAmount = content[0].slice(0, 4);
     } else {
@@ -694,6 +726,12 @@ function getSellProfit(content) {
     }
 
     let sellAmount = parseFloat(listedSellAmount);
+
+    sellAmounts.push(sellAmount);
+
+
+
+
 
     let pAndL = (sellPrice - currentPrice) * sellAmount * 3.746 * 0.377;
     let perTT_PL = (sellPrice - currentPrice) * 3.746 * 0.377;
@@ -738,6 +776,8 @@ function getBuyProfit(content) {
 
     let buyPrice = parseFloat(listedBuyValue2.replace(",", ""));
 
+    buyPositions.push(buyPrice);
+
     if (content[0].length > 25) {
       var listedBuyAmount = content[0].slice(0, 4);
     } else {
@@ -745,6 +785,9 @@ function getBuyProfit(content) {
     }
 
     let buyAmount = parseFloat(listedBuyAmount);
+
+    buyAmounts.push(buyAmount);
+
 
     let pAndL2 = (currentPrice - buyPrice) * buyAmount * 3.746 * 0.377;
     let perTT_PL = (currentPrice - buyPrice) * 3.746 * 0.377;
@@ -1016,6 +1059,7 @@ setTimeout(() => {
   const totalPL = document.createElement("td");
   totalPL.setAttribute("id","allProfitID");
   const allRow = document.createElement("td");
+  allRow.setAttribute("id", "allBoxMiddleCell")
 
   livePLDiv.appendChild(totalPL_Table);
   totalPL_Table.appendChild(row1);
@@ -1060,39 +1104,64 @@ setTimeout(() => {
 
 }, 9500);
 
-// setTimeout(() => {
-//   const sliderDiv = document.createElement("div");
-//   livePLDiv.appendChild(sliderDiv);
-//   livePLDiv.appendChild(document.createElement("br"));
-//   livePLDiv.appendChild(document.createElement("br"));
-//   sliderDiv.classList.add("slidecontainer");
-//   sliderDiv.innerHTML =
-//     '<p id="demo"></p><input type="range" min="-100" max="100" value="50" class="slider" id="myRange">';
+setTimeout(() => {
+  customProfit(currentPrice);
 
-//   var slider = document.getElementById("myRange");
-//   var output = document.getElementById("demo");
-//   let finalProfit = document.getElementById("allProfitID");
+  console.log("sell positions ", sellPositions);
+  console.log("sell amounts", sellAmounts);
+  console.log("buy positions", buyPositions);
+  console.log("buy amounts", buyAmounts);
 
 
-//   output.innerHTML = slider.value; // Display the default slider value
+  const sliderDiv = document.createElement("div");
+  livePLDiv.appendChild(sliderDiv);
+  livePLDiv.appendChild(document.createElement("br"));
+  livePLDiv.appendChild(document.createElement("br"));
+  sliderDiv.classList.add("slidecontainer");
+  sliderDiv.innerHTML =
+    '<br><p id="demo"></p><input type="range" min="1500" max="2200" value="1850" class="slider" id="myRange">';
 
-//   // Update the current slider value (each time you drag the slider handle)
-//   slider.oninput = function () {
-//     let selectedPrice = this.value;
-//     output.innerHTML = `Selected Price = $` + selectedPrice;
+  var slider = document.getElementById("myRange");
+  var output = document.getElementById("demo");
+  let finalProfit = document.getElementById("allProfitID");
+  let allBoxMiddle = document.getElementById("allBoxMiddleCell");
+
+  let resetButton = document.createElement("button");
+  livePLDiv.appendChild(resetButton);
+  resetButton.textContent = "Reset to Live P/L";
+  resetButton.classList.add("reset");
 
 
-//     let updated = selectedPrice*100;
-//     let entry = updated.toLocaleString("en-US", {
-//       style: "currency",
-//       currency: "BHD",
-//       minimumIntegerDigits: 5,
-//       maximumFractionDigits: 0,
-//       signDisplay: "exceptZero",
-//     });
-//     finalProfit.innerHTML = entry;
+  
 
-//     finalProfit.style.color = entry[0] === "+" ? "forestgreen" : "crimson";
+
+  output.innerHTML = "Check Total P/L at any price."; // Display the default slider value
+
+  // Update the current slider value (each time you drag the slider handle)
+  slider.oninput = function () {
+    let selectedPrice = this.value;
+    output.innerHTML = `Selected Price = $` + selectedPrice;
+
+
+    let customPL = customProfit(selectedPrice);
+    finalProfit.innerHTML = customPL;
+
+    finalProfit.style.color = customPL[0] === "+" ? "forestgreen" : "crimson";
+
+    allBoxMiddle.textContent = customPL[0] === "+" ? `Total Profit at $${selectedPrice}` : `Total Loss at $${selectedPrice}` 
     
-//   };
-// }, 10000);
+  };
+
+  resetButton.onclick = function () {
+
+    output.innerHTML = "Check Total P/L at any price.";
+    // document.getElementById("myRange").setAttribute('value', "1850");
+
+    let livePL = customProfit(currentPrice);
+
+    finalProfit.innerHTML = livePL;
+    finalProfit.style.color = livePL[0] === "+" ? "forestgreen" : "crimson";
+    allBoxMiddle.textContent = livePL[0] === "+" ? `Total Profit at $${currentPrice}` : `Total Loss at $${currentPrice}` ;
+
+  };
+}, 10000);
