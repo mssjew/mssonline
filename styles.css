@@ -719,7 +719,7 @@ th {
 .slider {
   -webkit-appearance: none;  /* Override default CSS styles */
   appearance: none;
-  width: 80%; /* Full-width */
+  width: 95%; /* Full-width */
   height: 25px; /* Specified height */
   background: black; /* Grey background */
   outline: none; /* Remove outline */
