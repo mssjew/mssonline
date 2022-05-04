@@ -55,9 +55,9 @@ const totalBoughtPlainText = "Summary!G50";
 const avgSoldPlainText = "Summary!D50";
 const avgBoughtPlainText = "Summary!E50";
 
-const unfixedRange = "UNFIXED!A2:C33";
-const totalUnfixed = "UNFIXED!A35";
-const averageFixingTarget = "UNFIXED!B35";
+const unfixedRange = "UNFIXED!A2:C28";
+const totalUnfixed = "UNFIXED!A31";
+const averageFixingTarget = "UNFIXED!B31";
 
 var currentPrice;
 
@@ -705,6 +705,40 @@ const customProfit = (price) => {
     signDisplay: "exceptZero",
   });
 
+}
+
+const customSellProfit = (price) => {
+  let sellCustomPL = 0;
+
+
+  for(let i=0; i<sellPositions.length; i++) {
+    sellCustomPL += ((sellPositions[i]-price)*sellAmounts[i]*3.746*.377);
+  }
+
+  return sellCustomPL.toLocaleString("en-US", {
+    style: "currency",
+    currency: "BHD",
+    minimumIntegerDigits: 5,
+    maximumFractionDigits: 0,
+    signDisplay: "exceptZero",
+  });
+
+}
+
+const customBuyProfit = (price) => {
+  let buyCustomPL = 0;
+
+  for(let i=0; i<buyPositions.length; i++) {
+    buyCustomPL += ((price-buyPositions[i])*buyAmounts[i]*3.746*.377);
+  }
+
+  return buyCustomPL.toLocaleString("en-US", {
+    style: "currency",
+    currency: "BHD",
+    minimumIntegerDigits: 5,
+    maximumFractionDigits: 0,
+    signDisplay: "exceptZero",
+  });
 
 }
 
@@ -1044,9 +1078,22 @@ setTimeout(() => {
     });
 }, 8000);
 
+
+var customBuy = document.createElement("p");
+var customSell = document.createElement("p");
+
 setTimeout(() => {
   livePLDiv.appendChild(document.createElement("br"));
   livePLDiv.appendChild(document.createElement("br"));
+  livePLDiv.appendChild(document.createElement("br"));
+  livePLDiv.appendChild(document.createElement("br"));
+
+
+  livePLDiv.appendChild(customSell);
+  livePLDiv.appendChild(customBuy);
+  customBuy.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+  customSell.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+
   livePLDiv.appendChild(document.createElement("br"));
   livePLDiv.appendChild(document.createElement("br"));
 
@@ -1069,6 +1116,7 @@ setTimeout(() => {
   row1.appendChild(total_Label);
   row2.appendChild(allRow);
   row3.appendChild(totalPL);
+
 
   total_Label.textContent = "All Open Positions";
 
@@ -1127,24 +1175,33 @@ setTimeout(() => {
   let allBoxMiddle = document.getElementById("allBoxMiddleCell");
 
   let resetButton = document.createElement("button");
-  livePLDiv.appendChild(resetButton);
   resetButton.textContent = "Reset to Live P/L";
   resetButton.classList.add("reset");
 
-
-  
+ 
 
 
   output.innerHTML = "Check Total P/L at any price."; // Display the default slider value
 
   // Update the current slider value (each time you drag the slider handle)
   slider.oninput = function () {
+
+    livePLDiv.appendChild(resetButton);
+
     let selectedPrice = this.value;
     output.innerHTML = `Selected Price = $` + selectedPrice;
 
 
     let customPL = customProfit(selectedPrice);
     finalProfit.innerHTML = customPL;
+
+    let customSellPL = customSellProfit(selectedPrice);
+    customSell.textContent = customSellPL[0] === "+" ? `Sell Profit = ${customSellPL}` : `Sell Loss = ${customSellPL}` 
+    customSell.style.color = customSellPL[0] === "+" ? "forestgreen" : "crimson";
+
+    let customBuyPL = customBuyProfit(selectedPrice);
+    customBuy.textContent = customBuyPL[0] === "+" ? `Buy Profit = ${customBuyPL}` : `Buy Loss = ${customBuyPL}`
+    customBuy.style.color = customBuyPL[0] === "+" ? "forestgreen" : "crimson";
 
     finalProfit.style.color = customPL[0] === "+" ? "forestgreen" : "crimson";
 
@@ -1158,6 +1215,9 @@ setTimeout(() => {
     // document.getElementById("myRange").setAttribute('value', "1850");
 
     let livePL = customProfit(currentPrice);
+
+    customBuy.textContent = "";
+    customSell.textContent = "";
 
     finalProfit.innerHTML = livePL;
     finalProfit.style.color = livePL[0] === "+" ? "forestgreen" : "crimson";
