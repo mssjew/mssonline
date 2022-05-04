@@ -1196,11 +1196,11 @@ setTimeout(() => {
     finalProfit.innerHTML = customPL;
 
     let customSellPL = customSellProfit(selectedPrice);
-    customSell.textContent = customSellPL[0] === "+" ? `Sell Profit = ${customSellPL}` : `Sell Loss = ${customSellPL}` 
+    customSell.textContent = `Sell Positions = ${customSellPL}`;
     customSell.style.color = customSellPL[0] === "+" ? "forestgreen" : "crimson";
 
     let customBuyPL = customBuyProfit(selectedPrice);
-    customBuy.textContent = customBuyPL[0] === "+" ? `Buy Profit = ${customBuyPL}` : `Buy Loss = ${customBuyPL}`
+    customBuy.textContent = `Buy Positions = ${customBuyPL}`;
     customBuy.style.color = customBuyPL[0] === "+" ? "forestgreen" : "crimson";
 
     finalProfit.style.color = customPL[0] === "+" ? "forestgreen" : "crimson";
