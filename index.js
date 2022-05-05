@@ -801,6 +801,10 @@ function getSellProfit(content) {
 }
 
 function getBuyProfit(content) {
+
+  if (content[0] === "#N/A") {
+    return " ---------- -----------";
+  }
   if (currentPrice) {
     if (content[0].length > 25) {
       var listedBuyValue2 = content[0].slice(17, 25);
@@ -1008,6 +1012,7 @@ setTimeout(() => {
       th2.style.color = "white";
       th3.style.color = "white";
 
+
       resp.data.values.forEach((element, idx) => {
         const preRow = document.createElement("tr");
         const positionText = document.createElement("td");
@@ -1015,7 +1020,7 @@ setTimeout(() => {
 
         plTable2.appendChild(preRow);
         preRow.appendChild(positionText);
-        positionText.textContent = element[0];
+        positionText.textContent = element[0] === "#N/A" ? "No Buy Positions" : element[0];
         // positionText.style.backgroundColor = "#0D3D56";
         positionText.style.color = "#333333";
         positionText.style.fontWeight = "bold";
@@ -1155,12 +1160,6 @@ setTimeout(() => {
 setTimeout(() => {
   customProfit(currentPrice);
 
-  console.log("sell positions ", sellPositions);
-  console.log("sell amounts", sellAmounts);
-  console.log("buy positions", buyPositions);
-  console.log("buy amounts", buyAmounts);
-
-
   const sliderDiv = document.createElement("div");
   livePLDiv.appendChild(sliderDiv);
   livePLDiv.appendChild(document.createElement("br"));
@@ -1200,9 +1199,15 @@ setTimeout(() => {
     customSell.style.color = customSellPL[0] === "+" ? "forestgreen" : "crimson";
 
     let customBuyPL = customBuyProfit(selectedPrice);
+    
     customBuy.textContent = `Buy Positions = ${customBuyPL}`;
-    customBuy.style.color = customBuyPL[0] === "+" ? "forestgreen" : "crimson";
 
+    if(customBuyPL[0] === "B") {
+      customBuy.style.color = "gray";
+    } else {
+      customBuy.style.color = customBuyPL[0] === "+" ? "forestgreen" : "crimson";
+    }
+  
     finalProfit.style.color = customPL[0] === "+" ? "forestgreen" : "crimson";
 
     allBoxMiddle.textContent = customPL[0] === "+" ? `Total Profit at $${selectedPrice}` : `Total Loss at $${selectedPrice}` 

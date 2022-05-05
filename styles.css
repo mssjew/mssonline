@@ -752,7 +752,6 @@ th {
 }
 
 
-
 @media (max-width: 520px) {
   * {
     box-sizing: border-box;
@@ -950,6 +949,10 @@ th {
 
   .physicalUnfixed > table th {
     font-size: 1.8rem;
+  }
+
+  p{
+    font-size: 1.7rem;
   }
 }
 
