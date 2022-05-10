@@ -56,8 +56,8 @@ const avgSoldPlainText = "Summary!D50";
 const avgBoughtPlainText = "Summary!E50";
 
 const unfixedRange = "UNFIXED!A2:C28";
-const totalUnfixed = "UNFIXED!A31";
-const averageFixingTarget = "UNFIXED!B31";
+const totalUnfixed = "UNFIXED!A30";
+const averageFixingTarget = "UNFIXED!B30";
 
 var currentPrice;
 
