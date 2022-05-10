@@ -55,7 +55,7 @@ const totalBoughtPlainText = "Summary!G50";
 const avgSoldPlainText = "Summary!D50";
 const avgBoughtPlainText = "Summary!E50";
 
-const unfixedRange = "UNFIXED!A2:C28";
+const unfixedRange = "UNFIXED!A2:C27";
 const totalUnfixed = "UNFIXED!A30";
 const averageFixingTarget = "UNFIXED!B30";
 
