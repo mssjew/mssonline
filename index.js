@@ -1,3 +1,9 @@
+const ONLINE_SHEET_KEY = '1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo';
+const DAILY_FIXING_SHEET_KEY = '1On8IDb0uBl6DKtH95yMSU2DkULE-IsDWwwc4L0ODXNs';
+
+
+
+
 const internalSpan = document.getElementById("internal");
 const netSpan = document.getElementById("net");
 
@@ -291,7 +297,7 @@ function unfixedTotalRow() {
 // DAILY FIXING SHEET
 axios
   .get(
-    `https://sheets.googleapis.com/v4/spreadsheets/1On8IDb0uBl6DKtH95yMSU2DkULE-IsDWwwc4L0ODXNs/values/${unfixedRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+    `https://sheets.googleapis.com/v4/spreadsheets/${DAILY_FIXING_SHEET_KEY}/values/${unfixedRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
     resp.data.values.forEach((row) => {
@@ -307,7 +313,7 @@ axios
 // DAILY FIXING SHEET
 async function getTotalUnfixed() {
   let resp = await axios.get(
-    `https://sheets.googleapis.com/v4/spreadsheets/1On8IDb0uBl6DKtH95yMSU2DkULE-IsDWwwc4L0ODXNs/values/${totalUnfixed}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+    `https://sheets.googleapis.com/v4/spreadsheets/${DAILY_FIXING_SHEET_KEY}/values/${totalUnfixed}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   );
   return resp.data.values[0][0];
 }
@@ -317,7 +323,7 @@ async function getTotalUnfixed() {
 
 async function getUnfixedTarget() {
   let resp = await axios.get(
-    `https://sheets.googleapis.com/v4/spreadsheets/1On8IDb0uBl6DKtH95yMSU2DkULE-IsDWwwc4L0ODXNs/values/${averageFixingTarget}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+    `https://sheets.googleapis.com/v4/spreadsheets/${DAILY_FIXING_SHEET_KEY}/values/${averageFixingTarget}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   );
   return resp.data.values[0][0];
 }
@@ -325,7 +331,7 @@ async function getUnfixedTarget() {
 // TOTAL SOLD PLAIN TEXT
 axios
   .get(
-    `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${totalSoldPlainText}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+    `https://sheets.googleapis.com/v4/spreadsheets/${ONLINE_SHEET_KEY}/values/${totalSoldPlainText}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
     totalSoldNumber = parseFloat(resp.data.values[0][0]);
@@ -337,7 +343,7 @@ axios
 // TOTAL BOUGHT PLAIN TEXT
 axios
   .get(
-    `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${totalBoughtPlainText}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+    `https://sheets.googleapis.com/v4/spreadsheets/${ONLINE_SHEET_KEY}/values/${totalBoughtPlainText}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
     totalBoughtNumber = parseFloat(resp.data.values[0][0]);
@@ -349,7 +355,7 @@ axios
 // AVG SOLD PLAIN TEXT
 axios
   .get(
-    `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${avgSoldPlainText}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+    `https://sheets.googleapis.com/v4/spreadsheets/${ONLINE_SHEET_KEY}/values/${avgSoldPlainText}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
     avgSoldNumber = parseFloat(resp.data.values[0][0]);
@@ -361,7 +367,7 @@ axios
 // AVG BOUGHT PLAIN TEXT
 axios
   .get(
-    `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${avgBoughtPlainText}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+    `https://sheets.googleapis.com/v4/spreadsheets/${ONLINE_SHEET_KEY}/values/${avgBoughtPlainText}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
     avgBoughtNumber = parseFloat(resp.data.values[0][0]);
@@ -373,7 +379,7 @@ axios
 // INTERNAL POSITION
 axios
   .get(
-    `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${internalPos}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+    `https://sheets.googleapis.com/v4/spreadsheets/${ONLINE_SHEET_KEY}/values/${internalPos}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
     internalSpan.textContent = resp.data.values[0];
@@ -385,7 +391,7 @@ axios
 // NET POSITION
 axios
   .get(
-    `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${netPos}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+    `https://sheets.googleapis.com/v4/spreadsheets/${ONLINE_SHEET_KEY}/values/${netPos}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
     netSpan.textContent = resp.data.values[0];
@@ -399,7 +405,7 @@ axios
 // // SELL POSITION COUNT
 // axios
 //   .get(
-//     `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${sellRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+//     `https://sheets.googleapis.com/v4/spreadsheets/${ONLINE_SHEET_KEY}/values/${sellRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
 //   )
 //   .then((resp) => {
 //     if (resp.data.values[0][0] === "#N/A") {
@@ -415,7 +421,7 @@ axios
 // TOTAL SOLD TT
 axios
   .get(
-    `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${totalSold}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+    `https://sheets.googleapis.com/v4/spreadsheets/${ONLINE_SHEET_KEY}/values/${totalSold}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
     totalSoldTTBars = resp.data.values[0];
@@ -428,7 +434,7 @@ axios
 // SELL LIST
 axios
   .get(
-    `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${sellRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+    `https://sheets.googleapis.com/v4/spreadsheets/${ONLINE_SHEET_KEY}/values/${sellRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
     resp.data.values.forEach((element, idx) => {
@@ -442,7 +448,7 @@ axios
 // AVG SOLD PRICE
 axios
   .get(
-    `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${avgSell}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+    `https://sheets.googleapis.com/v4/spreadsheets/${ONLINE_SHEET_KEY}/values/${avgSell}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
     if (resp.data.values[0][0] === "#DIV/0!") {
@@ -466,7 +472,7 @@ axios
 // BUY POSITION COUNT
 // axios
 //   .get(
-//     `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${buyRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+//     `https://sheets.googleapis.com/v4/spreadsheets/${ONLINE_SHEET_KEY}/values/${buyRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
 //   )
 //   .then((resp) => {
 //     console.log(resp.data.values);
@@ -483,7 +489,7 @@ axios
 // TOTAL BOUGHT TT
 axios
   .get(
-    `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${totalBought}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+    `https://sheets.googleapis.com/v4/spreadsheets/${ONLINE_SHEET_KEY}/values/${totalBought}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
     totalBoughtElement.textContent = resp.data.values[0];
@@ -495,7 +501,7 @@ axios
 // BUY LIST
 axios
   .get(
-    `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${buyRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+    `https://sheets.googleapis.com/v4/spreadsheets/${ONLINE_SHEET_KEY}/values/${buyRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
     resp.data.values.forEach((element, idx) => {
@@ -509,7 +515,7 @@ axios
 // AVG BUY PRICE
 axios
   .get(
-    `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${avgBuy}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+    `https://sheets.googleapis.com/v4/spreadsheets/${ONLINE_SHEET_KEY}/values/${avgBuy}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
     if (resp.data.values[0][0] === "#DIV/0!") {
@@ -624,7 +630,7 @@ const amtToday = "Summary!B65:F85";
 // Today Closing
 axios
   .get(
-    `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${amtToday}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+    `https://sheets.googleapis.com/v4/spreadsheets/${ONLINE_SHEET_KEY}/values/${amtToday}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
     if (resp.data.values[0][0] === "#N/A") {
@@ -648,7 +654,7 @@ const totalDailyHTML = document.getElementById("dailyProfit");
 // Total Daily Profit
 axios
   .get(
-    `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${totalDailyP}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+    `https://sheets.googleapis.com/v4/spreadsheets/${ONLINE_SHEET_KEY}/values/${totalDailyP}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
     const profitTot = getNum(resp.data.values[0][0]);
@@ -743,6 +749,10 @@ const customBuyProfit = (price) => {
 }
 
 function getSellProfit(content) {
+
+  if (content[0] === "#N/A") {
+    return " ---------- -----------";
+  }
   if (currentPrice) {
     if (content[0].length > 23) {
       var listedSellValue = content[0].slice(15, 23);
@@ -857,7 +867,7 @@ function getBuyProfit(content) {
 setTimeout(() => {
   axios
     .get(
-      `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${sellRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+      `https://sheets.googleapis.com/v4/spreadsheets/${ONLINE_SHEET_KEY}/values/${sellRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
     )
     .then((resp) => {
       livePLDiv.innerHTML = "";
@@ -911,7 +921,7 @@ setTimeout(() => {
 
         plTable.appendChild(preRow);
         preRow.appendChild(positionText);
-        positionText.textContent = element[0];
+        positionText.textContent = element[0] === "#N/A" ? "No Sell Positions" : element[0];
         // positionText.style.backgroundColor = "#0D3D56";
         positionText.style.color = "#333333";
         positionText.style.fontWeight = "bold";
@@ -976,7 +986,7 @@ setTimeout(() => {
 setTimeout(() => {
   axios
     .get(
-      `https://sheets.googleapis.com/v4/spreadsheets/1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo/values/${buyRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+      `https://sheets.googleapis.com/v4/spreadsheets/${ONLINE_SHEET_KEY}/values/${buyRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
     )
     .then((resp) => {
       livePLDiv.appendChild(document.createElement("br"));
@@ -1196,7 +1206,11 @@ setTimeout(() => {
 
     let customSellPL = customSellProfit(selectedPrice);
     customSell.textContent = `Sell Positions = ${customSellPL}`;
-    customSell.style.color = customSellPL[0] === "+" ? "forestgreen" : "crimson";
+    if(customSellPL[0] === "B") {
+      customSell.style.color = "gray";
+    } else {
+      customSell.style.color = customSellPL[0] === "+" ? "forestgreen" : "crimson";
+    }
 
     let customBuyPL = customBuyProfit(selectedPrice);
     
