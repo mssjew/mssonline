@@ -1,93 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>MSS Online Report</title>
-    <link type="text/css" rel="stylesheet" href="normalize.css"/>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>    
-
-
+    <link type="text/css" rel="stylesheet" href="normalize.css" />
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-
     <div id="logo"></div>
 
     <div class="btnHolder">
       <div>
         <a href="https://k139378.netlify.app/">
-        <button class="kenz">Kenz&nbsp;Report</button>
+          <button class="kenz">Kenz&nbsp;Report</button>
         </a>
       </div>
 
       <div>
         <a href="https://qabpos.netlify.app/">
-        <button class="qab"> <span>Sajeev&nbsp;Report</span> </button>
+          <button class="qab"><span>Sajeev&nbsp;Report</span></button>
         </a>
       </div>
     </div>
-    
 
-    
+    <h1>MSS Online Position</h1>
 
-   
-      <h1>MSS Online Position</h1>
+    <!-- <h2 class="price">Live Price: $<span id="price"></span></h2> -->
 
-      <!-- <h2 class="price">Live Price: $<span id="price"></span></h2> -->
+    <h2>Internal: &nbsp; <span id="internal"></span></h2>
 
-      <h2>Internal: &nbsp; <span id="internal"></span></h2>
+    <h2>Net: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span id="net"></span></h2>
+    <br /><br />
+    <h2 class="liveP">Live Price:&nbsp;<span id="liveGPrice"></span></h2>
+    <br />
+    <h2 class="dataP">High Today:&nbsp;<span id="gPriceH"></span></h2>
+    <h2 class="dataP">&nbsp;Low Today:&nbsp;<span id="gPriceL"></span></h2>
+    <br />
+    <!-- <hr> -->
 
-      <h2>Net: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span id="net"></span></h2>
-      <br><br>
-      <h2 class="liveP">Live Price:&nbsp;<span id="liveGPrice"></span></h2>
-      <br>
-      <h2 class="dataP">High Today:&nbsp;<span id="gPriceH"></span></h2>
-      <h2 class="dataP">&nbsp;Low Today:&nbsp;<span id="gPriceL"></span></h2>
-      <br>
-      <!-- <hr> -->
+    <!-- <h2 style="font-weight: bold;">Price Movement Expected:</h2> -->
 
-      <!-- <h2 style="font-weight: bold;">Price Movement Expected:</h2> -->
-      
-      <!-- <div class="eventHider">
+    <!-- <div class="eventHider">
 	   
 
     </div> -->
 
-     
     <p class="signalKey">* = New Position Today</p>
     <p class="signalKey">&#128994; = Position in Profit</p>
     <p class="signalKey">&#128308; = Position in Loss&nbsp;&nbsp;</p>
-    <hr>
-    
-    
-      <!-- SELL DATA -->
+    <hr />
 
-    
+    <!-- SELL DATA -->
 
-      <h3 id="totalSold"></h3>
-      <p id="avgSell"></p>
-      
-      
-      <ul id="sell"></ul>
-      
-    
-      
+    <h3 id="totalSold"></h3>
+    <p id="avgSell"></p>
 
-      
-      <hr>
-      
-      
+    <ul id="sell"></ul>
 
-      <!-- BUY DATA -->
-      <h3 id="totalBought"></h3>
-      <p id="avgBuy"></p>
-     
+    <hr />
 
-      <ul id="buy"></ul>
+    <!-- BUY DATA -->
+    <h3 id="totalBought"></h3>
+    <p id="avgBuy"></p>
 
-      <!-- <hr>
+    <ul id="buy"></ul>
+
+    <!-- <hr>
       <h1 class="today">Live Profit/Loss</h1>
 
       <div class="livePLHolder">
@@ -96,15 +76,11 @@
 
       </div> -->
 
-      <hr>
-      <h1 class="today">Positions Closed Today</h1>
-      <br>
+    <hr />
+    <h1 class="today">Positions Closed Today</h1>
+    <br />
 
-      <div id="todaySec">
-
-     
-    
-
+    <div id="todaySec">
       <!-- <div class="card">
           <div class="row1">
             Amount:
@@ -123,61 +99,54 @@
           </div>
           
       </div> -->
-
     </div>
 
-    <br>
-    <br>
+    <br />
+    <br />
 
     <h2 id="dailyProfit"></h2>
 
-    <hr>
+    <hr />
     <nav class="sausage-links">
       <ul>
-          <li><a id="firstSausage" onclick="toggleUnfixed()">Pending Physical Fixing</a></li>
-          <li><a onclick="togglePL()">Live Profit and Loss</a></li>
-          <!-- <li><a onclick="toggleOldUnfix()">Old Unfixed</a></li> -->
-
+        <li>
+          <a id="firstSausage" onclick="toggleUnfixed()"
+            >Pending Physical Fixing</a
+          >
+        </li>
+        <li><a onclick="togglePL()">Live Profit and Loss</a></li>
+        <!-- <li><a onclick="toggleOldUnfix()">Old Unfixed</a></li> -->
       </ul>
     </nav>
-    
 
     <div id="unfixedSection" class="physicalUnfixed">
       <h1 class="today">Physical TT Unfixed</h1>
 
       <table id="unfixTable">
         <tr>
-          <th> Amount </th>
-          <th> Target </th>
-          <th> Date </th>
+          <th>Amount</th>
+          <th>Target</th>
+          <th>Date</th>
         </tr>
       </table>
     </div>
-    
+
     <div id="livePLSection" class="livePLDiv">
+      <p style="text-decoration: underline">Live Profit/Loss</p>
+      <p>Position numbers match<br />to the list above.</p>
+    </div>
 
-     <p style="text-decoration: underline;">Live Profit/Loss</p>
-     <p>Position numbers match<br>to the list above.</p>
-
-    </div> 
-    
     <div id="oldUnfixSection">
-
       <h2>OLD TT PENDING</h2>
 
       <p>Total 500TT</p>
 
-      <ul><li>$1600</li></ul>
-    </div>  
+      <ul>
+        <li>$1600</li>
+      </ul>
+    </div>
 
-
-    
-    
-
-
-
-     
-
-	<script src="index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="index.js"></script>
   </body>
 </html>
