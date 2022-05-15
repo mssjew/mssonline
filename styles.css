@@ -200,9 +200,7 @@ p.signalKey {
 }
 
 hr {
-  border: 2px dashed black;
-  margin-right: 3%;
-  margin-left: 3%;
+  border: 2px solid black;
   margin-top: 5%;
   margin-bottom: 5%;
 }
@@ -317,7 +315,7 @@ p {
 }
 
 h1.today {
-  font-size: 3rem;
+  font-size: 3.5rem;
   text-decoration: underline;
   text-align: center;
   line-height: 1.5;
@@ -569,7 +567,7 @@ th {
 }
 
 .physicalUnfixed > table th {
-  background-color: black;
+  background-color: rgb(44, 44, 44);
   border: 1px solid black;
   color: white;
   padding: 10px;
@@ -752,6 +750,51 @@ th {
 }
 
 
+.monthlyPerformance {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.monthlyStatsTable {
+  font-size: 1.5rem;
+  vertical-align: middle;
+  
+}
+
+/* table.monthlyStatsTable > tbody > tr > td:last-child  {
+  font-weight: bold;
+} */
+
+table.monthlyStatsTable > tbody > tr:first-child {
+  font-size: 2.2rem;
+  color: chocolate;
+  background-color: black;
+  font-weight: bold;
+}
+
+table.monthlyStatsTable > tbody > tr > td:first-child {
+  color: chocolate;
+}
+
+table.monthlyStatsTable > tbody > tr:last-child > td:first-child {
+  color: chocolate;
+  font-size: 1.8rem;
+}
+
+table.monthlyStatsTable > tbody > tr > td:nth-child(2) {
+  font-size: 1.8rem;
+}
+
+table.monthlyStatsTable > tbody > tr:last-child > td {
+  font-weight: bold;
+}
+
+
+
+
 @media (max-width: 520px) {
   * {
     box-sizing: border-box;
@@ -857,7 +900,7 @@ th {
   }
 
   h1.today {
-    font-size: 2.3rem;
+    font-size: 2.5rem;
   }
 
   h2 {
@@ -970,7 +1013,7 @@ th {
   }
 
   h1.today {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
 
   .liveP {
@@ -1103,7 +1146,7 @@ th {
   }
 
   h1.today {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
   }
 
   h2 {

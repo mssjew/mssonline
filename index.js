@@ -1,8 +1,6 @@
-const ONLINE_SHEET_KEY = '1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo';
-const DAILY_FIXING_SHEET_KEY = '1On8IDb0uBl6DKtH95yMSU2DkULE-IsDWwwc4L0ODXNs';
-
-
-
+const ONLINE_SHEET_KEY = "1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo";
+const DAILY_FIXING_SHEET_KEY =
+  "1On8IDb0uBl6DKtH95yMSU2DkULE-IsDWwwc4L0ODXNs";
 
 const internalSpan = document.getElementById("internal");
 const netSpan = document.getElementById("net");
@@ -29,6 +27,18 @@ const averageUnfixTargetP = document.getElementById("averageUnfixTarget");
 const unfixedDiv = document.getElementById("unfixedSection");
 const livePLDiv = document.getElementById("livePLSection");
 const oldUnfixDiv = document.getElementById("oldUnfixSection");
+
+
+const thisMonth = document.getElementById("currMonth");
+const totalTrades = document.getElementById("totalTrades");
+const profitTrades = document.getElementById("profitTrades");
+const lossTrades = document.getElementById("lossTrades");
+const tradingLoss = document.getElementById("tradingLoss");
+const tradingProfit = document.getElementById("tradingProfit");
+const grossProfit = document.getElementById("grossProfit");
+
+
+
 
 let loader = `<div class="container">
 <p>Calculating Profit/Loss</p>   
@@ -64,6 +74,8 @@ const avgBoughtPlainText = "Summary!E50";
 const unfixedRange = "UNFIXED!A2:C27";
 const totalUnfixed = "UNFIXED!A30";
 const averageFixingTarget = "UNFIXED!B30";
+
+const monthlyStats = "Summary!C91:103";
 
 var currentPrice;
 
@@ -278,10 +290,10 @@ function unfixedTotalRow() {
     td4.textContent = target;
   });
 
-  td.style.backgroundColor = "black";
+  td.style.backgroundColor = "rgb(44, 44, 44)";
   td.style.color = "white";
 
-  td3.style.backgroundColor = "black";
+  td3.style.backgroundColor = "rgb(44, 44, 44)";
   td3.style.color = "white";
 
   td2.style.color = "crimson";
@@ -673,13 +685,58 @@ axios
     console.error(err);
   });
 
-// LIVE PROFIT AND LOSS
 
-// var formatter = new Intl.NumberFormat('en-US', {
-//   style: 'currency',
-//   currency: 'BHD',
-//   maximumFractionDigits: 0,
-// });
+
+// MONTHLY PERFORMANCE
+
+axios
+  .get(
+    `https://sheets.googleapis.com/v4/spreadsheets/${ONLINE_SHEET_KEY}/values/${monthlyStats}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+  )
+  .then((resp) => {
+    const monthlyProfitData = resp.data.values[0][0];
+    const totalTradesData = resp.data.values[10][0];
+    const profitTradesData = resp.data.values[2][0];
+    const lossTradesData = resp.data.values[4][0];
+    const tradingProfitData = resp.data.values[6][0];
+    const tradingLossData = resp.data.values[8][0];
+    const currentMonthData = resp.data.values[12][0];
+
+    thisMonth.textContent = currentMonthData;
+    totalTrades.textContent = totalTradesData;
+  
+    profitTrades.textContent = profitTradesData;
+    profitTrades.style.color = "forestgreen"; 
+
+    lossTrades.textContent = lossTradesData;
+    lossTrades.style.color = "crimson"; 
+
+    tradingLoss.textContent = tradingLossData;
+    tradingLoss.style.color = "crimson"; 
+
+    tradingProfit.textContent = tradingProfitData;
+    tradingProfit.style.color = "forestgreen"; 
+
+    grossProfit.textContent = monthlyProfitData;
+    grossProfit.style.color = monthlyProfitData[0]==="B"? "forestgreen" : "crimson"; 
+
+
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
+
+
+
+
+
+
+// MONTHLY PERFORMANCE END
+
+
+  
+
 
 var liveSellTotalPL = 0;
 var liveBuyTotalPL = 0;
@@ -693,12 +750,12 @@ const customProfit = (price) => {
   let buyCustomPL = 0;
   let customProfitAmount = 0;
 
-  for(let i=0; i<sellPositions.length; i++) {
-    sellCustomPL += ((sellPositions[i]-price)*sellAmounts[i]*3.746*.377);
+  for (let i = 0; i < sellPositions.length; i++) {
+    sellCustomPL += (sellPositions[i] - price) * sellAmounts[i] * 3.746 * 0.377;
   }
 
-  for(let i=0; i<buyPositions.length; i++) {
-    buyCustomPL += ((price-buyPositions[i])*buyAmounts[i]*3.746*.377);
+  for (let i = 0; i < buyPositions.length; i++) {
+    buyCustomPL += (price - buyPositions[i]) * buyAmounts[i] * 3.746 * 0.377;
   }
 
   customProfitAmount = sellCustomPL + buyCustomPL;
@@ -710,15 +767,13 @@ const customProfit = (price) => {
     maximumFractionDigits: 0,
     signDisplay: "exceptZero",
   });
-
-}
+};
 
 const customSellProfit = (price) => {
   let sellCustomPL = 0;
 
-
-  for(let i=0; i<sellPositions.length; i++) {
-    sellCustomPL += ((sellPositions[i]-price)*sellAmounts[i]*3.746*.377);
+  for (let i = 0; i < sellPositions.length; i++) {
+    sellCustomPL += (sellPositions[i] - price) * sellAmounts[i] * 3.746 * 0.377;
   }
 
   return sellCustomPL.toLocaleString("en-US", {
@@ -728,14 +783,13 @@ const customSellProfit = (price) => {
     maximumFractionDigits: 0,
     signDisplay: "exceptZero",
   });
-
-}
+};
 
 const customBuyProfit = (price) => {
   let buyCustomPL = 0;
 
-  for(let i=0; i<buyPositions.length; i++) {
-    buyCustomPL += ((price-buyPositions[i])*buyAmounts[i]*3.746*.377);
+  for (let i = 0; i < buyPositions.length; i++) {
+    buyCustomPL += (price - buyPositions[i]) * buyAmounts[i] * 3.746 * 0.377;
   }
 
   return buyCustomPL.toLocaleString("en-US", {
@@ -745,11 +799,9 @@ const customBuyProfit = (price) => {
     maximumFractionDigits: 0,
     signDisplay: "exceptZero",
   });
-
-}
+};
 
 function getSellProfit(content) {
-
   if (content[0] === "#N/A") {
     return " ---------- -----------";
   }
@@ -772,10 +824,6 @@ function getSellProfit(content) {
     let sellAmount = parseFloat(listedSellAmount);
 
     sellAmounts.push(sellAmount);
-
-
-
-
 
     let pAndL = (sellPrice - currentPrice) * sellAmount * 3.746 * 0.377;
     let perTT_PL = (sellPrice - currentPrice) * 3.746 * 0.377;
@@ -811,7 +859,6 @@ function getSellProfit(content) {
 }
 
 function getBuyProfit(content) {
-
   if (content[0] === "#N/A") {
     return " ---------- -----------";
   }
@@ -835,7 +882,6 @@ function getBuyProfit(content) {
     let buyAmount = parseFloat(listedBuyAmount);
 
     buyAmounts.push(buyAmount);
-
 
     let pAndL2 = (currentPrice - buyPrice) * buyAmount * 3.746 * 0.377;
     let perTT_PL = (currentPrice - buyPrice) * 3.746 * 0.377;
@@ -921,7 +967,8 @@ setTimeout(() => {
 
         plTable.appendChild(preRow);
         preRow.appendChild(positionText);
-        positionText.textContent = element[0] === "#N/A" ? "No Sell Positions" : element[0];
+        positionText.textContent =
+          element[0] === "#N/A" ? "No Sell Positions" : element[0];
         // positionText.style.backgroundColor = "#0D3D56";
         positionText.style.color = "#333333";
         positionText.style.fontWeight = "bold";
@@ -1022,7 +1069,6 @@ setTimeout(() => {
       th2.style.color = "white";
       th3.style.color = "white";
 
-
       resp.data.values.forEach((element, idx) => {
         const preRow = document.createElement("tr");
         const positionText = document.createElement("td");
@@ -1030,7 +1076,8 @@ setTimeout(() => {
 
         plTable2.appendChild(preRow);
         preRow.appendChild(positionText);
-        positionText.textContent = element[0] === "#N/A" ? "No Buy Positions" : element[0];
+        positionText.textContent =
+          element[0] === "#N/A" ? "No Buy Positions" : element[0];
         // positionText.style.backgroundColor = "#0D3D56";
         positionText.style.color = "#333333";
         positionText.style.fontWeight = "bold";
@@ -1093,7 +1140,6 @@ setTimeout(() => {
     });
 }, 8000);
 
-
 var customBuy = document.createElement("p");
 var customSell = document.createElement("p");
 
@@ -1103,11 +1149,12 @@ setTimeout(() => {
   livePLDiv.appendChild(document.createElement("br"));
   livePLDiv.appendChild(document.createElement("br"));
 
-
   livePLDiv.appendChild(customSell);
   livePLDiv.appendChild(customBuy);
-  customBuy.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-  customSell.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+  customBuy.innerHTML =
+    "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+  customSell.innerHTML =
+    "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 
   livePLDiv.appendChild(document.createElement("br"));
   livePLDiv.appendChild(document.createElement("br"));
@@ -1119,9 +1166,9 @@ setTimeout(() => {
 
   const total_Label = document.createElement("td");
   const totalPL = document.createElement("td");
-  totalPL.setAttribute("id","allProfitID");
+  totalPL.setAttribute("id", "allProfitID");
   const allRow = document.createElement("td");
-  allRow.setAttribute("id", "allBoxMiddleCell")
+  allRow.setAttribute("id", "allBoxMiddleCell");
 
   livePLDiv.appendChild(totalPL_Table);
   totalPL_Table.appendChild(row1);
@@ -1131,7 +1178,6 @@ setTimeout(() => {
   row1.appendChild(total_Label);
   row2.appendChild(allRow);
   row3.appendChild(totalPL);
-
 
   total_Label.textContent = "All Open Positions";
 
@@ -1164,7 +1210,6 @@ setTimeout(() => {
   totalPL.style.fontSize = "2.3rem";
   totalPL.style.fontWeight = "bold";
   totalPL.style.fontStyle = "normal";
-
 }, 9500);
 
 setTimeout(() => {
@@ -1187,49 +1232,47 @@ setTimeout(() => {
   resetButton.textContent = "Reset to Live P/L";
   resetButton.classList.add("reset");
 
- 
-
-
   output.innerHTML = "Check Total P/L at any price."; // Display the default slider value
 
   // Update the current slider value (each time you drag the slider handle)
   slider.oninput = function () {
-
     livePLDiv.appendChild(resetButton);
 
     let selectedPrice = this.value;
     output.innerHTML = `Selected Price = $` + selectedPrice;
-
 
     let customPL = customProfit(selectedPrice);
     finalProfit.innerHTML = customPL;
 
     let customSellPL = customSellProfit(selectedPrice);
     customSell.textContent = `Sell Positions = ${customSellPL}`;
-    if(customSellPL[0] === "B") {
+    if (customSellPL[0] === "B") {
       customSell.style.color = "gray";
     } else {
-      customSell.style.color = customSellPL[0] === "+" ? "forestgreen" : "crimson";
+      customSell.style.color =
+        customSellPL[0] === "+" ? "forestgreen" : "crimson";
     }
 
     let customBuyPL = customBuyProfit(selectedPrice);
-    
+
     customBuy.textContent = `Buy Positions = ${customBuyPL}`;
 
-    if(customBuyPL[0] === "B") {
+    if (customBuyPL[0] === "B") {
       customBuy.style.color = "gray";
     } else {
-      customBuy.style.color = customBuyPL[0] === "+" ? "forestgreen" : "crimson";
+      customBuy.style.color =
+        customBuyPL[0] === "+" ? "forestgreen" : "crimson";
     }
-  
+
     finalProfit.style.color = customPL[0] === "+" ? "forestgreen" : "crimson";
 
-    allBoxMiddle.textContent = customPL[0] === "+" ? `Total Profit at $${selectedPrice}` : `Total Loss at $${selectedPrice}` 
-    
+    allBoxMiddle.textContent =
+      customPL[0] === "+"
+        ? `Total Profit at $${selectedPrice}`
+        : `Total Loss at $${selectedPrice}`;
   };
 
   resetButton.onclick = function () {
-
     output.innerHTML = "Check Total P/L at any price.";
     // document.getElementById("myRange").setAttribute('value', "1850");
 
@@ -1240,7 +1283,9 @@ setTimeout(() => {
 
     finalProfit.innerHTML = livePL;
     finalProfit.style.color = livePL[0] === "+" ? "forestgreen" : "crimson";
-    allBoxMiddle.textContent = livePL[0] === "+" ? `Total Profit at $${currentPrice}` : `Total Loss at $${currentPrice}` ;
-
+    allBoxMiddle.textContent =
+      livePL[0] === "+"
+        ? `Total Profit at $${currentPrice}`
+        : `Total Loss at $${currentPrice}`;
   };
 }, 10000);
