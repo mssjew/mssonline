@@ -330,11 +330,10 @@ h1.today {
 }
 
 h3.numIdx {
-  width: 30px;
+  width: 50px;
   line-height: 30px;
-  border-radius: 50%;
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 2rem;
   border: 2px solid #666;
   margin: 0;
   padding: 0;
@@ -391,6 +390,31 @@ button.reset {
   color: #fff;
   font-family: monospace;
   vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+button.yesterday {
+  margin-top: 2%;
+  margin: 1%;
+  padding: 8px;
+  display: flex;
+  font-size: 1.6rem;
+  border-radius: 20px;
+  font-weight: bold;
+  border: 5px solid saddlebrown;
+  background-color: saddlebrown;
+  color: #fff;
+  font-family: monospace;
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 button.qab {
@@ -869,9 +893,13 @@ table.monthlyStatsTable > tbody > tr:last-child > td {
     font-size: 2.6rem;
   }
 
-  .row1 .row2 .row3 .row4 .row5 .row6 {
+  .row0, .row1 .row2 .row3 .row4 .row5 .row6 {
     display: flex;
     justify-content: space-around;
+  }
+
+  .row0 {
+    text-decoration: underline;
   }
 
   span.signalSign {
