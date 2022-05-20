@@ -54,8 +54,7 @@ axios
       monthlyList.appendChild(noneP);
       noneP.textContent = "None";
     } else {
-
-      resp.data.values.sort(function(a, b){return a - b}).reverse().forEach(function (e, idx) {
+      resp.data.values.sort(function(a, b){return Date.parse(a[0]) - Date.parse(b[0])}).forEach(function (e, idx) {
         monthlyList.appendChild(cardMaker(e, idx));
       });
     }
