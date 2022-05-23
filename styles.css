@@ -646,6 +646,7 @@ th {
 .sausage-links ul li {
   padding: 0 8px;
   white-space: nowrap;
+  border-bottom: 1px solid white;
 }
 .sausage-links ul li a,
 .sausage-links ul li a:visited {
