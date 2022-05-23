@@ -1,8 +1,11 @@
 const ONLINE_SHEET_KEY = "1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo";
 
 const month = "Summary!C103";
+const monthlyProfit = "Summary!C91";
 
 const thisMonth = document.getElementById("currentMonth");
+const monthlyProfitHTML = document.getElementById("monthlyProfit");
+
 
 function getNum(arr) {
   const profit = arr.split("");
@@ -117,6 +120,28 @@ function cardMaker(e, idx) {
 
   return divHolder;
 }
+
+
+axios
+  .get(
+    `https://sheets.googleapis.com/v4/spreadsheets/${ONLINE_SHEET_KEY}/values/${monthlyProfit}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+  )
+  .then((resp) => {
+    const profitTot = getNum(resp.data.values[0][0]);
+
+    if (isNaN(profitTot)) {
+      monthlyProfitHTML.classList.add("hide");
+    } else if (profitTot > 0) {
+      monthlyProfitHTML.textContent = "Monthly Profit: BD " + profitTot.toFixed(0);
+      monthlyProfitHTML.classList.add("rowProfit");
+    } else {
+      monthlyProfitHTML.textContent = "Monthly Loss: BD " + profitTot.toFixed(0);
+      monthlyProfitHTML.classList.add("rowLoss");
+    }
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
 // const totalTrades = document.getElementById("totalTrades");
 // const profitTrades = document.getElementById("profitTrades");

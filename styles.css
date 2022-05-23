@@ -502,7 +502,7 @@ span.signalSign {
   font-size: 2.5rem;
 }
 
-#dailyProfit {
+.dailyProfitStyle {
   font-size: 2.5rem;
 }
 
@@ -985,7 +985,7 @@ table.monthlyStatsTable > tbody > tr:last-child > td {
     font-size: 1.7rem;
   }
 
-  #dailyProfit {
+  .dailyProfitStyle {
     font-size: 2.5rem;
   }
 
@@ -1116,7 +1116,7 @@ table.monthlyStatsTable > tbody > tr:last-child > td {
     font-size: 1.5rem;
   }
 
-  #dailyProfit {
+  .dailyProfitStyle{
     font-size: 2rem;
   }
 
@@ -1248,7 +1248,7 @@ table.monthlyStatsTable > tbody > tr:last-child > td {
     font-size: 1.5rem;
   }
 
-  #dailyProfit {
+  .dailyProfitStyle {
     font-size: 1.6rem;
   }
 
