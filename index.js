@@ -62,6 +62,11 @@ const totalBought = "Summary!C10";
 const sellRange = "Summary!B11:B48";
 const buyRange = "Summary!C11:C48";
 
+const sellRangeDates = "Summary!A11:B48";
+const buyRangeDates = "Summary!C11:D48";
+
+
+
 const avgSell = "Summary!B50";
 const avgBuy = "Summary!C50";
 
@@ -131,6 +136,19 @@ function pad(idx) {
   return idx;
 }
 
+function parseDate(str) {
+  let monthNames =["Jan","Feb","Mar","Apr",
+                      "May","Jun","Jul","Aug",
+                      "Sep", "Oct","Nov","Dec"];
+
+  var ymd = str.split('-');
+  return new Date('20'+ymd[2], monthNames.indexOf(ymd[1]), ymd[0]);
+
+}
+
+function dateDiff(first, second) {
+  return Math.round((second-first)/(1000*60*60*24));
+}
 goldPrice()
   .then((price) => {
     document.getElementById("liveGPrice").textContent = `$${price}`;
@@ -159,21 +177,29 @@ goldPriceLow()
 
 // LIST MAKER FUNCTION
 function listMakerSell(list, content, idx) {
-  if (content[0].length > 23) {
-    var listedSellValue = content[0].slice(15, 23);
+  if (content[1].length > 23) {
+    var listedSellValue = content[1].slice(15, 23);
   } else {
-    var listedSellValue = content[0].slice(14, 22);
+    var listedSellValue = content[1].slice(14, 22);
   }
   const sellPrice = parseFloat(listedSellValue.replace(",", ""));
 
   const listItem = document.createElement("li");
-  list.appendChild(listItem);
+  const positionDate = document.createElement("p");
 
-  if (content[0].length <= 23) {
-    listItem.textContent = "\xa0" + content;
+  positionDate.classList.add("posDate")
+
+  list.appendChild(positionDate);
+  list.appendChild(listItem);
+ 
+
+  if (content[1].length <= 23) {
+    listItem.textContent = "\xa0" + content[1];
   } else {
-    listItem.textContent = content;
+    listItem.textContent = content[1];
   }
+
+  positionDate.textContent = '\xa0\xa0\xa0\xa0' + content[0] + '\xa0\xa0\xa0' + dateDiff(parseDate(content[0]), new Date) + " days";
 
   const signal = document.createElement("span");
   signal.classList.add("signalSign");
@@ -208,12 +234,21 @@ function listMakerBuy(list, content, idx) {
   const buyPrice = parseFloat(listedBuyValue.replace(",", ""));
 
   const listItem = document.createElement("li");
+  const positionDate = document.createElement("p");
+
+  positionDate.classList.add("posDate")
+
+
+  list.appendChild(positionDate);
   list.appendChild(listItem);
 
+  positionDate.textContent = '\xa0\xa0\xa0\xa0' + content[1] + '\xa0\xa0\xa0' + dateDiff(parseDate(content[1]), new Date) + " days";
+
+
   if (content[0].length <= 25) {
-    listItem.textContent = "\xa0" + content;
+    listItem.textContent = "\xa0" + content[0];
   } else {
-    listItem.textContent = content;
+    listItem.textContent = content[0];
   }
 
   const signal = document.createElement("span");
@@ -446,9 +481,10 @@ axios
 // SELL LIST
 axios
   .get(
-    `https://sheets.googleapis.com/v4/spreadsheets/${ONLINE_SHEET_KEY}/values/${sellRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+    `https://sheets.googleapis.com/v4/spreadsheets/${ONLINE_SHEET_KEY}/values/${sellRangeDates}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
+    console.log(resp.data.values);
     resp.data.values.forEach((element, idx) => {
       listMakerSell(sellList, element, idx);
     });
@@ -513,7 +549,7 @@ axios
 // BUY LIST
 axios
   .get(
-    `https://sheets.googleapis.com/v4/spreadsheets/${ONLINE_SHEET_KEY}/values/${buyRange}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+    `https://sheets.googleapis.com/v4/spreadsheets/${ONLINE_SHEET_KEY}/values/${buyRangeDates}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
     resp.data.values.forEach((element, idx) => {
