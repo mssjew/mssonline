@@ -199,10 +199,12 @@ function listMakerSell(list, content, idx) {
     listItem.textContent = content[1];
   }
 
+  const days = dateDiff(parseDate(content[0]), new Date);
+
   if (content[0] === "#N/A") {
     positionDate.textContent = ""
   } else {
-    positionDate.textContent = '\xa0\xa0\xa0\xa0' + content[0] + '\xa0\xa0\xa0' + dateDiff(parseDate(content[0]), new Date) + " days";
+    positionDate.textContent = days == 0 ? '\xa0\xa0\xa0\xa0' + content[0] + '\xa0\xa0\xa0' + "Today" : '\xa0\xa0\xa0\xa0' + content[0] + '\xa0\xa0\xa0' + days + " days";
   }
   const signal = document.createElement("span");
   signal.classList.add("signalSign");
@@ -241,14 +243,15 @@ function listMakerBuy(list, content, idx) {
 
   positionDate.classList.add("posDate")
 
-
   list.appendChild(positionDate);
   list.appendChild(listItem);
+
+  const days = dateDiff(parseDate(content[1]), new Date);
 
   if (content[1] === "#N/A") {
     positionDate.textContent = ""
   } else {
-    positionDate.textContent = '\xa0\xa0\xa0\xa0' + content[1] + '\xa0\xa0\xa0' + dateDiff(parseDate(content[1]), new Date) + " days";
+    positionDate.textContent = days == 0 ? '\xa0\xa0\xa0\xa0' + content[1] + '\xa0\xa0\xa0' + "Today" : '\xa0\xa0\xa0\xa0' + content[1] + '\xa0\xa0\xa0' + days + " days";
   }
 
   if (content[0].length <= 25) {
