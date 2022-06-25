@@ -79,6 +79,7 @@ const avgBoughtPlainText = "Summary!E50";
 const unfixedRange = "UNFIXED!A2:C27";
 const totalUnfixed = "UNFIXED!A30";
 const averageFixingTarget = "UNFIXED!B30";
+const averageFixingWithoutOld = "UNFIXED!A32:B32";
 
 const monthlyStats = "Summary!C91:103";
 
@@ -202,7 +203,7 @@ function listMakerSell(list, content, idx) {
   const days = dateDiff(parseDate(content[0]), new Date);
 
   if (content[0] === "#N/A") {
-    positionDate.textContent = ""
+    positionDate.textContent = "";
   } else {
     positionDate.textContent = days == 0 ? '\xa0\xa0\xa0\xa0' + content[0] + '\xa0\xa0\xa0' + "Today" : '\xa0\xa0\xa0\xa0' + content[0] + '\xa0\xa0\xa0' + days + " days";
   }
@@ -308,23 +309,36 @@ function unfixedTotalRow() {
   const td3 = document.createElement("td");
   const trow4 = document.createElement("tr");
   const td4 = document.createElement("td");
+  const trow5 = document.createElement("tr");
+  const td5 = document.createElement("td");
+  const trow6 = document.createElement("tr");
+  const td6 = document.createElement("td");
 
   td.setAttribute("colspan", "3");
   td2.setAttribute("colspan", "3");
   td3.setAttribute("colspan", "3");
   td4.setAttribute("colspan", "3");
+  td5.setAttribute("colspan", "3");
+  td6.setAttribute("colspan", "3");
+
 
   unfixTable.appendChild(trow);
   unfixTable.appendChild(trow2);
   unfixTable.appendChild(trow3);
   unfixTable.appendChild(trow4);
+  unfixTable.appendChild(trow5);
+  unfixTable.appendChild(trow6);
   trow.appendChild(td);
   trow2.appendChild(td2);
   trow3.appendChild(td3);
   trow4.appendChild(td4);
+  trow5.appendChild(td5);
+  trow6.appendChild(td6);
 
   td.textContent = "TOTAL PENDING FIXING";
   td3.textContent = "AVERAGE FIXING TARGET";
+  td5.textContent = "WITHOUT OLD POSITIONS";
+
 
   getTotalUnfixed().then((total) => {
     td2.textContent = total;
@@ -332,6 +346,10 @@ function unfixedTotalRow() {
 
   getUnfixedTarget().then((target) => {
     td4.textContent = target;
+  });
+
+  getUnfixedTargetWithoutOld().then((target) => {
+    td6.textContent = `${target[0][0]} with avg. ${target[0][1]}`;
   });
 
   td.style.backgroundColor = "rgb(44, 44, 44)";
@@ -347,6 +365,16 @@ function unfixedTotalRow() {
   td4.style.color = "crimson";
   td4.style.fontWeight = "bold";
   td4.style.fontSize = "2.4rem";
+
+  td5.style.backgroundColor = "rgb(44, 44, 44)";
+  td5.style.color = "white";
+
+
+  td6.style.color = "crimson";
+  td6.style.fontWeight = "bold";
+  td6.style.fontSize = "2rem";
+
+
 }
 
 // UNFIXED RANGE
@@ -382,6 +410,13 @@ async function getUnfixedTarget() {
     `https://sheets.googleapis.com/v4/spreadsheets/${DAILY_FIXING_SHEET_KEY}/values/${averageFixingTarget}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   );
   return resp.data.values[0][0];
+}
+
+async function getUnfixedTargetWithoutOld() {
+  let resp = await axios.get(
+    `https://sheets.googleapis.com/v4/spreadsheets/${DAILY_FIXING_SHEET_KEY}/values/${averageFixingWithoutOld}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+  );
+  return resp.data.values;
 }
 
 // TOTAL SOLD PLAIN TEXT
@@ -493,7 +528,6 @@ axios
     `https://sheets.googleapis.com/v4/spreadsheets/${ONLINE_SHEET_KEY}/values/${sellRangeDates}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
   )
   .then((resp) => {
-    console.log(resp.data.values);
     resp.data.values.forEach((element, idx) => {
       listMakerSell(sellList, element, idx);
     });
