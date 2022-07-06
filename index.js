@@ -1102,7 +1102,7 @@ setTimeout(() => {
       p.textContent = "Error fetching sell position data. Refresh the page.";
       console.error(err);
     });
-}, 7000);
+}, 8500);
 
 setTimeout(() => {
   axios
@@ -1212,7 +1212,7 @@ setTimeout(() => {
       p.textContent = "Error fetching buy position data. Refresh the page.";
       console.error(err);
     });
-}, 8000);
+}, 9500);
 
 var customBuy = document.createElement("p");
 var customSell = document.createElement("p");
@@ -1362,4 +1362,4 @@ setTimeout(() => {
         ? `Total Profit at $${currentPrice}`
         : `Total Loss at $${currentPrice}`;
   };
-}, 10000);
+}, 11500);
