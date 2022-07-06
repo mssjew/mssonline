@@ -1284,7 +1284,7 @@ setTimeout(() => {
   totalPL.style.fontSize = "2.3rem";
   totalPL.style.fontWeight = "bold";
   totalPL.style.fontStyle = "normal";
-}, 9500);
+}, 10500);
 
 setTimeout(() => {
   customProfit(currentPrice);
