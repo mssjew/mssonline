@@ -1350,5 +1350,5 @@ setTimeout(() => {
         ? `Total Profit at $${currentPrice}`
         : `Total Loss at $${currentPrice}`;
   };
-}, 2500);
+}, 3000);
 
