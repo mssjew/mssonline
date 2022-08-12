@@ -199,7 +199,8 @@ function listMakerSell(list, content, idx) {
     } else {
       signal.innerHTML = "";
     }
-  }, 1000);
+  }, 750);
+
 
   const indexVal = document.createElement("span");
   indexVal.classList.add("index");
@@ -253,7 +254,8 @@ function listMakerBuy(list, content, idx) {
     } else {
       signal.innerHTML = "";
     }
-  }, 1000);
+  }, 750);
+
 
   const indexVal = document.createElement("span");
   indexVal.classList.add("index");
@@ -1081,6 +1083,7 @@ setTimeout(() => {
     });
 }, 1000);
 
+
 setTimeout(() => {
   axios
     .get(
@@ -1190,6 +1193,8 @@ setTimeout(() => {
       console.error(err);
     });
 }, 1500);
+
+
 
 var customBuy = document.createElement("p");
 var customSell = document.createElement("p");
@@ -1340,3 +1345,4 @@ setTimeout(() => {
         : `Total Loss at $${currentPrice}`;
   };
 }, 2500);
+
