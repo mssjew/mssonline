@@ -141,7 +141,7 @@ function parseDate(str) {
 }
 
 function dateDiff(first, second) {
-  return Math.round((second-first)/(1000*60*60*24));
+  return Math.floor((second-first)/(1000*60*60*24));
 }
 goldPrice2()
   .then((price) => {
@@ -181,8 +181,10 @@ function listMakerSell(list, content, idx) {
 
   if (content[0] === "#N/A") {
     positionDate.textContent = "";
+  } else if (days==0) {
+    positionDate.textContent = '\xa0\xa0\xa0\xa0' + content[0] + '\xa0\xa0\xa0' + "TODAY";
   } else {
-    positionDate.textContent = days == 0 ? '\xa0\xa0\xa0\xa0' + content[0] + '\xa0\xa0\xa0' + "Today" : '\xa0\xa0\xa0\xa0' + content[0] + '\xa0\xa0\xa0' + days + " days";
+    positionDate.textContent = days == 1 ? '\xa0\xa0\xa0\xa0' + content[0] + '\xa0\xa0\xa0' + "YESTERDAY" : '\xa0\xa0\xa0\xa0' + content[0] + '\xa0\xa0\xa0' + days + " days";
   }
   const signal = document.createElement("span");
   signal.classList.add("signalSign");
@@ -227,10 +229,14 @@ function listMakerBuy(list, content, idx) {
 
   const days = dateDiff(parseDate(content[1]), new Date);
 
+
+
   if (content[1] === "#N/A") {
-    positionDate.textContent = ""
+    positionDate.textContent = "";
+  } else if (days==0) {
+    positionDate.textContent = '\xa0\xa0\xa0\xa0' + content[1] + '\xa0\xa0\xa0' + "TODAY";
   } else {
-    positionDate.textContent = days == 0 ? '\xa0\xa0\xa0\xa0' + content[1] + '\xa0\xa0\xa0' + "Today" : '\xa0\xa0\xa0\xa0' + content[1] + '\xa0\xa0\xa0' + days + " days";
+    positionDate.textContent = days == 1 ? '\xa0\xa0\xa0\xa0' + content[1] + '\xa0\xa0\xa0' + "YESTERDAY" : '\xa0\xa0\xa0\xa0' + content[1] + '\xa0\xa0\xa0' + days + " days";
   }
 
   if (content[0].length <= 25) {
