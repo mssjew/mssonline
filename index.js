@@ -113,7 +113,6 @@ async function goldPrice() {
   let resp = await axios.get("https://www.goldapi.io/api/XAU/USD", {
     headers: { "x-access-token": "goldapi-f20pyjatkuagctl5-io" },
   });
-
   return resp.data.price;
 }
 
