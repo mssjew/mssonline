@@ -827,6 +827,10 @@ table.monthlyStatsTable > tbody > tr:last-child > td {
   font-weight: bold;
 }
 
+.yellowB {
+  background-color: yellow;
+}
+
 
 
 

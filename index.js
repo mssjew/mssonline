@@ -182,6 +182,7 @@ function listMakerSell(list, content, idx) {
     positionDate.textContent = "";
   } else if (days==0) {
     positionDate.textContent = '\xa0\xa0\xa0\xa0' + content[0] + '\xa0\xa0\xa0' + "TODAY";
+    positionDate.classList.add("yellowB");
   } else {
     positionDate.textContent = days == 1 ? '\xa0\xa0\xa0\xa0' + content[0] + '\xa0\xa0\xa0' + "YESTERDAY" : '\xa0\xa0\xa0\xa0' + content[0] + '\xa0\xa0\xa0' + days + " days";
   }
