@@ -201,7 +201,7 @@ function listMakerSell(list, content, idx) {
     } else {
       signal.innerHTML = "";
     }
-  }, 750);
+  }, 1000);
 
 
   const indexVal = document.createElement("span");
@@ -261,7 +261,7 @@ function listMakerBuy(list, content, idx) {
     } else {
       signal.innerHTML = "";
     }
-  }, 750);
+  }, 1000);
 
 
   const indexVal = document.createElement("span");
@@ -1088,7 +1088,7 @@ setTimeout(() => {
       p.textContent = "Error fetching sell position data. Refresh the page.";
       console.error(err);
     });
-}, 1000);
+}, 1500);
 
 
 setTimeout(() => {
@@ -1199,7 +1199,7 @@ setTimeout(() => {
       p.textContent = "Error fetching buy position data. Refresh the page.";
       console.error(err);
     });
-}, 1500);
+}, 2500);
 
 
 
@@ -1273,7 +1273,7 @@ setTimeout(() => {
   totalPL.style.fontSize = "2.3rem";
   totalPL.style.fontWeight = "bold";
   totalPL.style.fontStyle = "normal";
-}, 2000);
+}, 3500);
 
 setTimeout(() => {
   customProfit(currentPrice);
@@ -1351,5 +1351,5 @@ setTimeout(() => {
         ? `Total Profit at $${currentPrice}`
         : `Total Loss at $${currentPrice}`;
   };
-}, 3500);
+}, 4500);
 
