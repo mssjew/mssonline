@@ -1284,7 +1284,7 @@ setTimeout(() => {
   livePLDiv.appendChild(document.createElement("br"));
   sliderDiv.classList.add("slidecontainer");
   sliderDiv.innerHTML =
-    '<br><p id="demo"></p><input type="range" min="1500" max="2200" value="1850" class="slider" id="myRange">';
+    '<br><p id="demo"></p><input type="range" min="1700" max="2000" value="1850" class="slider" id="myRange">';
 
   var slider = document.getElementById("myRange");
   var output = document.getElementById("demo");
