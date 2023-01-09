@@ -157,6 +157,13 @@ html {
   height: 10vh;
 }
 
+.goldWidget {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1%;
+}
+
 h1 {
   font-size: 4rem;
   display: flex;

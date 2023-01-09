@@ -144,7 +144,6 @@ function dateDiff(first, second) {
 }
 goldPrice2()
   .then((price) => {
-    document.getElementById("liveGPrice").textContent = `$${price}`;
     currentPrice = price;
   })
   .catch((err) => {
