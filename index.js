@@ -118,10 +118,9 @@ async function goldPrice() {
 
 
 async function goldPrice2() {
-  let resp = await axios.get("https://api.polygon.io/v3/quotes/C:XAU-USD?apiKey=MSrxp0wCzzxnwMtWQaCS9OA3ph2jlA9w");
-  return resp.data.results[0].ask_price;
+  let resp = await axios.get("https://marketdata.tradermade.com/api/v1/live?currency=XAUUSD&api_key=gUkkarv9QS3rDdC4nbNk");
+  return resp.data.quotes[0].ask;
 }
-
 
 function pad(idx) {
   idx = idx.toString();
