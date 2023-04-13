@@ -185,6 +185,30 @@ h2 {
   margin: 0% 1%;
 }
 
+#timeUpdated {
+  font-size: 2rem;
+  font-weight: 700;
+  color: darkgreen;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.5;
+  font-family: monospace;
+  margin: 0% 1%;
+}
+
+ #hoursAgo {
+  font-size: 1.7rem;
+  font-weight: 500;
+  color: darkgreen;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.5;
+  font-family: monospace;
+  margin: 0% 1%;
+}
+
 #internal {
   font-size: 2.5rem;
   color: rgb(196, 108, 0);

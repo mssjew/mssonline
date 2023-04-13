@@ -1,9 +1,11 @@
 const ONLINE_SHEET_KEY = "1OJaJ-yJX6vDt6PtUcw4KK5T59JKYAAd4j0NkZext6Jo";
-const DAILY_FIXING_SHEET_KEY =
-  "1On8IDb0uBl6DKtH95yMSU2DkULE-IsDWwwc4L0ODXNs";
+const DAILY_FIXING_SHEET_KEY = "1On8IDb0uBl6DKtH95yMSU2DkULE-IsDWwwc4L0ODXNs";
 
 const internalSpan = document.getElementById("internal");
 const netSpan = document.getElementById("net");
+
+const lastUpdatedSpan = document.getElementById("lastUpdated");
+const hoursAgo = document.getElementById("hoursAgo");
 
 const sellList = document.getElementById("sell");
 const buyList = document.getElementById("buy");
@@ -28,7 +30,6 @@ const unfixedDiv = document.getElementById("unfixedSection");
 const livePLDiv = document.getElementById("livePLSection");
 const oldUnfixDiv = document.getElementById("oldUnfixSection");
 
-
 const thisMonth = document.getElementById("currMonth");
 const totalTrades = document.getElementById("totalTrades");
 const profitTrades = document.getElementById("profitTrades");
@@ -36,9 +37,6 @@ const lossTrades = document.getElementById("lossTrades");
 const tradingLoss = document.getElementById("tradingLoss");
 const tradingProfit = document.getElementById("tradingProfit");
 const grossProfit = document.getElementById("grossProfit");
-
-
-
 
 let loader = `<div class="container">
 <p>Calculating Profit/Loss</p>   
@@ -49,6 +47,8 @@ let loader = `<div class="container">
 </div>`;
 
 livePLDiv.innerHTML = loader;
+
+const lastUpdatedCell = "Summary!A1";
 
 const internalPos = "Summary!C3";
 const netPos = "Summary!C5";
@@ -64,8 +64,6 @@ const buyRange = "Summary!C11:C48";
 
 const sellRangeDates = "Summary!A11:B48";
 const buyRangeDates = "Summary!C11:D48";
-
-
 
 const avgSell = "Summary!B50";
 const avgBuy = "Summary!C50";
@@ -109,6 +107,75 @@ function toggleOldUnfix() {
   oldUnfixDiv.style.display = "flex";
 }
 
+axios
+  .get(
+    `https://sheets.googleapis.com/v4/spreadsheets/${ONLINE_SHEET_KEY}/values/${lastUpdatedCell}?key=AIzaSyDmbXdZsgesHy5afOQOZSr9hgDeQNTC6Q4`
+  )
+  .then((resp) => {
+    let data = resp.data.values[0][0];
+
+    // the variable data above is a string in the format of "DAY MONTH DD YYYY HHMM"
+    // we need to parse it to get the date and time
+    // then we can calculate the hours ago
+
+    // split the string by space and remove the last two elements
+    let dateFormatted = data.split(" ").slice(0, -2).join(" ");
+
+    let time24 = data.split(" ")[4];
+
+    // convert 4 digit 24 hour to 12 hour time and add pm or am
+    let timeFormatted = time24.slice(0, -2) + ":" + time24.slice(-2);
+    console.log(timeFormatted);
+
+
+    const dateParts = data.split(" ");
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    // Get the date components
+    const month = months.indexOf(dateParts[1]);
+    const day = parseInt(dateParts[2]);
+    const year = parseInt(dateParts[3]);
+
+    // Get the time components
+    const militaryTime = parseInt(dateParts[4]);
+    const hours = Math.floor(militaryTime / 100);
+    const minutes = militaryTime % 100;
+
+    // Create the date object and set the time
+    const date = new Date(year, month, day);
+    date.setHours(hours, minutes);
+
+    console.log(date.getTime());
+
+    const timeDifference = Math.round(Math.abs((date.getTime() - Date.now()) / 3600000));
+
+    lastUpdatedSpan.innerHTML =  timeDifference + " hours ago.";
+
+
+
+    hoursAgo.innerHTML =  "(" + dateFormatted + " " + timeFormatted + ")";
+
+
+
+
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
 async function goldPrice() {
   let resp = await axios.get("https://www.goldapi.io/api/XAU/USD", {
     headers: { "x-access-token": "goldapi-f20pyjatkuagctl5-io" },
@@ -116,9 +183,10 @@ async function goldPrice() {
   return resp.data.price;
 }
 
-
 async function goldPrice2() {
-  let resp = await axios.get("https://marketdata.tradermade.com/api/v1/live?currency=XAUUSD&api_key=gUkkarv9QS3rDdC4nbNk");
+  let resp = await axios.get(
+    "https://marketdata.tradermade.com/api/v1/live?currency=XAUUSD&api_key=gUkkarv9QS3rDdC4nbNk"
+  );
   return resp.data.quotes[0].ask;
 }
 
@@ -129,17 +197,27 @@ function pad(idx) {
 }
 
 function parseDate(str) {
-  let monthNames =["Jan","Feb","Mar","Apr",
-                      "May","Jun","Jul","Aug",
-                      "Sep", "Oct","Nov","Dec"];
+  let monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
 
-  var ymd = str.split('-');
-  return new Date('20'+ymd[2], monthNames.indexOf(ymd[1]), ymd[0]);
-
+  var ymd = str.split("-");
+  return new Date("20" + ymd[2], monthNames.indexOf(ymd[1]), ymd[0]);
 }
 
 function dateDiff(first, second) {
-  return Math.floor((second-first)/(1000*60*60*24));
+  return Math.floor((second - first) / (1000 * 60 * 60 * 24));
 }
 goldPrice2()
   .then((price) => {
@@ -162,11 +240,10 @@ function listMakerSell(list, content, idx) {
   const listItem = document.createElement("li");
   const positionDate = document.createElement("p");
 
-  positionDate.classList.add("posDate")
+  positionDate.classList.add("posDate");
 
   list.appendChild(positionDate);
   list.appendChild(listItem);
- 
 
   if (content[1].length <= 23) {
     listItem.textContent = "\xa0" + content[1];
@@ -174,15 +251,19 @@ function listMakerSell(list, content, idx) {
     listItem.textContent = content[1];
   }
 
-  const days = dateDiff(parseDate(content[0]), new Date);
+  const days = dateDiff(parseDate(content[0]), new Date());
 
   if (content[0] === "#N/A") {
     positionDate.textContent = "";
-  } else if (days==0) {
-    positionDate.textContent = '\xa0\xa0\xa0\xa0' + content[0] + '\xa0\xa0\xa0' + "TODAY";
+  } else if (days == 0) {
+    positionDate.textContent =
+      "\xa0\xa0\xa0\xa0" + content[0] + "\xa0\xa0\xa0" + "TODAY";
     positionDate.classList.add("yellowB");
   } else {
-    positionDate.textContent = days == 1 ? '\xa0\xa0\xa0\xa0' + content[0] + '\xa0\xa0\xa0' + "YESTERDAY" : '\xa0\xa0\xa0\xa0' + content[0] + '\xa0\xa0\xa0' + days + " days";
+    positionDate.textContent =
+      days == 1
+        ? "\xa0\xa0\xa0\xa0" + content[0] + "\xa0\xa0\xa0" + "YESTERDAY"
+        : "\xa0\xa0\xa0\xa0" + content[0] + "\xa0\xa0\xa0" + days + " days";
   }
   const signal = document.createElement("span");
   signal.classList.add("signalSign");
@@ -200,7 +281,6 @@ function listMakerSell(list, content, idx) {
       signal.innerHTML = "";
     }
   }, 1000);
-
 
   const indexVal = document.createElement("span");
   indexVal.classList.add("index");
@@ -220,22 +300,24 @@ function listMakerBuy(list, content, idx) {
   const listItem = document.createElement("li");
   const positionDate = document.createElement("p");
 
-  positionDate.classList.add("posDate")
+  positionDate.classList.add("posDate");
 
   list.appendChild(positionDate);
   list.appendChild(listItem);
 
-  const days = dateDiff(parseDate(content[1]), new Date);
-
-
+  const days = dateDiff(parseDate(content[1]), new Date());
 
   if (content[1] === "#N/A") {
     positionDate.textContent = "";
-  } else if (days==0) {
-    positionDate.textContent = '\xa0\xa0\xa0\xa0' + content[1] + '\xa0\xa0\xa0' + "TODAY";
+  } else if (days == 0) {
+    positionDate.textContent =
+      "\xa0\xa0\xa0\xa0" + content[1] + "\xa0\xa0\xa0" + "TODAY";
     positionDate.classList.add("yellowB");
   } else {
-    positionDate.textContent = days == 1 ? '\xa0\xa0\xa0\xa0' + content[1] + '\xa0\xa0\xa0' + "YESTERDAY" : '\xa0\xa0\xa0\xa0' + content[1] + '\xa0\xa0\xa0' + days + " days";
+    positionDate.textContent =
+      days == 1
+        ? "\xa0\xa0\xa0\xa0" + content[1] + "\xa0\xa0\xa0" + "YESTERDAY"
+        : "\xa0\xa0\xa0\xa0" + content[1] + "\xa0\xa0\xa0" + days + " days";
   }
 
   if (content[0].length <= 25) {
@@ -260,7 +342,6 @@ function listMakerBuy(list, content, idx) {
       signal.innerHTML = "";
     }
   }, 1000);
-
 
   const indexVal = document.createElement("span");
   indexVal.classList.add("index");
@@ -305,7 +386,6 @@ function unfixedTotalRow() {
   td5.setAttribute("colspan", "3");
   td6.setAttribute("colspan", "3");
 
-
   unfixTable.appendChild(trow);
   unfixTable.appendChild(trow2);
   unfixTable.appendChild(trow3);
@@ -322,7 +402,6 @@ function unfixedTotalRow() {
   td.textContent = "TOTAL PENDING FIXING";
   td3.textContent = "AVERAGE FIXING TARGET";
   td5.textContent = "WITHOUT OLD POSITIONS";
-
 
   getTotalUnfixed().then((total) => {
     td2.textContent = total;
@@ -353,12 +432,9 @@ function unfixedTotalRow() {
   td5.style.backgroundColor = "rgb(44, 44, 44)";
   td5.style.color = "white";
 
-
   td6.style.color = "crimson";
   td6.style.fontWeight = "bold";
   td6.style.fontSize = "2rem";
-
-
 }
 
 // UNFIXED RANGE
@@ -748,8 +824,6 @@ axios
     console.error(err);
   });
 
-
-
 // MONTHLY PERFORMANCE
 
 axios
@@ -767,34 +841,28 @@ axios
 
     thisMonth.textContent = currentMonthData;
     totalTrades.textContent = totalTradesData;
-  
+
     profitTrades.textContent = profitTradesData;
-    profitTrades.style.color = "forestgreen"; 
+    profitTrades.style.color = "forestgreen";
 
     lossTrades.textContent = lossTradesData;
-    lossTrades.style.color = "crimson"; 
+    lossTrades.style.color = "crimson";
 
     tradingLoss.textContent = tradingLossData;
-    tradingLoss.style.color = "crimson"; 
+    tradingLoss.style.color = "crimson";
 
     tradingProfit.textContent = tradingProfitData;
-    tradingProfit.style.color = "forestgreen"; 
+    tradingProfit.style.color = "forestgreen";
 
     grossProfit.textContent = monthlyProfitData;
-    grossProfit.style.color = monthlyProfitData[0]==="B"? "forestgreen" : "crimson"; 
-
-
+    grossProfit.style.color =
+      monthlyProfitData[0] === "B" ? "forestgreen" : "crimson";
   })
   .catch((err) => {
     console.error(err);
   });
 
-
 // MONTHLY PERFORMANCE END
-
-
-  
-
 
 var liveSellTotalPL = 0;
 var liveBuyTotalPL = 0;
@@ -1088,7 +1156,6 @@ setTimeout(() => {
     });
 }, 1500);
 
-
 setTimeout(() => {
   axios
     .get(
@@ -1198,8 +1265,6 @@ setTimeout(() => {
       console.error(err);
     });
 }, 2500);
-
-
 
 var customBuy = document.createElement("p");
 var customSell = document.createElement("p");
@@ -1350,4 +1415,3 @@ setTimeout(() => {
         : `Total Loss at $${currentPrice}`;
   };
 }, 4500);
-

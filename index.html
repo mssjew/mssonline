@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="preconnect" href="https://sheets.googleapis.com/v4/spreadsheets">
     <link rel="dns-prefetch" href="https://sheets.googleapis.com/v4/spreadsheets">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js" integrity="sha512-CryKbMe7sjSCDPl18jtJI5DR5jtkUWxPXWaLCst6QjH8wxDexfRJic2WRmRXmstr2Y8SxDDWuBO6CQC6IE4KTA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>MSS Online Report</title>
     <link type="text/css" rel="stylesheet" href="normalize.css" />
     <link rel="stylesheet" href="styles.css" />
@@ -36,6 +37,9 @@
     <h2>Net: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span id="net"></span></h2>
     <br /><br />
 
+    <h3 id="timeUpdated">UPDATED: <span id="lastUpdated"></span></h3>
+    <h3 id="hoursAgo"></h3>
+
     <!-- TradingView Widget BEGIN -->
     <div class="goldWidget">
    
@@ -58,7 +62,6 @@
 
 <!-- TradingView Widget END -->
     <!-- <h2 class="liveP">Live Price:&nbsp;<span id="liveGPrice"></span></h2> -->
-    <br />
     <!-- <hr> -->
 
     <!-- <h2 style="font-weight: bold;">Price Movement Expected:</h2> -->
