@@ -127,7 +127,6 @@ axios
     let timeFormatted = time24.slice(0, -2) + ":" + time24.slice(-2);
     console.log(timeFormatted);
 
-
     const dateParts = data.split(" ");
     const months = [
       "January",
@@ -158,19 +157,49 @@ axios
     const date = new Date(year, month, day);
     date.setHours(hours, minutes);
 
-    console.log(date.getTime());
+    // Calculate the time difference in minutes
+    const timeDifference = Math.abs(date.getTime() - Date.now());
+    const millisecondsPerMinute = 60000;
 
-    const timeDifference = Math.round(Math.abs((date.getTime() - Date.now()) / 3600000));
+    if (timeDifference >= 60 * millisecondsPerMinute) {
+      // Time difference is one hour or more, round to nearest hour
+      const hoursDifference = Math.round(timeDifference / 3600000);
 
-    lastUpdatedSpan.innerHTML =  timeDifference + " hours ago.";
+      //if the difference is greater than 24 hours, display days ago
+      // else if the difference is less than 24 hours, display hours ago
+      if (hoursDifference >= 24) {
+        lastUpdatedSpan.innerHTML =  Math.round(hoursDifference / 24) + " days ago.";
+      } else {
+        lastUpdatedSpan.innerHTML =  hoursDifference + " hours ago.";
+      }
+    } else {
+      // Time difference is less than one hour, round to nearest minute
+      const minutesDifference = Math.round(
+        timeDifference / millisecondsPerMinute
+      );
 
+      if (minutesDifference === 0) {
+        lastUpdatedSpan.innerHTML =  "Just now.";
+      } else {
+        lastUpdatedSpan.innerHTML =  minutesDifference + " minutes ago.";
+      }
+      
+    }
 
+    // const timeDifference = Math.round(Math.abs((date.getTime() - Date.now()) / 3600000));
 
-    hoursAgo.innerHTML =  "(" + dateFormatted + " " + timeFormatted + ")";
+    // // 
+    // //if timeDifference is less than 24 hours, display hours ago
+    // //if timeDifference is more than 24 hours, display days ago
+    // //if timeDifference is less than
 
+    // if (timeDifference < 24) {
+    //   lastUpdatedSpan.innerHTML =  timeDifference + " hours ago.";
+    // } else {
+    //   lastUpdatedSpan.innerHTML =  Math.round(timeDifference / 24) + " days ago.";
+    // }
 
-
-
+    hoursAgo.innerHTML = "(" + dateFormatted + " " + timeFormatted + ")";
   })
   .catch((err) => {
     console.error(err);
